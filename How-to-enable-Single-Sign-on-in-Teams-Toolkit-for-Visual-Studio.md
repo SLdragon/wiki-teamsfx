@@ -396,7 +396,7 @@ For Teams Bot Applications
       ```
       > Note: Replace the value of "name" with your expected AAD app name.
     
-    - Add following lines under `configureApp` to configure AAD app with AAD app template in the step 1.
+    - Add following lines under `provision` to configure AAD app with AAD app template in the step 1.
       ```
       - uses: aadApp/update
         with:
