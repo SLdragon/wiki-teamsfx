@@ -129,7 +129,7 @@ For Teams Tab Application
     In `teamsapp.local.yml` only:
     - Add following lines under `provision` to add AAD related configs to local debug service.
       ```
-      - uses: file/createOrUpdateJsonFile
+        - uses: file/updateJson
         with:
           target: ./appsettings.Development.json
           appsettings:
@@ -137,6 +137,7 @@ For Teams Tab Application
               Authentication:
                 ClientId: ${{AAD_APP_CLIENT_ID}}
                 ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+                InitiateLoginEndpoint: ${{TAB_ENDPOINT}}/auth-start.html
                 OAuthAuthority: ${{AAD_APP_OAUTH_AUTHORITY}}
       ```
 
@@ -164,32 +165,52 @@ For Teams Tab Application
    }
    ```
 
-   Open `infra/azure.bicep` find follow line:
+   Open `infra/azure.bicep` and update
    ```
-   param location string = resourceGroup().location
+   resource webApp 'Microsoft.Web/sites@2021-02-01' = {
+      kind: 'app'
+      location: location
+      name: webAppName
+      properties: {
+        serverFarmId: serverfarm.id
+        httpsOnly: true
+        siteConfig: {
+          appSettings: [
+            {
+              name: 'WEBSITE_RUN_FROM_PACKAGE'
+              value: '1'
+            }
+          ]
+          ftpsState: 'FtpsOnly'
+        }
+      }
+    }
    ```
-   and add following lines:
+   with:
    ```
-   param tabAadAppClientId string
-   param tabAadAppOauthAuthorityHost string
-   param tabAadAppTenantId string
-   @secure()
-   param tabAadAppClientSecret string
-   ```
-   and add following configs in `webApp.properties.siteConfig.appSettings`
-   ```
-   {
-     name: 'TeamsFx__Authentication__ClientId'
-     value: tabAadAppClientId
-   }
-   {
-     name: 'TeamsFx__Authentication__ClientSecret'
-     value: tabAadAppClientSecret
-   }
-   {
-     name: 'TeamsFx__Authentication__OAuthAuthority'
-     value: uri(tabAadAppOauthAuthorityHost, tabAadAppTenantId)
-   } 
+   resource webApp 'Microsoft.Web/sites@2021-02-01' = {
+      kind: 'app'
+      location: location
+      name: webAppName
+      properties: {
+        serverFarmId: serverfarm.id
+        httpsOnly: true
+        siteConfig: {
+          ftpsState: 'FtpsOnly'
+        }
+      }
+    }
+
+    resource  webAppConfig  'Microsoft.Web/sites/config@2021-02-01' = {
+      name: '${webAppName}/appsettings'
+      properties: {
+        WEBSITE_RUN_FROM_PACKAGE: '1'
+        TeamsFx__Authentication__ClientId: tabAadAppClientId
+        TeamsFx__Authentication__ClientSecret: tabAadAppClientSecret
+        TeamsFx__Authentication__InitiateLoginEndpoint: 'https://${webApp.properties.defaultHostName}/auth-start.html'
+        TeamsFx__Authentication__OAuthAuthority: uri(tabAadAppOauthAuthorityHost, tabAadAppTenantId)
+      }
+    }
    ```
 
 5. Update `appsettings.json` and `appsettings.Development.json`
@@ -199,6 +220,7 @@ For Teams Tab Application
       Authentication: {
         ClientId: AAD app client id
         ClientSecret: AAD app client secret,
+        InitiateLoginEndpoint: Login Endpoint,
         OAuthAuthority: AAD app oauth authority
       }
     }
@@ -212,8 +234,9 @@ For Teams Tab Application
    "TeamsFx": {	
      "Authentication": {	
        "ClientId": "$clientId$",	
-       "ClientSecret": "$client-secret$",	
-       "OAuthAuthority": "$oauthAuthority$"	
+       "ClientSecret": "$client-secret$",
+       "InitiateLoginEndpoint": "$TAB_ENDPOINT$/auth-start.html",
+       "OAuthAuthority": "$oauthAuthority$"
      }	
    }
    ```
@@ -271,6 +294,8 @@ For Teams Tab Application
      <Content Remove="TeamsFx-Auth/Tab/GetUserProfile.razor"/>
    </ItemGroup>
    ```
+
+   5. Download `auth-start.html` and `auth-end.html` from [GitHub Repo](https://github.com/OfficeDev/TeamsFx/tree/dev/templates/scenarios/csharp/sso-tab/wwwroot) to `{ProjectDirectory}/wwwroot`.
 
 7. To check the SSO app works as expected, run `Local Debug` in Visual Studio. Or run the app in cloud by clicking `Provision in the cloud` and then `Deploy to the cloud` to make the updates taking effects.
 
