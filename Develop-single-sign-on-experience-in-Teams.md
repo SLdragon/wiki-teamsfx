@@ -2,9 +2,9 @@
 
 Microsoft Teams provides a mechanism by which an application can obtain the signed-in Teams user token to access Microsoft Graph (and other APIs). Teams Toolkit facilitates this interaction by abstracting some of the Azure Active Directory flows and integrations behind some simple, high level APIs. This enables you to add single sign-on (SSO) features easily to your Teams application.
 
-Basically you will need take care these configurations: 
+Basically you will need take care these configurations:
 
-* In the Azure Active Directory app manifest file, you need to specify URIs such as the URI to identify the Azure AD authentication app and the redirect URI for returning token. 
+* In the Azure Active Directory app manifest file, you need to specify URIs such as the URI to identify the Azure AD authentication app and the redirect URI for returning token.
 * In the Teams manifest file, add the SSO application to link it with Teams application.
 * In the Teams Toolkit configuration files and Infra files, you need to add necessary configurations to make SSO works for your Teams app.
 * Add SSO application information in Teams Toolkit configuration files in order to make sure the authentication app can be registered on backend service and started by Teams Toolkit when you debug or preview Teams application.
@@ -56,11 +56,11 @@ You can find your Teams Toolkit configuration files `./.yml`. Azure Active Direc
 - add `aadApp/update` under `provision`
   * For updating your Azure Active Directory app with AAD app manifest in step 1.
   * You can find more info [here](https://aka.ms/teamsfx-actions/aadapp-update)
-- update `cli/runNpmCommand` under `deploy`:
+- for React project, update `cli/runNpmCommand` under `deploy`:
   * For adding following environment variables when local debug:
     * REACT_APP_CLIENT_ID: Azure Active Directory app client id
     * REACT_APP_START_LOGIN_PAGE_URL: Azure Active Directory app client secret
-- update `file/createOrUpdateEnvironmentFile`
+- for React project, update `file/createOrUpdateEnvironmentFile`
   * For adding following environment variables when local debug:
     * REACT_APP_CLIENT_ID: Azure Active Directory app client id
     * REACT_APP_START_LOGIN_PAGE_URL: Login start page for authentication
@@ -99,7 +99,7 @@ Add following lines in `provision` in `teamsapp.yml` and `teamsapp.local.yml`:
 > Note: For local you need to place `aad/update` after `file/createOrUpdateEnvironmentFile` action since `aad/update` will consume output of `file/createOrUpdateEnvironmentFile`.
 
 #### `cli/runNpmCommand`
-Find `cli/runNpmCommand` action with name `build app` in `teamsapp.yml` and add following env:
+If you are building tab app with React framework, find `cli/runNpmCommand` action with name `build app` in `teamsapp.yml` and add following env:
 ```yml
 env:
   REACT_APP_CLIENT_ID: ${{AAD_APP_CLIENT_ID}}
@@ -107,7 +107,7 @@ env:
 ```
 
 #### `file/createOrUpdateEnvironmentFile`
-Find `file/createOrUpdateEnvironmentFile` action for deploy in `teamsapp.local.yml` and add following env:
+If you are building tab app with React framework, find `file/createOrUpdateEnvironmentFile` action for deploy in `teamsapp.local.yml` and add following env:
 ```yml
 envs:
   ...
@@ -118,7 +118,9 @@ envs:
 ### Update Source Code
 With all changes above, your environment is ready and can update your code to add SSO to your Teams app.
 
-You can find and download sample code for TeamsFx Tab below to `./auth`:
+#### React
+
+Suppose you are building your tab app with React framework. You can find and download sample code for TeamsFx Tab below to `./auth`:
   * for [js](https://github.com/OfficeDev/TeamsFx/tree/main/packages/fx-core/templates/plugins/resource/aad/auth/tab/js)
   * for [ts](https://github.com/OfficeDev/TeamsFx/tree/main/packages/fx-core/templates/plugins/resource/aad/auth/tab/ts)
 
@@ -135,6 +137,33 @@ You can follow the following steps to update your source code:
 
 You can also find sample for SSO enabled Tab [here](https://github.com/OfficeDev/TeamsFx-Samples/tree/dev/hello-world-tab).
 
+#### Vanilla JavaScript
+
+For non-React tab app, following is a basic sample for getting SSO token with vanilla JavaScript.
+
+    ```js
+    function getSSOToken() {
+      return new Promise((resolve, reject) => {
+        microsoftTeams.authentication
+          .getAuthToken()
+          .then((token) => {
+            resolve(token);
+          })
+          .catch((error) => {
+            alert(error);
+            reject("Error getting token: " + error);
+          });
+      });
+    }
+
+    function getBasicUserInfo() {
+      getSSOToken().then((ssoToken) => {
+        const tokenObj = JSON.parse(window.atob(ssoToken.split(".")[1]));;
+        console.log(`username: ${tokenObj.name}`);
+        console.log(`user email: ${tokenObj.preferred_username}`);
+      });
+    }
+    ```
 
 ## Teams Bot/Messaging Extension app
 
