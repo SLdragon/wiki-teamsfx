@@ -165,7 +165,19 @@ For Teams Tab Application
    }
    ```
 
-   Open `infra/azure.bicep` and update
+   Open `infra/azure.bicep` find follow line:
+   ```
+   param location string = resourceGroup().location
+   ```
+   and add following lines:
+   ```
+   param tabAadAppClientId string
+   param tabAadAppOauthAuthorityHost string
+   param tabAadAppTenantId string
+   @secure()
+   param tabAadAppClientSecret string
+   ```
+   In the same file, update
    ```
    resource webApp 'Microsoft.Web/sites@2021-02-01' = {
       kind: 'app'
