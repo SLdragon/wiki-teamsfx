@@ -21,6 +21,7 @@ Teams Toolkit checks the following prerequisites during the debug process:
 * Custom app uploading or sideloading for your developer tenant is turned on, if not then the debug terminates .
 
 * Ngrok binary version 2.3 is applicable for bot and message extension, if Ngrok isn't installed or the version doesn't match the requirement, the Teams toolkit installs Ngrok NPM package `ngrok@4.2.2` in `~/.fx/bin/ngrok`. The Ngrok binary is managed by Ngrok NPM package in `/.fx/bin/ngrok/node modules/ngrok/bin`.
+  > **Note**: Teams Toolkit downloads npm package ngrok@4.3.3 which contains [NGROK](https://ngrok.com/) v2.3.40. Customer must have a valid license to use NGROK software. Microsoft does not license use of the NGROK.
 
 * Azure Functions Core Tools version 4, if Azure Functions Core Tools is'nt installed or the version doesn't match the requirement, the Teams Toolkit installs Azure Functions Core Tools NPM package, azure-functions-core-tools@4 for **Windows** and for **macOs** in  `~/.fx/bin/func`. The Azure Functions Core Tools NPM package in  `~/.fx/bin/func/node_modules/azure-functions-core-tools/bin` manages Azure Functions Core Tools binary. For Linux, the debug terminates.
 
