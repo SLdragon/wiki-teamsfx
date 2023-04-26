@@ -70,6 +70,8 @@ This task is to validate and install prerequisites that will be used in followed
 | dotnet | Ensure .NET Core SDK is installed. TeamsFx Azure Functions project depends on extra .NET binding extensions for HTTP trigger authorization. |
 | portOccupancy | Validate available ports to ensure those debug ones are not occupied. |
 
+> **Note**: Teams Toolkit downloads npm package ngrok@4.3.3 which contains [NGROK](https://ngrok.com/) v2.3.40. Customer must have a valid license to use NGROK software. Microsoft does not license use of the NGROK.
+
 #### Sample
 
 ```json
