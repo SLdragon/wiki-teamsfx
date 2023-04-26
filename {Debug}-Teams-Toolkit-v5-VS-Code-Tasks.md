@@ -181,8 +181,8 @@ When `writeToEnvironmentFile` is included, the specified environment variables w
 
 |Alternative|Description|
 |-|-|
-|Cloud VM|Develop your project on cloud VM (e.g., [Azure VMs](https://azure.microsoft.com/products/virtual-machines/) or [Azure DevTest Labs](https://azure.microsoft.com/products/devtest-lab/)). You can choose either to still use ngrok on your cloud VM, or to directly expose your bot service via VM's public hostname and port.|
-|[localtunnel](https://localtunnel.me/)|An alternative tunnel solution. You can install and run `localtunnel` instead of `ngrok`.|
+|Cloud VM|Develop your project on cloud VM (e.g., [Azure VMs](https://azure.microsoft.com/products/virtual-machines/) or [Azure DevTest Labs](https://azure.microsoft.com/products/devtest-lab/)). You can choose either to still use dev tunnel on your cloud VM, or to directly expose your bot service via VM's public hostname and port.|
+|[localtunnel](https://localtunnel.me/)|An alternative tunnel solution. You can install and run `localtunnel` instead of `dev tunnel`.|
 
 ```yml
 provision:
