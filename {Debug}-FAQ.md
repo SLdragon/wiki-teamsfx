@@ -8,6 +8,8 @@ Teams Toolkit allows you to debug your Teams app locally by leveraging Visual St
 - Bot: a bot server required by Teams Bot capability
 - Ngrok: a tunneling service required by Teams Bot that forwards local address to public address
 
+> **Note**: Teams Toolkit downloads npm package ngrok@4.3.3 which contains NGROK(https://ngrok.com/) v2.3.40. Customer must have a valid license to use NGROK software. Microsoft does not license use of the NGROK.
+
 During debugging, a localhost development certificate will also be automatically generated and installed to your system after your confirmation.
 
 Some frequently asked questions are listed bellow.
