@@ -96,7 +96,6 @@ For newly created project, there may be following ports to be validated:
 ### Start local tunnel
 
 This task is to start local tunnel service to make your local bot message endpoint public.
-There are two types of tunnel services that can be used: dev tunnel and ngrok. By default, dev tunnel will be used. 
 
 #### Dev Tunnel
 If you choose to use the dev tunnel service, the following are the required arguments:
@@ -179,110 +178,6 @@ When `writeToEnvironmentFile` is included, the specified environment variables w
 ```
 
 **3. Totally get rid of Teams Toolkit tunnel service.** If your dev environment does not support dev tunnel and ngrok or you'd like to use your own tunnel solution, you can skip/remove this tunnel task and just let Teams Toolkit know your messaging endpoint (set your messaging endpoint in `botFramework/create` action in `teamsapp.local.yml`).
-
-#### Ngrok
-If you opt for the ngrok service, you will need to provide the following arguments:
-
-| Arguments       | Type    | Required | Description                                                                                                                                                                                             |
-|-----------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| type      | string | required | The type of tunnel service to use. This argument must be set to `ngrok`. |
-| ngrokArgs        | string or string[]  | required | The ngrok command line arguments to start the tunnel. Full references can be found in [ngrok document](https://ngrok.com/docs/ngrok-agent/ngrok). |
-| env | string | optional | The environment name. Teams Toolkit will write the environment variables defined in `output` to `.env.<env>` file. | 
-| writeToEnvironmentFile | object | optional | The key of tunnel endpoint and tunnel domain environment variables that will be writen to `.env` file. |
-| ngrokPath        | string | optional | The ngrok binary path. If undefined, use Teams Toolkit ngrok, otherwise use provided path. E.g.,"ngrokPath": <ul><li>"ngrok" // use ngrok from `env:PATH`</li><li>"C:/some-path/ngrok" // use ngrok from absolute path</li><li>"./bot/my-ngrok/ngrok" // use ngrok from relative path</li></ul> |
-| tunnelInspection | string  | optional | Teams Toolkit tries to get tunnel public URL from ngrok log first, then the first PublicURL via default inspection "http://127.0.0.1:4040/api/tunnels". If you specify your own `ngrokArgs` with different log format or inspection, set this arg to provide your own inspection location. |
-
-| WriteToEnvironmentFile | Description |
-|----------------|------------------------------------------------------------------------------------------------------------|
-| endpoint | The key of tunnel endpoint environment variable.  |
-| domain | The key of tunnel domain environment variable. |
-
-#### Ngrok Samples
-**1. This task is used to replace the default dev tunnel task that is included with TeamsFx templates.** Teams Toolkit installs its own ngrok binary and start tunnel with command `ngrok http 3978 --log=stdout --log-format=logfmt`.
-```json
-{
-    "label": "Start local tunnel",
-    "type": "teamsfx",
-    "command": "debug-start-local-tunnel",
-    "args": {
-        "ngrokArgs": "http 3978 --log=stdout --log-format=logfmt",
-        "env": "local",
-        "output": {
-            // output to .env.local
-            "endpoint": "BOT_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT
-            "domain": "BOT_DOMAIN" // output tunnel domain as BOT_DOMAIN
-        }
-    },
-    "isBackground": true,
-    "problemMatcher": "$teamsfx-local-tunnel-watch"
-},
-```
-
-**2. Change port.** To use another port for local bot service (e.g., 3922), you can change the one in `ngrokArgs`. Note that you also need to change the port in bot code (`index.js` or `index.ts`).
-```json
-{
-    "label": "Start local tunnel",
-    "type": "teamsfx",
-    "command": "debug-start-local-tunnel",
-    "args": {
-        // change port here
-        "ngrokArgs": "http 3922 --log=stdout --log-format=logfmt",
-        "env": "local",
-        "output": {
-            // output to .env.local
-            "endpoint": "BOT_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT
-            "domain": "BOT_DOMAIN" // output tunnel domain as BOT_DOMAIN
-        }
-    },
-    "isBackground": true,
-    "problemMatcher": "$teamsfx-local-tunnel-watch"
-},
-```
-
-**3. Use your own ngrok command or config.** If you'd like to use your own ngork command (e.g., `ngrok start`) or config (e.g., `any-ngrok.yml`) for advances usages. Note that if you change the log format or set your own inspect path, you need to provide `tunnelInspection` as well.
-```json
-{
-    "label": "Start local tunnel",
-    "type": "teamsfx",
-    "command": "debug-start-local-tunnel",
-    "args": {
-        // change the command here
-        "ngrokArgs": "start --config any-ngrok.yml",
-        // to let Teams Toolkit know your ngrok endpoint
-        "tunnelInspection": "http://127.0.0.1:4040/api/tunnels",
-        "env": "local",
-        "output": {
-            // output to .env.local
-            "endpoint": "BOT_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT
-            "domain": "BOT_DOMAIN" // output tunnel domain as BOT_DOMAIN
-        }
-    },
-    "isBackground": true,
-    "problemMatcher": "$teamsfx-local-tunnel-watch"
-},
-```
-
-**4. Use your own ngrok binary.** If Teams Toolkit has issue on installing ngrok or you'd like to use your own ngrok binary, set `ngrokPath`.
-```json
-{
-    "label": "Start local tunnel",
-    "type": "teamsfx",
-    "command": "debug-start-local-tunnel",
-    "args": {
-        "ngrokArgs": "http 3978 --log=stdout --log-format=logfmt",
-        // set ngrok path
-        "ngrokPath": "/path/to/your/ngrok",
-        "env": "local",
-        "output": {
-            // output to .env.local
-            "endpoint": "BOT_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT
-            "domain": "BOT_DOMAIN" // output tunnel domain as BOT_DOMAIN
-        }
-    },
-    "isBackground": true,
-    "problemMatcher": "$teamsfx-local-tunnel-watch"
-},
-```
 
 |Alternative|Description|
 |-|-|
