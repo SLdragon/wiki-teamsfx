@@ -130,15 +130,15 @@ For Teams Tab Application
     - Add following lines under `provision` to add AAD related configs to local debug service.
       ```
         - uses: file/createOrUpdateJsonFile
-        with:
-          target: ./appsettings.Development.json
-          appsettings:
-            TeamsFx:
-              Authentication:
-                ClientId: ${{AAD_APP_CLIENT_ID}}
-                ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-                InitiateLoginEndpoint: ${{TAB_ENDPOINT}}/auth-start.html
-                OAuthAuthority: ${{AAD_APP_OAUTH_AUTHORITY}}
+          with:
+            target: ./appsettings.Development.json
+            appsettings:
+              TeamsFx:
+                Authentication:
+                  ClientId: ${{AAD_APP_CLIENT_ID}}
+                  ClientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
+                  InitiateLoginEndpoint: ${{TAB_ENDPOINT}}/auth-start.html
+                  OAuthAuthority: ${{AAD_APP_OAUTH_AUTHORITY}}
       ```
 
 4. Update Infra
