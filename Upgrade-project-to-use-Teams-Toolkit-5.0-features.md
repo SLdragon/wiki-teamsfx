@@ -92,6 +92,9 @@ To fix this: Open `teamsapp.yml`, find the npm build command in deploy lifecycle
 
 Since simple auth is deprecated, refer to [wiki](https://github.com/OfficeDev/TeamsFx/wiki/How-Authentication-Works-in-TeamsFx) for best practices and iterate your application to use the latest TeamsFx SDK.
 
+### teamsApp/validateAppPackage failed error
+If your project failed to provision or publish by `teamsApp/validateAppPackage` action after upgrade but had provisioned successfully before, please use the [validation](https://dev.teams.microsoft.com/validation) to check your appPackage zip file and fix the error.
+
 ## Feature changes that impact your development flow
 
 There're some changes to existing features you should be aware of:
