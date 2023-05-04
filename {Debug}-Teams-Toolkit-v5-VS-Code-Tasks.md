@@ -176,7 +176,7 @@ When `writeToEnvironmentFile` is included, the specified environment variables w
     "problemMatcher": "$teamsfx-local-tunnel-watch"
 },
 ```
-**3. Choose your own tunnel solution.** 
+#### Choose your own tunnel solution.
 
 If your dev environment does not support Teams Toolkit dev tunnel or you prefer to use a different tunnel solution, you can choose from a variety of options including:
 
@@ -186,7 +186,7 @@ If your dev environment does not support Teams Toolkit dev tunnel or you prefer 
 |[localtunnel](https://localtunnel.me/)|An alternative tunnel solution. You can install and run `localtunnel` instead of `dev tunnel`.|
 |Cloud VM|Develop your project on cloud VM (e.g., [Azure VMs](https://azure.microsoft.com/products/virtual-machines/) or [Azure DevTest Labs](https://azure.microsoft.com/products/devtest-lab/)). You can choose either to still use dev tunnel on your cloud VM, or to directly expose your bot service via VM's public hostname and port.|
 
-**3.1. Use ngrok and automatically set the tunnel endpoint.**
+**1. Use ngrok and automatically set the tunnel endpoint.**
 
 If you opt to use ngrok, you can install [ngrok](https://ngrok.com/), modify the tunnel task in `.vscode/tasks.json` and add the following script action to your `teamsapp.local.yml` file to obtain the ngrok tunnel endpoint and simplify the debugging process:
 
@@ -245,7 +245,7 @@ If you opt to use ngrok, you can install [ngrok](https://ngrok.com/), modify the
           echo "::set-teamsfx-env BOT_DOMAIN=$domain"
   ```
 
-**3.2. Manually update the tunnel endpoint.**
+**2. Manually update the tunnel endpoint.**
 
 For any tunnel service, you can skip or remove the Teams Toolkit dev tunnel task and manually specify your messaging endpoint by setting it in the botFramework/create action in `teamsapp.local.yml`.
 
