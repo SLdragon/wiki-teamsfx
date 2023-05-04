@@ -246,15 +246,20 @@ If you opt to use ngrok, you can install [ngrok](https://ngrok.com/), modify the
     - uses: script
       with:
         run: |
-          $endpoint = ""
-          while ($endpoint -eq "") {
-            sleep 2
-            $output = Invoke-WebRequest -Uri "http://localhost:4040/api/tunnels"
-            $endpoint = $output.Content | Select-String -Pattern 'https://[a-zA-Z0-9 -\.]*\.ngrok\.io' | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+          for ($i = 1; $i -le 10; $i++) {
+            $endpoint = (Invoke-WebRequest -Uri "http://localhost:4040/api/tunnels" | Select-String -Pattern 'https://[a-zA-Z0-9 -\.]*\.ngrok\.io').Matches.Value
+            if ($endpoint) {
+              break
+            }
+            sleep 10
           }
-          echo "::set-teamsfx-env BOT_ENDPOINT=$endpoint"
-          $domain = $endpoint.Substring(8)
-          echo "::set-teamsfx-env BOT_DOMAIN=$domain"
+          if (-not $endpoint) {
+            echo "ERROR: Failed to find tunnel endpoint after 10 attempts."
+            exit 1
+          } else {
+            echo "::set-teamsfx-env BOT_ENDPOINT=$endpoint"
+            echo "::set-teamsfx-env BOT_DOMAIN=$($endpoint.Substring(8))"
+          }
   ```
 
 **2. Manually update the tunnel endpoint.**
