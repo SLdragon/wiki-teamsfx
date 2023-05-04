@@ -95,6 +95,10 @@ Since simple auth is deprecated, refer to [wiki](https://github.com/OfficeDev/Te
 ### teamsApp/validateAppPackage failed error
 If your project failed to provision or publish by `teamsApp/validateAppPackage` action after upgrade but had provisioned successfully before, please use the [validation](https://dev.teams.microsoft.com/validation) to check your appPackage zip file and fix the error.
 
+### Start local service error
+If you've encountered the error message "Teams Toolkit now uses Dev Tunnel as default tunnel solution. For manual updates, see https://aka.ms/teamsfx-tasks/local-tunnel.", you'll need to update your 'Start local tunnel' task to continue using Teams Toolkit. Please follow the the instructions in this [document](#start-local-tunnel) to update `Start local tunnel` task.
+
+
 ## Feature changes that impact your development flow
 
 There're some changes to existing features you should be aware of:
@@ -145,6 +149,14 @@ If you didn't use Teams Toolkit to add API Management service to your project, t
 2. You need to manually create an Azure Active Directory app for APIM service when provisioning a new environment. This [document](https://aka.ms/teamsfx-add-azure-apim) includes tutorials about how to create an Azure Active Directory app for APIM service.
 3. Teams Toolkit no longer support deploy API spec to APIM any more.
 Teams Toolkit will reuse your provisioned resource when upgrading (except Bot Service), when you wish to add a new environment after project upgrading, please remember to change resource name in `azure.parameters.{your_env_name}.json` to avoid name conflicts. 
+
+### Start tunnel service
+The Teams Toolkit now uses Dev Tunnel as its default tunnel solution. If you have customized the Start local tunnel task in your .vscode/task.json file, you will need to manually update it. Here are the steps to follow:
+1. Refer to this [document](https://aka.ms/teamsfx-tasks/local-tunnel) to learn how to use Teams Toolkit dev tunnel service.
+2. If you prefer to use ngrok instead, you can still do so by following this [document](https://aka.ms/teamsfx-tasks/customize-tunnel-service
+) to set up.
+By updating your local tunnel service, you can continue to use Teams Toolkit seamlessly and customize it according to your preferences.
+
 
 ## Upgrade your projects manually
 
@@ -429,12 +441,19 @@ For every manifest or parameter file, you need to do following things. This is j
             "type": "teamsfx",
             "command": "debug-start-local-tunnel",
             "args": {
-                "ngrokArgs": "http 3978 --log=stdout --log-format=logfmt",
-                "env": "local",
-                "output": {
-                    "endpoint": "PROVISIONOUTPUT__AZUREWEBAPPBOTOUTPUT__SITEENDPOINT", // you need to update the environment variable name here
-                    "domain": "PROVISIONOUTPUT__AZUREWEBAPPBOTOUTPUT__DOMAIN" // you need to update the environment variable name here
-                }
+                "type": "dev-tunnel",
+                "ports": [
+                    {
+                        "portNumber": 3978,
+                        "protocol": "http",
+                        "access": "public",
+                        "writeToEnvironmentFile": {
+                            "endpoint": "PROVISIONOUTPUT__AZUREWEBAPPBOTOUTPUT__SITEENDPOINT", // you need to update the environment variable name here
+                            "domain": "PROVISIONOUTPUT__AZUREWEBAPPBOTOUTPUT__DOMAIN" // you need to update the environment variable name here
+                        }
+                    }
+                ],
+                "env": "local"
             },
             "isBackground": true,
             "problemMatcher": "$teamsfx-local-tunnel-watch"
