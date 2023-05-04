@@ -177,12 +177,13 @@ When `writeToEnvironmentFile` is included, the specified environment variables w
 },
 ```
 
-**3. Totally get rid of Teams Toolkit tunnel service.** If your dev environment does not support dev tunnel and ngrok or you'd like to use your own tunnel solution, you can skip/remove this tunnel task and just let Teams Toolkit know your messaging endpoint (set your messaging endpoint in `botFramework/create` action in `teamsapp.local.yml`).
+**3. Totally get rid of Teams Toolkit tunnel service.** If your dev environment does not support dev tunnel or you'd like to use your own tunnel solution, you can skip/remove this tunnel task and just let Teams Toolkit know your messaging endpoint (set your messaging endpoint in `botFramework/create` action in `teamsapp.local.yml`).
 
 |Alternative|Description|
 |-|-|
-|Cloud VM|Develop your project on cloud VM (e.g., [Azure VMs](https://azure.microsoft.com/products/virtual-machines/) or [Azure DevTest Labs](https://azure.microsoft.com/products/devtest-lab/)). You can choose either to still use dev tunnel on your cloud VM, or to directly expose your bot service via VM's public hostname and port.|
+|[ngrok](https://ngrok.com/)| An alternative tunnel solution. To simplify the process of debugging your Teams project using ngrok, you can follow these [detailed instruction](https://aka.ms/teamsfx-tasks/customize-tunnel-service).|
 |[localtunnel](https://localtunnel.me/)|An alternative tunnel solution. You can install and run `localtunnel` instead of `dev tunnel`.|
+|Cloud VM|Develop your project on cloud VM (e.g., [Azure VMs](https://azure.microsoft.com/products/virtual-machines/) or [Azure DevTest Labs](https://azure.microsoft.com/products/devtest-lab/)). You can choose either to still use dev tunnel on your cloud VM, or to directly expose your bot service via VM's public hostname and port.|
 
 ```yml
 provision:
