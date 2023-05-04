@@ -176,14 +176,78 @@ When `writeToEnvironmentFile` is included, the specified environment variables w
     "problemMatcher": "$teamsfx-local-tunnel-watch"
 },
 ```
+**3. Choose your own tunnel solution.** 
 
-**3. Totally get rid of Teams Toolkit tunnel service.** If your dev environment does not support dev tunnel or you'd like to use your own tunnel solution, you can skip/remove this tunnel task and just let Teams Toolkit know your messaging endpoint (set your messaging endpoint in `botFramework/create` action in `teamsapp.local.yml`).
+If your dev environment does not support Teams Toolkit dev tunnel or you prefer to use a different tunnel solution, you can choose from a variety of options including:
 
 |Alternative|Description|
 |-|-|
 |[ngrok](https://ngrok.com/)| An alternative tunnel solution. To simplify the process of debugging your Teams project using ngrok, you can follow these [detailed instruction](https://aka.ms/teamsfx-tasks/customize-tunnel-service).|
 |[localtunnel](https://localtunnel.me/)|An alternative tunnel solution. You can install and run `localtunnel` instead of `dev tunnel`.|
 |Cloud VM|Develop your project on cloud VM (e.g., [Azure VMs](https://azure.microsoft.com/products/virtual-machines/) or [Azure DevTest Labs](https://azure.microsoft.com/products/devtest-lab/)). You can choose either to still use dev tunnel on your cloud VM, or to directly expose your bot service via VM's public hostname and port.|
+
+**3.1. Use ngrok and automatically set the tunnel endpoint.**
+
+If you opt to use ngrok, you can install [ngrok](https://ngrok.com/), modify the tunnel task in `.vscode/tasks.json` and add the following script action to your `teamsapp.local.yml` file to obtain the ngrok tunnel endpoint and simplify the debugging process:
+
+**a. Update `Start local tunnel` task:**
+```json
+{
+    "label": "Start local tunnel",
+    "type": "shell",
+    "command": "ngrok http 3978 --log=stdout --log-format=logfmt",
+    "isBackground": true,
+    "problemMatcher": {
+        "pattern": [
+            {
+                "regexp": "^.*$",
+                "file": 0,
+                "location": 1,
+                "message": 2
+            }
+        ],
+        "background": {
+            "activeOnStart": true,
+            "beginsPattern": "starting web service",
+            "endsPattern": "started tunnel|failed to reconnect session"
+        }
+    }
+}
+```
+**b. Add the following action in the first step of the provision lifecycle in `teamsapp.local.yml`:**
+- Linux and macOS
+  ```yml
+  provision:
+    - uses: script
+      with:
+        run: |
+          while [ -z "$endpoint" ]; do
+            sleep 2
+            endpoint=$(curl -s localhost:4040/api/tunnels | grep -o 'https://[a-zA-Z0-9 -\.]*\.ngrok\.io')
+          done
+          echo "::set-teamsfx-env BOT_ENDPOINT=$endpoint"
+          echo "::set-teamsfx-env BOT_DOMAIN=${endpoint:8}"
+  ```
+- Windows
+  ```yml
+  provision:
+    - uses: script
+      with:
+        run: |
+          $endpoint = ""
+          while ($endpoint -eq "") {
+            sleep 2
+            $output = Invoke-WebRequest -Uri "http://localhost:4040/api/tunnels"
+            $endpoint = $output.Content | Select-String -Pattern 'https://[a-zA-Z0-9 -\.]*\.ngrok\.io' | Select-Object -ExpandProperty Matches | Select-Object -ExpandProperty Value
+          }
+          echo "::set-teamsfx-env BOT_ENDPOINT=$endpoint"
+          $domain = $endpoint.Substring(8)
+          echo "::set-teamsfx-env BOT_DOMAIN=$domain"
+  ```
+
+**3.2. Manually update the tunnel endpoint.**
+
+For any tunnel service, you can skip or remove the Teams Toolkit dev tunnel task and manually specify your messaging endpoint by setting it in the botFramework/create action in `teamsapp.local.yml`.
 
 ```yml
 provision:
