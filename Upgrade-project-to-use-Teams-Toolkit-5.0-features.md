@@ -96,8 +96,7 @@ Since simple auth is deprecated, refer to [wiki](https://github.com/OfficeDev/Te
 If your project failed to provision or publish by `teamsApp/validateAppPackage` action after upgrade but had provisioned successfully before, please use the [validation](https://dev.teams.microsoft.com/validation) to check your appPackage zip file and fix the error.
 
 ### Start local service error
-If you've encountered the error message "Teams Toolkit now uses Dev Tunnel as default tunnel solution. For manual updates, see https://aka.ms/teamsfx-tasks/local-tunnel.", you'll need to update your 'Start local tunnel' task to continue using Teams Toolkit. Please follow the the instructions in this [document](#start-local-tunnel) to update `Start local tunnel` task.
-
+If you've encountered the error message "Teams Toolkit now uses Dev Tunnel as default tunnel solution. For manual updates, see https://aka.ms/teamsfx-tasks/local-tunnel.", you'll need to update your `Start local tunnel` task to continue using Teams Toolkit. Please follow the instructions in this [document](#start-tunnel-service) to update the task.
 
 ## Feature changes that impact your development flow
 
@@ -151,7 +150,7 @@ If you didn't use Teams Toolkit to add API Management service to your project, t
 Teams Toolkit will reuse your provisioned resource when upgrading (except Bot Service), when you wish to add a new environment after project upgrading, please remember to change resource name in `azure.parameters.{your_env_name}.json` to avoid name conflicts. 
 
 ### Start tunnel service
-The Teams Toolkit now uses Dev Tunnel as its default tunnel solution. If you have customized the Start local tunnel task in your .vscode/task.json file, you will need to manually update it. Here are the steps to follow:
+The Teams Toolkit now uses Dev Tunnel as its default tunnel solution. If you have customized the Start local tunnel task in your `.vscode/tasks.json` file, you will need to manually update it. Here are the steps to follow:
 1. Refer to this [document](https://aka.ms/teamsfx-tasks/local-tunnel) to learn how to use Teams Toolkit dev tunnel service.
 2. If you prefer to use ngrok instead, you can still do so by following this [document](https://aka.ms/teamsfx-tasks/customize-tunnel-service
 ) to set up.
