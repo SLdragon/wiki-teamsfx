@@ -477,7 +477,9 @@ This action will install the development tool(s) required to debug a Teams app.
     with:
       devCert: # Optional. The SSL certificate for Teams Tab app. This action will generate a SSL certificate and install it to the system certificate management center.
         trust: true # Required. Whether to trust the SSL certificate.
-      func: true # Optional. Azure Functions Core Tools.
+      func: # Optional. Azure Functions Core Tools.
+        version: ~4.0.4670 # Required. The version number of Azure Functions Core Tools that follow the Semantic Versioning scheme.
+        symlinkDir: ./devTools/func # Optional. The path of the symlink target for the folder containing Azure Functions Core Tools binaries.
       dotnet: true # Optional. .NET SDK.
     writeToEnvironmentFile: # Write the information of installed development tool(s) into environment file for the specified environment variable(s).
       sslCertFile: SSL_CRT_FILE # Optional. The path of the certificate file of the SSL certificate. This parameter takes effect only when `devCert` is specified.
