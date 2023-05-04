@@ -225,12 +225,20 @@ If you opt to use ngrok, you can install [ngrok](https://ngrok.com/), modify the
     - uses: script
       with:
         run: |
-          while [ -z "$endpoint" ]; do
-            sleep 2
+          for i in {1..10}; do
             endpoint=$(curl -s localhost:4040/api/tunnels | grep -o 'https://[a-zA-Z0-9 -\.]*\.ngrok\.io')
+            if [ -n "$endpoint" ]; then
+              break
+            fi
+            sleep 10
           done
-          echo "::set-teamsfx-env BOT_ENDPOINT=$endpoint"
-          echo "::set-teamsfx-env BOT_DOMAIN=${endpoint:8}"
+          if [ -z "$endpoint" ]; then
+            echo "ERROR: Failed to find tunnel endpoint after 10 attempts."
+            exit 1
+          else
+            echo "::set-teamsfx-env BOT_ENDPOINT=$endpoint"
+            echo "::set-teamsfx-env BOT_DOMAIN=${endpoint:8}"
+          fi
   ```
 - Windows
   ```yml
