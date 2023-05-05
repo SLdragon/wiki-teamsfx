@@ -74,7 +74,7 @@ For example, your folder structure look like:
     |-- appPackage/
     |-- env/
     |-- infra/
-    |-- tabs/           <!--tab app source code-->
+    |-- tab/           <!--tab app source code-->
     |   |-- src/
     |   |   |-- index.tsx
     |   |-- package.json
@@ -90,7 +90,7 @@ For example, your folder structure look like:
     .
     |-- appPackage/
     |-- infra/
-    |-- tabs/           <!--tab app source code-->
+    |-- tab/           <!--tab app source code-->
     |   |-- src/
     |   |   |-- index.tsx
     |   |-- package.json
