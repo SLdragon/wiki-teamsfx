@@ -105,7 +105,7 @@ There're some changes to existing features you should be aware of:
 ### Environment management
 
 1. All the user environment files `.env.{env_name}.user` will be gitignored by default. You need to sync the environment variables in `.env.{env_name}.user` files under `env` folder by yourselves to other machines to operate corresponding environments.
-2. When creating new environments, you need to fill customized fields in the new `.env.{env_name}` file. Usually you need to provide values for all environment values with `CONFIG__` prefix.
+2. When creating new environments(call `Creating New Environment` in vs code command pallete), you need to fill customized fields in the new `.env.{env_name}` file. Usually you need to provide values for all environment values with `CONFIG__` prefix. 
 3. When creating new secret environments, you need to fill customized fields in the new `.env.{env_name}.user` file. Usually you need to provide values for all environment values with `CONFIG__` prefix.
 4. When creating new environments, you need to manually create `templates/azure/azure.parameters.{env_name}.json` as Azure provision parameters and fill the parameter values accordingly.
 5. Some additional steps are required if you added SQL or APIM to your project. Refer [Provision SQL databases](#provision-sql-databases) and [Provision APIM service](#provision-apim-service) section to learn more.
