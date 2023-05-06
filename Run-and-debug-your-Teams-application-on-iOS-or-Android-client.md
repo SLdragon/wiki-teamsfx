@@ -132,6 +132,7 @@
    > ![image](https://user-images.githubusercontent.com/49138419/236614768-096f81b8-fc94-4f25-837d-cf97c588a50b.png)
 
 1. If you are debugging a bot app with SSO and accessing the dev tunnel for the first time, you will need to confirm the anti-phishing page. 
+   
    ![image](https://user-images.githubusercontent.com/49138419/236614843-d96c5de4-f6f4-4656-9da0-841848eedc1c.png)
    > **Note:** The confirmation of the anti-phishing page must be completed after every installation of the app. 
 1. Debug the bot app on your mobile.  
