@@ -80,40 +80,40 @@ This app also supported teams different themes, including dark theme and high co
 
 This section walks through the generated code. The project folder contains the following:
 
-| Folder       | Contents                                            |
-|--------------|-----------------------------------------------------|
-| `.vscode`    | VSCode files for debugging                          |
-| `appPackage` | Templates for the Teams application manifest        |
-| `env`        | Environment files                                   |
-| `infra`      | Templates for provisioning Azure resources          |
-| `src`        | The source code for the dashboard Teams application |
+| Folder       | Contents                                             |
+|--------------|------------------------------------------------------|
+| `.vscode`    | VSCode files for debugging.                          |
+| `appPackage` | Templates for the Teams application manifest.        |
+| `env`        | Environment files.                                   |
+| `infra`      | Templates for provisioning Azure resources.          |
+| `src`        | The source code for the dashboard Teams application. |
 
 The following files provide the business logic for the dashboard tab. These files can be updated to fit your business logic requirements. The default implementation provides a starting point to help you get started.
 
-| File                                 | Contents                                           |
-| ------------------------------------ | -------------------------------------------------- |
-| `src/models/chartModel.ts`           | Data model for the chart widget                    |
-| `src/models/listModel.ts`            | Data model for the list widget                     |
-| `src/services/chartService.ts`       | A data retrive implementation for the chart widget |
-| `src/services/listService.ts`        | A data retrive implementation for the list widget  |
-| `src/dashboards/SampleDashboard.tsx` | A sample dashboard layout implementation           |
-| `src/styles/ChartWidget.css`         | The chart widget style file                        |
-| `src/styles/ListWidget.css`          | The list widget style file                         |
-| `src/widgets/ChartWidget.tsx`        | A widget implementation that can display a chart   |
-| `src/widgets/ListWidget.tsx`         | A widget implementation that can display a list    |
-| `src/App.css`                        | The style of application route                     |
-| `src/App.tsx`                        | Application route                                  |
+| File                                 | Contents                                            |
+| ------------------------------------ | --------------------------------------------------- |
+| `src/models/chartModel.ts`           | Data model for the chart widget.                    |
+| `src/models/listModel.ts`            | Data model for the list widget.                     |
+| `src/services/chartService.ts`       | A data retrive implementation for the chart widget. |
+| `src/services/listService.ts`        | A data retrive implementation for the list widget.  |
+| `src/dashboards/SampleDashboard.tsx` | A sample dashboard layout implementation.           |
+| `src/styles/ChartWidget.css`         | The chart widget style file.                        |
+| `src/styles/ListWidget.css`          | The list widget style file.                         |
+| `src/widgets/ChartWidget.tsx`        | A widget implementation that can display a chart.   |
+| `src/widgets/ListWidget.tsx`         | A widget implementation that can display a list.    |
+| `src/App.css`                        | The style of application route.                     |
+| `src/App.tsx`                        | Application route.                                  |
 
 The following files are project-related files. You generally will not need to customize these files.
 
-| File                               | Contents                                                     |
-| ---------------------------------- | ------------------------------------------------------------ |
-| `src/index.css`                    | The style of application entry point                         |
-| `src/index.tsx`                    | Application entry point                                      |
-| `src/internal/addNewScopes.ts`     | Implementation of new scopes add                             |
-| `src/internal/context.ts`          | TeamsFx Context                                              |
-| `src/internal/login.ts`            | Implementation of login                                      |
-| `src/internal/singletonContext.ts` | Implementation of the TeamsUserCredential instance singleton |
+| File                               | Contents                                                      |
+| ---------------------------------- | ------------------------------------------------------------- |
+| `src/index.css`                    | The style of application entry point.                         |
+| `src/index.tsx`                    | Application entry point.                                      |
+| `src/internal/addNewScopes.ts`     | Implementation of new scopes add.                             |
+| `src/internal/context.ts`          | TeamsFx Context.                                              |
+| `src/internal/login.ts`            | Implementation of login.                                      |
+| `src/internal/singletonContext.ts` | Implementation of the TeamsUserCredential instance singleton. |
 
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
@@ -245,11 +245,10 @@ export class BaseWidget<P, S> extends Component<P, S & BaseWidgetState> {
 
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
-## Dashboard abstraction
-In order to easily define and adjust the layout of the dashboard, the TeamsFx provides a `BaseDashboard` class 
-for developers. You can inherit this `BaseDashboard` class to quickly implement your own dashboard.
+## Dashboard Abstraction
+To facilitate the definition and customization of dashboard layout, TeamsFx offers a `BaseDashboard` class that developers can inherit to efficiently create their own dashboard.
 
-Below is the definition of the Dashboard class.
+The following is the definition of the `BaseDashboard` class.
 
 ```ts
 function dashboardStyle(isMobile?: boolean) {
@@ -321,23 +320,23 @@ export class BaseDashboard<P, S> extends Component<P, S & BaseDashboardState> {
 }
 ```
 
-In the BaseDashboard class, the TeamsFx SDK provided some basic layouts and customizable methods. The BaseDashboard is actually still a react component, and the TeamsFx provide some basic implementations of functions based on the lifecycle of react components, such as implementing a basic render logic based on the Grid layout, adding an observer to automatically adapt to mobile devices.
+The TeamsFx SDK offers a set of basic layouts and customizable methods within the `BaseDashboard` class. Despite being a react component, the `BaseDashboard` class is equipped with pre-implemented functions that are based on the lifecycle of react components. This includes a basic render logic that utilizes the Grid layout, as well as an observer that automatically adjusts to mobile devices.
 
 
 | Methods                  | Function                                                                                                       | Recommend to override |
 |--------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------|
-| `constructor()`          | Initializes the dashboard state and variables                                                                  | NO                    |
-| `componentDidMount()`    | This method will be invoked after a component is mounted                                                       | NO                    |
-| `componentWillUnmount()` | This method will be invoked when a component will be unmounted                                                 | NO                    |
-| `render()`               | This method will be called each time an update happens, we defined the dashboard default layout in this method | NO                    |
-| `layout()`               | Override this method to define the layout of the widget in the dashboard.                                      | YES                   |
-| `styling()`              | Override this method to customize the dashboard style.                                                         | YES                   |
+| `constructor()`          | Initialize the state and variables of the dashboard.                                                           | NO                    |
+| `componentDidMount()`    | This method will be called after a component has been mounted.                                                 | NO                    |
+| `componentWillUnmount()` | This method will be called when a component is about to be unmounted.                                          | NO                    |
+| `render()`               | This method will be called every time an update occurs, and it defines the default layout for the dashboard.   | NO                    |
+| `layout()`               | To define the layout of the widget in the dashboard, you can override this method.                             | YES                   |
+| `styling()`              | To customize the style of the dashboard, you can override this method.                                         | YES                   |
 
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
 ## How to add a new widget
 
-You can use the following steps to add a new widget to the dashboard:
+To add a new widget to the dashboard, you can follow these steps:
 
 1. [Step 1: Define a data model](#step-1-define-a-data-model)
 2. [Step 2: Create a data retrive service](#step-2-create-a-data-retrive-service)
@@ -346,7 +345,7 @@ You can use the following steps to add a new widget to the dashboard:
 
 ### Step 1: Define a data model
 
-Define a data model based on the business scenario, we recommend that you place the data model under the `src/models` directory. Here is an example of a data model::
+To define a data model based on the business scenario, it is recommended to place the data model under the `src/models` directory. Here is an example of a data model:
 
 ```typescript
 //sampleModel.ts
@@ -359,7 +358,7 @@ export interface SampleModel {
 
 Typically, a widget requires a service to retrieve the necessary data for displaying its content. This service can either fetch static data from a predefined source or retrieve dynamic data from a backend service or API.
 
-For instance, we will implement a service that returns static data and place under the `src/services` directory.
+For instance, we can implement a service that returns static data and place it under the `src/services` directory.
 
 Here is a sample service for retrieving static data:
 
@@ -378,11 +377,11 @@ Create a widget file in `src/widgets` folder. Inherit the `BaseWidget` class fro
 
 | Methods     | Function                                                                                                                                      |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `getData()` | This method is used to get the data for the widget. You can implement it to get data from the backend service or from the Microsoft Graph API |
-| `header()`  | Customize the content of the widget header                                                                                                    |
-| `body()`    | Customize the content of the widget body                                                                                                      |
-| `footer()`  | Customize the content of the widget footer                                                                                                    |
-| `styling()` | Customize the widget style                                                                                                                    |
+| `getData()` | This method is utilized to retrieve data for the widget. It can be implemented to obtain data from either the backend service or the Microsoft Graph API. |
+| `header()`  | Customize the header content of the widget.                                                                                                    |
+| `body()`    | Customize the body content of the widget.                                                                                                      |
+| `footer()`  | Customize the footer content of the widget.                                                                                                    |
+| `styling()` | Customize the style of the widget.                                                                                                                    |
 
 > All method overrides are optional.
 
@@ -420,7 +419,7 @@ export class SampleWidget extends BaseWidget<any, SampleWidgetState> {
 
 ### Step 4: Add the widget to the dashboard
 
-Open the `src/dashboards/SampleDashboard.tsx` file and add the widget to the implementation of the `layout` method. If you want create a new dashboard, please refer to [How to add a new dashboard](#how-to-add-a-new-dashboard).
+Please navigate to the `src/dashboards/SampleDashboard.tsx` file and include the widget in the implementation of the `layout()` method. In case you wish to create a new dashboard, kindly refer to [How to add a new dashboard](#how-to-add-a-new-dashboard).
 
 ```tsx
 override layout(): JSX.Element | undefined {
@@ -434,7 +433,7 @@ override layout(): JSX.Element | undefined {
 }
 ```
 
-Optional: If you want to arrange multiple widgets in the same column, you can refer to the following code snippet:
+Optional: If you prefer to arrange multiple widgets within the same column, you may refer to the following code snippet:
 
 ```css
 .one-column {
@@ -462,7 +461,7 @@ override layout(): JSX.Element | undefined {
 
 ## How to add a new dashboard
 
-You can use the following steps to add a new dashboard layout:
+To add a new dashboard layout, you can follow these steps:
 
 1. [Step 1: Create a dashboard class](#step-1-create-a-dashboard-class)
 2. [Step 2: Override methods to customize dashboard layout](#step-2-override-methods-to-customize-dashboard-layout)
@@ -471,7 +470,7 @@ You can use the following steps to add a new dashboard layout:
 
 ### Step 1: Create a dashboard class
 
-Create a file with the extension `.tsx` for your dashboard in the `src/dashboards` directory, for example, `YourDashboard.tsx`. Then, define a class that inherits the `BaseDashboard` class from `@microsoft/teamsfx-react`.
+In the `src/dashboards` directory, generate a file with the extension `.tsx` and name it `YourDashboard.tsx`. Within this file, create a class that extends the `BaseDashboard` class from `@microsoft/teamsfx-react`.
 
 ```tsx
 //YourDashboard.tsx
@@ -482,14 +481,14 @@ export default class YourDashboard extends BaseDashboard<any, any> {}
 
 ### Step 2: Override methods to customize dashboard layout
 
-The `BaseDashboard` class provides some methods that you can override to customize the dashboard layout. The following table lists the methods that you can override.
+You have the ability to customize the layout of the dashboard by overriding certain methods provided by the `BaseDashboard` class. The table below outlines the methods that can be overridden:
 
 | Methods     | Function                             |
 | ----------- | ------------------------------------ |
 | `styling()` | Customize the style of the dashboard |
 | `layout()`  | Define widgets layout                |
 
-Here is an example to customize the dashboard layout.
+Here is an example of how to customize the layout of a dashboard.
 
 ```css
 .your-dashboard-layout {
@@ -549,9 +548,9 @@ Open the `appPackage/manifest.json` file and add a new dashboard tab under the `
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
 ## Customize the Widget
-Since the BaseWidget class provides some methods that can be overridden to customize the widget, you can customize the widget by overriding these methods.
+As the `BaseWidget` class offers several methods that are open for customization, one may customize a widget by overriding these methods.
 
-- Override `header()`、`body()`、`footer()` to customize the widget.
+- Override `header()`, `body()` and `footer()` methods to customize the widget.
 
 ```tsx
 export class NewsWidget extends BaseWidget<any, any> {
@@ -596,7 +595,7 @@ export class NewsWidget extends BaseWidget<any, any> {
 ![image](https://user-images.githubusercontent.com/107838226/209327297-bbcc62fd-9ec1-4a4e-88af-f408085634aa.png)
 
 
-- Just override `body()`、`footer()` to customize the widget.
+- Override `body() and `footer()` methods to customize the widget.
 
 ```tsx
 export class NewsWidget extends BaseWidget<any, any> {
@@ -631,7 +630,7 @@ export class NewsWidget extends BaseWidget<any, any> {
 ![image](https://user-images.githubusercontent.com/107838226/209326796-69fa92a6-0582-4ddb-bb1c-8383ac805433.png)
 
 
-- Just override `body()` to customize the widget.
+- Override the `body()` method to customize the widget.
 
 ```tsx
 export class NewsWidget extends BaseWidget<any, any> {
@@ -656,7 +655,7 @@ export class NewsWidget extends BaseWidget<any, any> {
 
 ## How to include a data loader
 
-If you want to include a data loader to your widget before the widget is loaded, the only thing you need to do is to override the `loading()` method in your widget class. Here is an example:
+To incorporate a data loader that runs before the widget is loaded, you can override the `loading()` method in your widget class. Here is an example:
 
 ```tsx
 override loading(): JSX.Element | undefined {
@@ -668,7 +667,7 @@ override loading(): JSX.Element | undefined {
 }
 ```
 
-Now, the loading spinner is shown while the data is loading. When the data is loaded, the loading spinner is hidden, and the list data and footer button are shown.
+Presently, a loading spinner is displayed during the data loading process. Once the data has been loaded, the loading spinner is concealed, and the list data and footer button are exhibited.
 
 ![5xcq3-utv28](https://user-images.githubusercontent.com/107838226/212793039-90aa6f7e-28fd-4650-bb64-f9c3859d260b.gif)
 
@@ -676,7 +675,7 @@ Now, the loading spinner is shown while the data is loading. When the data is lo
 
 ## How to handle empty state
 
-You can display a specific content in your widget when the data is empty. To do so, you need to modify the `body()` method in your widget file to adopt different states of the data. The following example shows how to display an empty image when the data of **ListWidget** is empty:
+To exhibit a particular content within your widget when the data is empty, you must adjust the `body()` method within your widget file to accommodate distinct data states. The ensuing example demonstrates how to present an empty image when the data within the **ListWidget** is absent:
 
 ```tsx
   override body(): JSX.Element | undefined {
@@ -700,7 +699,7 @@ You can display a specific content in your widget when the data is empty. To do 
   }
 ```
 
-And you can use a similar approach to remove the footer content of your widget when the data is empty. 
+Likewise, you can utilize a comparable technique to eliminate the footer content of your widget when the data is vacant.
 
 ```ts
   override footer(): JSX.Element | undefined {
@@ -711,7 +710,7 @@ And you can use a similar approach to remove the footer content of your widget w
   }
 ```
 
-Your list widget will look like this when the data is empty:
+When the data is vacant, your list widget will appear as follows:
 ![image](https://user-images.githubusercontent.com/107838226/212546123-33b8943e-094c-4de5-9f23-61868ee4e51b.png)
 
 
@@ -719,7 +718,7 @@ Your list widget will look like this when the data is empty:
 
 ## How to refresh data as scheduled
 
-The following example shows how to display real-time data in a widget. The widget displays the current time and updates every second.
+The subsequent example delineates how to present live data within a widget. The widget showcases the current time and refreshes every second.
 
 ```tsx
 interface IRefreshWidgetState {
@@ -739,23 +738,23 @@ export class RefreshWidget extends BaseWidget<any, IRefreshWidgetState> {
 }
 ```
 
-You can modify `setInterval` method to call your own function to refresh data, like this: `setInterval(() => yourGetDataFunction(), 1000)`.
+You may customize the `setInterval` method to invoke your own function for data refreshment, as demonstrated below: `setInterval(() => yourGetDataFunction(), 1000)`.
 
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
 ## How to use Microsoft Graph Toolkit as widget content
 
-Microsoft Graph Toolkit is a set of reusables, framework-agnostic web components and helpers for accessing and working with Microsoft Graph. You can use the Microsoft Graph Toolkit with any web framework or without a framework at all. 
+The Microsoft Graph Toolkit comprises a collection of reusable, framework-agnostic web components and utilities that facilitate accessing and manipulating Microsoft Graph. You can leverage the Microsoft Graph Toolkit with any web framework or even without a framework.
 
-You can follow the steps below to use Microsoft Graph Toolkit as your widget content.
+To utilize the Microsoft Graph Toolkit as your widget content, you can follow the steps outlined below:
 
-### Step 1: Add SSO feature to your Teams app
+### Step 1: Add SSO functionality to your Teams app
 
-Microsoft Teams provides single sign-on (SSO) function for an app to obtain signed in Teams user token to access Microsoft Graph. For how to add SSO feature to your Teams app, please refer to [this document](https://aka.ms/teamsfx-add-sso-new).
+Microsoft Teams furnishes a single sign-on (SSO) feature for an application to acquire a signed-in Teams user token and access Microsoft Graph. For instructions on how to incorporate SSO functionality into your Teams app, please consult [this document](https://aka.ms/teamsfx-add-sso-new).
 
 ### Step 2: Install required npm packages
 
-Run the following command in the root directory of your project to install the required npm packages:
+Execute the subsequent command in your project's root directory to install the necessary npm packages:
 
 ```bash
 npm install @microsoft/mgt-react @microsoft/mgt-element @microsoft/mgt-teamsfx-provider
@@ -763,7 +762,7 @@ npm install @microsoft/mgt-react @microsoft/mgt-element @microsoft/mgt-teamsfx-p
 
 ### Step 3: Add a new Graph Toolkit widget
 
-Create a new widget file in your project `src/views/widgets` folder. For example, `GraphyWidget.tsx`. In this widget, we will guide users to consent our app to access Microsoft Graph and then show the user's todo list by using Microsoft Graph Toolkit. The following code is an example of using `Todo` component from Microsoft Graph Toolkit in widget.
+Generate a new widget file in the `src/views/widgets` directory of your project, for instance, `GraphWidget.tsx`. Within this widget, we will assist users in granting consent to our application to access Microsoft Graph, and subsequently display the user's to-do list by leveraging the Microsoft Graph Toolkit. The code snippet below is an exemplar of how to use the Todo component from the Microsoft Graph Toolkit within the widget.
 
 ```tsx
 import { Providers, ProviderState, Todo } from "@microsoft/mgt-react";
@@ -817,11 +816,11 @@ export class GraphWidget extends Widget<any, IGraphWidgetState> {
 }
 ```
 
-You also can use other Microsoft Graph Toolkit components in your widget. For more information about Microsoft Graph Toolkit components, please refer to [this document](https://learn.microsoft.com/en-us/graph/toolkit/overview).
+Additionally, alternative Microsoft Graph Toolkit components can also be utilized within your widget. For further details regarding Microsoft Graph Toolkit components, please consult [this document](https://learn.microsoft.com/en-us/graph/toolkit/overview).
 
-### Step 4: Add the widget to dashboard layout
+### Step 4: Incorporate the widget into the dashboard layout
 
-Include the new widget in your dashboard file.
+Integrate the newly created widget into your dashboard file.
 
 ```tsx
 ...
@@ -838,7 +837,7 @@ export default class YourDashboard extends BaseDashboard<any, any> {
 }
 ```
 
-Now, launching or refreshing your Teams app, you will see the new widget using Microsoft Graph Toolkit after you finish login to consent our app to access Microsoft Graph.
+Upon launching or refreshing your Teams application, subsequent to completing the login process and consenting to our application's access to Microsoft Graph, the newly created widget utilizing the Microsoft Graph Toolkit will be visible.
 
 ![image](https://user-images.githubusercontent.com/107838226/213122528-f0823063-b5b6-4cbf-9f2c-0198e6d72958.png)
 
@@ -846,14 +845,16 @@ Now, launching or refreshing your Teams app, you will see the new widget using M
 
 ## How to embed Power BI to Dashboard
 
-For how to embed Power BI item to the Dashboard, you can refer to [this document](https://learn.microsoft.com/en-us/javascript/api/overview/powerbi/powerbi-client-react).
+For instructions on how to embed a Power BI item into the dashboard, please refer to [this document](https://learn.microsoft.com/en-us/javascript/api/overview/powerbi/powerbi-client-react).
 
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
 ## Customize the Dashboard Layout
-The TeamsFx provided some convenient methods for defining and modifying the layout of the dashboard.
 
-- Three widgets in a row with a height of 350px, occupying 20%, 60% and 20% of the width respectively.
+The TeamsFx offers several convenient methods for defining and modifying the dashboard layout.
+
+- Arrange three widgets horizontally with a height of 350px, utilizing 20%, 60%, and 20% of the width correspondingly.
+
 ```css
 .customize-class-name {
   grid-template-rows: 350px;
@@ -882,7 +883,7 @@ export default class SampleDashboard extends BaseDashboard<any, any> {
 
 ![image](https://user-images.githubusercontent.com/107838226/209525799-9ee5b7ab-6263-4a1f-89e6-b33eee6d31dc.png)
 
-- There are two widgets in a row with widths of 600px and 1100px, the height of the first line is the maximum height of its content, and the height of the second line is 400px.
+- Place two widgets side by side, with widths of 600px and 1100px respectively. The height of the first widget will be determined by the maximum height of its content, while the height of the second widget will be fixed at 400px.
 
 ```css
 .customize-class-name {
@@ -911,7 +912,7 @@ export default class SampleDashboard extends Dashboard {
 
 ![image](https://user-images.githubusercontent.com/107838226/209532741-0ad90649-f904-4dae-af25-940e7f874bf2.png)
 
-- Arrange two widgets in a column.
+- Organize two widgets vertically in a column.
 
 ```css
 .one-column {
@@ -945,23 +946,21 @@ export default class SampleDashboard extends BaseDashboard<any, any> {
 
 ### Add SSO First
 
-Before you add your logic of calling a Graph API, you should enable your dashboard project to use SSO. For how to add an SSO to your project you can refer to [this document](https://aka.ms/teamsfx-add-sso-new);
+Prior to implementing your Graph API call logic, it is necessary to enable Single Sign-On (SSO) for your dashboard project. For instructions on how to add SSO to your project, please refer to [this document](https://aka.ms/teamsfx-add-sso-new);
 
-Now you have already added SSO files to your project, and you can call Graph APIs. There are two types of Graph APIs, one will be called from the front-end(most of APIs, use delegated permissions), the other will be called from the back-end(sendActivityNotification, e.g., use application permissions). You can refer to [this tutorial](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-beta) to check permission types of the Graph APIs you want to call.
+Assuming that you have successfully added the SSO files to your project, you are now able to invoke Graph APIs. It is important to note that there are two categories of Graph APIs: those that are called from the front-end (which typically require delegated permissions), and those that are called from the back-end (such as sendActivityNotification, which typically require application permissions). To determine the type of permissions required for the Graph APIs you intend to call, please refer to [this tutorial](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-beta).
 
-### Call graph api from the front-end(use delegated permissions)
+### Call Graph API from the front-end (use delegated permissions)
 
-If you want to call a Graph API from the front-end tab, you can refer to the following steps.
+To invoke a Graph API from the front-end tab, you may follow the steps outlined below.
 
-1. [Step 1: Consent delegated permissions first](#step-1-consent-delegated-permissions-first)
-2. [Step 2: Create a graph client by adding the scope related to the Graph API you want to call](#step-2-create-a-graph-client-by-adding-the-scope-related-to-the-graph-api-you-want-to-call)
-3. [Step 3: Call the Graph API, and parse the response into a certain model, which will be used by front-end](#step-3-call-the-graph-api-and-parse-the-response-into-a-certain-model-which-will-be-used-by-front-end)
+1. [Step 1: Consent delegated permissions first] (#step-1-consent-delegated-permissions-first)
+2. [Step 2: Create a graph client by adding the scope related to the Graph API you want to call] (#step-2-create-a-graph-client-by-adding-the-scope-related-to-the-graph-api-you-want-to-call)
+3. [Step 3: Call the Graph API, and parse the response into a certain model, which will be used by front-end] (#step-3-call-the-graph-api-and-parse-the-response-into-a-certain-model-which-will-be-used-by-front-end)
 
 #### Step 1: Consent delegated permissions first
 
-You can call [`addNewPermissionScope(scopes: string[])`](https://github.com/OfficeDev/TeamsFx/blob/dev/templates/tab/ts/dashboard/src/internal/addNewScopes.ts) from `tab/ts/dashboard/src/internal/addNewScopes.ts` to consent the scopes of permissions you want to add. And the consented status will be preserved in a global context [`TeamsUserCredentialContext`](https://github.com/OfficeDev/TeamsFx/blob/dev/templates/tab/ts/dashboard/src/internal/singletonContext.ts).
-
-You can refer to [the Graph API V1.0](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0) to get the `scope name of the permission` related to the Graph API you want to call.
+To obtain the name of the permission scope associated with the Graph API you intend to invoke, please refer to [the Graph API V1.0] (https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0).
 
 #### Step 2: Create a graph client by adding the scope related to the Graph API you want to call
 
@@ -1003,7 +1002,7 @@ For how to add an Azure Function to your project you can refer to [this doc](htt
 
 #### Step 3: Add your logic in Azure Function
 
-In the `index.jsx`/`index.ts` under the folder named in step 2, you can add your logic which contains back-end graph api calling with application permissions. You can refer to the following code snippet.
+In the `index.jsx`/`index.ts` under the folder named in step 2, you can add your logic which contains back-end Graph API calling with application permissions. You can refer to the following code snippet.
 
 ```ts
 /**
