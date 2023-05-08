@@ -110,8 +110,6 @@
 
 1. Show a mobile friendly tab app. 
 
-### Debug a tab app on the Android device. 
-
 ## Steps for debugging a Teams bot app on mobile client
 
 1. Start a Bot App in VSC / CLI 
