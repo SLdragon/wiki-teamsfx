@@ -69,6 +69,12 @@
                REACT_APP_START_LOGIN_PAGE_URL: ${{TAB_ENDPOINT}}/auth-start.html 
                WDS_SOCKET_PORT: 0 
          ```
+      - Update `appPackage/manifest.json`, set `showLoadingIndicator` to be `false`.
+        ```json
+        {
+            "showLoadingIndicator": false
+        }
+        ```
       - Use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Debug in Teams` green arrow button. 
     - For CLI: 
        - Install [ngrok](https://ngrok.com/). 
@@ -79,6 +85,12 @@
            TAB_DOMAIN=sample-ngrok-id.ngrok.io 
            TAB_ENDPOINT=https://sample-ngrok-id.ngrok.io 
            ```
+      - Update `appPackage/manifest.json`, set `showLoadingIndicator` to be `false`.
+        ```json
+        {
+            "showLoadingIndicator": false
+        }
+        ```
        - Executing the command `teamsfx provision --env local` in your project directory. 
        - Executing the command `teamsfx deploy --env local` in your project directory. 
        - Executing the command `teamsfx preview --env local` in your project directory. 
