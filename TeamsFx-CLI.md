@@ -28,7 +28,7 @@ The following list provides the common scenarios for`teamsfx preview:
     ```
 
 - Local Preview Bot App
-  - To make the bot endpoint public, you should use a tunnel service solution. For example, you can use ngrok by the following steps:
+  - To make the bot endpoint public, you should use your own tunnel service solution. For example, you can use ngrok by the following steps:
       - Install [ngrok](https://ngrok.com/download)
       - Start your local tunnel service by running the command `ngrok http 3978`.
       > **Note:**
