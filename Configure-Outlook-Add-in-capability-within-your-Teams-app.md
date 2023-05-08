@@ -33,12 +33,12 @@ The following are the major steps to adding an Outlook Add-in to a Teams app. De
 
 ## Prepare the Teams app project
 
-Begin by separating the source code for the tab (or bot) into its own subfolder. These instructions assume that the project initially has the following structure. To create a Teams app project with this structure, be sure you are using the prerelease version of Teams Toolkit: v4.99.2023031507 or later. 
+Begin by separating the source code for the tab (or bot) into its own subfolder. These instructions assume that the project initially has the following structure. To create a Teams app project with this structure, be sure you are using the prerelease version of Teams Toolkit: v4.99.2023041408 or later. 
 
 ```
 |-- .vscode/
 |-- appPackage/
-|-- build\appPackage/
+|-- build
 |-- env/
 |-- infra/
 |-- node_modules/
@@ -52,7 +52,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 |-- tsconfig.json
 ```
 
-**NOTE**: If you are working with a new Teams tab project, the \node_modules folder and the package-lock.json file will not be present until you run `npm install` in the root of the project. The build\appPackage folder will not be present until after the first time you debug the project. 
+**NOTE**: If you are working with a new Teams tab project, the \node_modules folder and the package-lock.json file will not be present until you run `npm install` in the root of the project. The build folder will not be present until after the first time you debug the project. 
 
 1. Create a folder under the root named "tab" (or "bot").
 
@@ -64,7 +64,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
     ```
     |-- .vscode/
     |-- appPackage/
-    |-- build\appPackage/
+    |-- build
     |-- env/
     |-- infra/
     |-- tab/
@@ -107,7 +107,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 1. Change the "name", "version", and "author" properties, as needed.
 1. Open the teamsapp.local.yml file in the root of the project and find the line `args: install --no-audit`. Change this to `args: run install:tab --no-audit`.npm 
 1. Open **TERMINAL** in Visual Studio Code. Navigate to the root of the project and run `npm install`. Among other things, a new node_modules folder is in the project root. 
-1. Next run `npm install:tab`. Among other things, a new node_modules folder will be created in the tab folder, if there isn't one already. 
+1. Next run `npm run install:tab`. Among other things, a new node_modules folder will be created in the tab folder, if there isn't one already. 
 1. Verify that you can sideload the tab with the following steps:
 
     <ol type="a">
@@ -216,7 +216,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
 1. Create a top-level folder called "add-in" in the Teams app project.
 1. Copy the following files and folders from the add-in project to the "add-in" folder of the Teams app project.
 
-    - /assets
+    - /appPackage/assets
     - /src
     - .eslintrc.json
     - babel.config.json
@@ -232,7 +232,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     ```
     |-- .vscode/
     |-- add-in/
-    |-- |-- assets/
+    |-- |-- appPackage/assets/
     |-- |-- src/
     |-- |-- |-- commands/
     |-- |-- |-- taskpane/
@@ -267,7 +267,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
 
     ```
     "install:add-in": "cd add-in && npm install",
-    "postinstall": "install:add-in && install:tab",
+    "postinstall": "npm run install:add-in && npm run install:tab",
     "build:add-in": "cd add-in && npm run build",
     "build:add-in:dev": "cd add-in && npm run build:dev",
     "build": "npm run build:tab && npm run build:add-in",
@@ -297,7 +297,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     In the "validate" and "stop" scripts, change the parameter to `../build/AppPackage/manifest.local.json`. When you are done, they should look like this:
 
     ```
-    "stop": "office-addin-debugging stop ../build/AppPackage/manifest.local.json",
+    "stop": "office-addin-debugging stop ../appPackage/build/manifest.local.json",
     "validate": "office-addin-manifest validate ../build/AppPackage/manifest.local.json",
     ```
 
@@ -306,31 +306,15 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
 1. Change the line `from: "manifest*.json",` to `from: "../build/appPackage/manifest*.json",`.
 1. Near the top of the webpack.config.js file, there is a line that assigns a localhost URL with port `3000` to the `urlDev` constant. Change the value from `3000` to `53000`.
 1. Near the end of the webpack.config.js file there is a line that assigns a value to the `devServer.port` property. Change the value from `3000` to `53000`.
-1. In the root of project, open the teamsapp.local.yml file and find the `provision` section. Use the `#` character to comment out the lines that validate the manifest template. This is necessary because the Teams manifest validation system is not yet compatible with the changes you made to the manifest template. When you are done, the `provision` section should begin like the following:
+1. In the root of project, open the teamsapp.local.yml file and find the `provision` section. Use the `#` character to comment out the three lines that validate the manifest template. This is necessary because the Teams manifest validation system is not yet compatible with the changes you made to the manifest template. When you are done, the three lines should look like the following:
 
     ```
-    provision:
-      - uses: teamsApp/create # Creates a Teams app
-        with:
-          name: TeamsTabTest-${{TEAMSFX_ENV}} # Teams app name
-        writeToEnvironmentFile: # Write the information of created resources into environment file for the specified environment variable(s).
-          teamsAppId: TEAMS_APP_ID
-      - uses: script # Set TAB_DOMAIN for local launch
-        name: Set TAB_DOMAIN for local launch
-        with:
-          run: echo "::set-teamsfx-env TAB_DOMAIN=localhost:53000"
-      - uses: script # Set TAB_ENDPOINT for local launch
-        name: Set TAB_ENDPOINT for local launch
-        with:
-          run: echo "::set-teamsfx-env TAB_ENDPOINT=https://localhost:53000"
       # - uses: teamsApp/validateManifest # Validate using manifest schema
       #   with:
       #     manifestPath: ./appPackage/manifest.json # Path to manifest template
-
-    # remainder of the section omitted
-    
    ```
 
+1. Repeat the preceding step for the teamsapp.yml file. The three lines are found in both the `provision` and the `publish` sections. Comment them out in both places.
 1. Open the .vscode\tasks.json file in the add-in project and copy all of the tasks in the "tasks" array. *Add* them to "tasks" array of the same file in the Teams project. *Do not remove any of the tasks that are already there.* Be sure all tasks are separated by commas. 
 1. In *each* of the task objects that you just copied, add the following "options" property to ensure that these tasks run in the add-in folder.
 
@@ -358,10 +342,23 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     }
     ```
 
-1. Add the following task to the "tasks" array in the .vscode\tasks.json file of the project. Note the following about this markup: 
+1. Add the following task to the tasks array in the .vscode\tasks.json file of the project. Among other things, this will create the final manifest.
 
-    - It adds a "Start Add-in Locally" task that combines the tab app's "Create resources" task with the add-in's debugging task and specifies that they must run in that order.
-    - The "Create resources" task generates the final manifest.
+    ```
+    {
+        // Create the debug resources.
+        // See https://aka.ms/teamsfx-tasks/provision to know the details and how to customize the args.
+        "label": "Create resources",
+        "type": "teamsfx",
+        "command": "provision",
+        "args": {
+            "template": "${workspaceFolder}/teamsapp.local.yml",
+            "env": "local"
+        }
+    },
+    ```
+
+1. Add the following task to the tasks array. Note that it adds a "Start Add-in Locally" task that combines the tab app's "Create resources" task with the add-in's debugging task and specifies that they must run in that order.
 
     ```
     {
@@ -374,6 +371,19 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     },
     ```
 
+1. Add the following task to the tasks array. It combines the "Start Teams App Locally" task with the "Start Add-in Locally" and specifies that they must run in that order.
+
+   ```
+    {
+        "label": "Start App and AddIn Locally",
+        "dependsOn": [
+            "Start Teams App Locally"",
+            "Start Add-in Locally"
+        ],
+        "dependsOrder": "sequence"
+    },
+   ```
+
 1. Open the .vscode\launch.json file in the project, which configures the **RUN AND DEBUG** UI in Visual Studio Code and add the following object to the top of the "configurations" array.
 
     ```
@@ -383,8 +393,8 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
         "request": "attach",
         "port": 9229,
         "timeout": 600000,
-        "webRoot": "${workspaceRoot}/add-in/",
-        "preLaunchTask": "Start Add-in Locally",
+        "webRoot": "${workspaceRoot}",
+        "preLaunchTask": "Start App and AddIn Locally",
         "postDebugTask": "Stop Debug"
     },
     ```
@@ -423,7 +433,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
         uses: azureStorage/deploy # Deploy bits to Azure Storage Static Website
         with:
           workingDirectory: .
-          distributionPath: ./build # Deploy base folder
+          artifactFolder: ./build # Deploy base folder
           resourceId: ${{TAB_AZURE_STORAGE_RESOURCE_ID}} # The resource id of the cloud resource to be deployed to
     ```
 
