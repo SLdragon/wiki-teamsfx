@@ -1,7 +1,7 @@
 # Run and debug your Teams application on iOS or Android client.
-## Steps for running a tab app on mobile client
+## Steps for testing a tab app on mobile client
 
-1. Start the Teams tab app locally
+1. Run the Teams tab app locally
    - For VSCode:
      - Update `.vscode/task.json`, add `Start local tunnel` task to make the tab app accessible on the mobile client. 
         ```json
@@ -109,6 +109,7 @@
    > **Note:** The login process should only be required once per device, and confirmation of the anti-phishing page must be completed after every installation of the app. 
 
 1. Show a mobile friendly tab app. 
+1. For Android devices, you can use [DevTools](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/developer-tools#access-devtools-from-an-android-device) to debug your tab while it is running.
 
 ## Steps for debugging a Teams bot app on mobile client
 
