@@ -40,7 +40,7 @@ The following list provides the common scenarios for`teamsfx preview:
   - In the `env/.env.local` file, fill in the values for `BOT_DOMAIN` and `BOT_ENDPOINT` with your ngrok URL.
     ```
     BOT_DOMAIN=sample-id.ngrok.io
-    BOT_ENDPOINT=http://sample-id.ngrok.io
+    BOT_ENDPOINT=https://sample-id.ngrok.io
     ```
   - Executing the commands in your project directory.
     ```shell
