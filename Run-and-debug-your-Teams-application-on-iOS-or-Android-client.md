@@ -69,7 +69,7 @@
                REACT_APP_START_LOGIN_PAGE_URL: ${{TAB_ENDPOINT}}/auth-start.html 
                WDS_SOCKET_PORT: 0 
          ```
-      - Use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Run and Debug` green arrow button. 
+      - Use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Debug in Teams` green arrow button. 
     - For CLI: 
        - Install [ngrok](https://ngrok.com/). 
        - Sign up a ngrok account in https://dashboard.ngrok.com/signup. Copy your personal ngrok authtoken from https://dashboard.ngrok.com/get-started/your-authtoken. 
