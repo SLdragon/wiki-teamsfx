@@ -487,6 +487,25 @@ This action will install the development tool(s) required to debug a Teams app.
       funcPath: FUNC_PATH # Optional. The path of the Azure Functions Core Tools binary. This parameter takes effect only when `func` is `true`.
       dotnetPath: DOTNET_PATH # Optional. The path of the .NET binary. This parameter takes effect only when `dotnet` is `true`.
 ```
+## Troubleshooting:
+### Manually install development tools
+In case the Teams Toolkit fails to install prerequisites for you, you can manually install them by following the guidelines below.
+#### How to install .NET SDK
+
+Go to [the official website](https://dotnet.microsoft.com/download) to download and install the supported version:
+
+| Platform | .NET versions |
+| --- | --- |
+| Windows, macOS (x64), Linux | **.NET Core 3.1 SDK (recommended)**, .NET 5.0 SDK, .NET 6.0 SDK  |
+| macOS (arm64) | .NET 6.0 SDK |
+
+> Note: Please restart all your Visual Studio Code instances after the installation is finished.
+
+#### How to install Azure Functions Core Tools
+
+Go to [the official website](https://github.com/Azure/azure-functions-core-tools) to install the `Azure Functions Core Tools v4`.
+
+> Note: Please restart all your Visual Studio Code instances after the installation is finished.
 
 # arm/deploy
 This action will deploy given ARM templates parallelly
