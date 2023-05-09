@@ -106,6 +106,9 @@ If your project failed to provision or publish by `teamsApp/validateAppPackage` 
 ### Start local service error
 If you've encountered the error message "Teams Toolkit now uses Dev Tunnel as default tunnel solution. For manual updates, see https://aka.ms/teamsfx-tasks/local-tunnel.", you'll need to update your `Start local tunnel` task to continue using Teams Toolkit. Please follow the instructions in this [document](#start-tunnel-service) to update the task.
 
+### PROVISIONOUTPUT_AZUREWEBAPPBOTOUTPUT_DOMAIN missing error
+If you've customized `botMessagingEndpoint` in `debug-set-up-bot` task and never debug successfully, please set the `PROVISIONOUTPUT_AZUREWEBAPPBOTOUTPUT_DOMAIN` in `env/.env.local` with the domain of your `botMessagingEndpoint` after migrated to Teams Toolkit V5.
+
 ## Feature changes that impact your development flow
 
 There're some changes to existing features you should be aware of:
