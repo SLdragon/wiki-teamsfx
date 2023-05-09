@@ -69,8 +69,16 @@ If you still want to restore your project configuration after the upgrade is suc
 ## Known issues
 
 ### STATE__FX_RESOURCE_FRONTEND_HOSTING__ENDPOINT missing error in some projects
-If your project only contains a bot, an error might occur saying `STATE__FX_RESOURCE_FRONTEND_HOSTING__ENDPOINT` is missing when executing commands. Replace this placeholder with a valid URL in `appPackage/manifest.json` to fix it.
-> This happens in projects created using very old Teams Toolkit. The old tooling provides a default example URL for your project if this placeholder does not exist. In latest tooling, we want to make everything more transparent so requires you to provide your URL here.
+If your project only contains a bot, an error might occur saying `STATE__FX_RESOURCE_FRONTEND_HOSTING__ENDPOINT` is missing when executing commands. Provide a valid URL for the property that uses this placeholder in `appPackage/manifest.json` to fix it. Here's an example:
+``` json
+"developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://example.com",
+    "privacyUrl": "https://example.com/privacy",
+    "termsOfUseUrl": "https://example.com/termsofuse"
+}
+```
+> This happens in projects created using VS Code Teams Toolkit 4.0.1 or earlier version. The old tooling provides a default example URL for your project if this placeholder does not exist. In latest tooling, we want to make everything more transparent so requires you to provide your URL here.
 
 ### InvalidParameter: Following parameter is missing or invalid for aadApp/create action: name
 You may be trying to upgrade a project created by Teams Toolkit for Visual Studio Code v3.x / Teams Toolkit CLI v0.x / Teams Toolkit for Visual Studio v17.3. Please install Teams Toolkit for Visual Studio Code v4.x / Teams Toolkit CLI v1.x / Teams Toolkit for Visual Studio v17.4 and run upgrade first.
