@@ -22,6 +22,10 @@ A: Yes. The upgrade will backup changed files in your project. You can refer [Ho
 
 A: If you do not want to upgrade temporary, you can use VS Code Teams Toolkit 4.X / TeamsFx CLI 1.X / Visual Studio 2022 17.4 to develop your projects.
 
+### Q: Upgrade keeps failing for me, what can I do?
+
+A: There are a few [know issues](https://github.com/OfficeDev/TeamsFx/wiki/Upgrade-project-to-use-Teams-Toolkit-5.0-features#known-issues) that we've provided solutions below. If the issue continue to exist, feel free to reach us at **ttkfeedback@microsoft.com**.
+
 ## How to Upgrade
 
 Teams Toolkit can automatically upgrade your project with your consent. To trigger upgrade, you can:
