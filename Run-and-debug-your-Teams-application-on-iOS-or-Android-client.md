@@ -69,12 +69,6 @@
                REACT_APP_START_LOGIN_PAGE_URL: ${{TAB_ENDPOINT}}/auth-start.html 
                WDS_SOCKET_PORT: 0 
          ```
-      - Update `appPackage/manifest.json`, set `showLoadingIndicator` to be `false`.
-        ```json
-        {
-            "showLoadingIndicator": false
-        }
-        ```
       - Use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Debug in Teams` green arrow button. 
     - For CLI: 
        - Install [ngrok](https://ngrok.com/). 
