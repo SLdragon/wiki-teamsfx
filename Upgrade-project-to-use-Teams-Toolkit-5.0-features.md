@@ -245,7 +245,7 @@ The steps in this section is prepared for project that contains multiple 1 capab
     | tab, api, bot / message extension, SSO | [sample project](https://github.com/OfficeDev/TeamsFx/tree/chyuan/add-manual-upgrad-sample-project/docs/vscode-extension/5.0-multi-capability-sample/tab-api-and-bot-with-sso) |
 
 2. Copy your project's source code to the new project
-    1. If your project contains a tab, copy everything under `tab` folder to the new project's `tab` folder
+    1. If your project contains a tab, copy everything under `tabs` folder to the new project's `tabs` folder
     2. If your project contains api, copy everything under `api` folder to the new project's `api` folder
     3. If your project contains a bot or/and message extension, copy everything under `bot` folder to the new project's `bot` folder
 
@@ -253,23 +253,21 @@ The steps in this section is prepared for project that contains multiple 1 capab
 
 4. Copy your ARM template to the new project
 
-    1. Remove everything under the new project's `infra` folder. 
+    1. Create an `infra` folder in the new project and copy everything under `templates/azure` in your current project to the new project's `infra` folder. 
 
-    2. Copy everything under `templates/azure` in your current project to the new project's `infra` folder. 
+    2. Rename `main.bicep` to `azure.bicep`.
 
-    3. Rename `main.bicep` to `azure.bicep`.
-
-    4. Copy `.fx/configs/azure.parameters.{env}.json` to the new project's `infra` folder.
+    3. Copy `.fx/configs/azure.parameters.{env}.json` to the new project's `infra` folder.
 
 5. Copy your Teams manifest to the new project
 
-    1. Remove everything under the new project's `appPackage` folder
+    1. Create an `appPackage` folder in the new project.
 
     2. Copy everything except `aad.template.json` (if have) under your existing project's `templates/appPackage` folder to `appPackage` in your new project
     
     3. Rename `appPackage/manifest.template.json` to `appPackage/manifest.json`.
 
-6. If your existing project contains `templates/appPackage/aad.template.json`, copy the content of this file to `aad.manifest.json` (under root of the project folder) in your new project.
+6. If your existing project contains `templates/appPackage/aad.template.json`, create a new file `aad.manifest.json` under root of the new project and copy the content of `templates/appPackage/aad.template.json` in your existing project to the new file.
 
 7. Refer [Step 2: transform the placeholders to new format](#step-2-transform-the-placeholders-to-new-format) to update placeholders in `appPackage/manifest.json`, `aad.manifest.json` (if have) and `infra/azure.parameters.{env}.json`.
 
@@ -439,16 +437,14 @@ For every manifest or parameter file, you need to do following things. This is j
            3. The environment variable name should be `PROVISIONOUTPUT__AZURESTORAGETABOUTPUT__ENDPOINT`
            4. Replace `{{{state.fx-resource-frontend-hosting.endpoint}}}` with `{{PROVISIONOUTPUT__AZURESTORAGETABOUTPUT__ENDPOINT}}`
 
-    3. Find `file/updateEnv` in `teamsapp.local.yml`, add the new environment variables you figured out in previous step, and provide expected values for them when you run your app locally. For example, `PROVISIONOUTPUT__AZURESTORAGETABOUTPUT__ENDPOINT` is expected to be `https://localhost:53000` when you run your tab app locally:
-        ```
-        - uses: file/updateEnv
-          with:
-          envs:
-            PROVISIONOUTPUT__AZURESTORAGETABOUTPUT__ENDPOINT: https://localhost:53000 # the value is just an example
-            # other environment variables ...
-        ```
+    3. Open `teamsapp.yml` and `teamsapp.local.yml`. For every environment variable reference (in the format of `${{ENV_VAR_NAME}}`), if the environment variable name does not equal to any environment variable names you figured out in previous step, update the environment variable names to the one you figured out. Usually only the middle part of the name may be different. This is because the variable names outputted in ARM template may be different in different Teams Toolkit version. The sample uses latest output variable names, which may be different than projects created by an old Teams Toolkit.
+
+    4. Open `appPackage/manifest.json` and `aad.manifest.json` (if have), update any remaining old placeholders to reference the new environment variables you figured out in previous step.
+       > Some old placeholders may contain 3 braces (e.g. `{{{state.fx-resource-frontend-hosting.endpoint}}}`), remove all the 3 braces when replacing it with the new placeholder.
+
+    5. Open `teamsapp.yml` and `teamsapp.local.yml`, replace `<your-teams-app-name>`,`<your-bot-aad-app-name>`,`<your-aad-app-name>`,`<your-bot-registration-name>` with the name you want.
     
-    4. Find `Start local tunnel` in `.vscode/tasks.json`, update the output to output `endpoint` and `domain` to the new environment variables for bot. For example:
+    6. Find `Start local tunnel` in `.vscode/tasks.json`, update the output to output `endpoint` and `domain` to the new environment variables for bot. For example:
         ``` json
         {
             "label": "Start local tunnel",
@@ -473,15 +469,7 @@ For every manifest or parameter file, you need to do following things. This is j
             "problemMatcher": "$teamsfx-local-tunnel-watch"
         }
         ```
-        > This step is only required when your project contains bot or message extension.
-
-    5. Open `teamsapp.yml`, for any placeholder not added by you, replace them based on their meaning. For example, `azureStorage/deploy` requires an Azure Storage resource id, so you need to change the placeholder to `${{PROVISIONOUTPUT__AZURESTORAGETABOUTPUT__STORAGERESOURCEID}}`:
-        ``` yml
-        - uses: azureStorage/deploy
-          with:
-            distributionPath: ./build
-            resourceId: ${{TAB_AZURE_STORAGE_RESOURCE_ID}} # you need to change ${{TAB_AZURE_STORAGE_RESOURCE_ID}} to ${{PROVISIONOUTPUT__AZURESTORAGETABOUTPUT__STORAGERESOURCEID}}
-        ```
+        > This step is only required when your project contains bot or message extension. If your ARM template generates different environment variable, update the environment variable name in above sample.
 
 After above steps, you should be able to develop your Teams app with Teams Toolkit 5.0. Please read [Feature changes that impact your development flow](#feature-changes-that-impact-your-development-flow) to understand how development flow changes in Teams Toolkit 5.0.
 
