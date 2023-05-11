@@ -54,7 +54,7 @@
                echo "::set-teamsfx-env TAB_ENDPOINT=https://localhost:53000"; 
          ```
 
-      - Update `teamsapp.local.yml`, add the configuration `WDS_SOCKET_PORT=0` to activate hot reloading while debugging React after utilizing the tunnel service. 
+      - If you're using React, update `teamsapp.local.yml`, add the configuration `WDS_SOCKET_PORT=0` to activate hot reloading while debugging React after utilizing the tunnel service. 
          ```yaml
          - uses: file/createOrUpdateEnvironmentFile 
            with: 
