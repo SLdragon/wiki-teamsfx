@@ -83,13 +83,15 @@
        - Executing the command `teamsfx deploy --env local` in your project directory. 
        - Executing the command `teamsfx preview --env local` in your project directory. 
 1. Open the sideloading URL and install the app in the Teams website as usual. 
-   ![image](https://user-images.githubusercontent.com/49138419/236614484-41aef6c4-2a4e-454f-888b-1b2e8d8b547a.png)
+
+   <img src="https://github.com/OfficeDev/TeamsFx/assets/49138419/ea136692-5188-46c2-b34e-9c591806afa7" width="800"/>
+
    > **Note:** When the dev tunnel access is set to `private`, the tab app cannot be displayed within an iframe on the web client. It is because its login page is hosted on "login.microsoftonline.com", which has the `X-FRAME-Options` header set to DENY. If you want to preview the app on the mobile client and debug it on web clients, you need to set the access level to `public`. It's worth noting that public access raises safety concerns since the tab app can be visited by anyone who knows the app's URL. 
    > 
-   > ![image](https://user-images.githubusercontent.com/49138419/236614517-ab553360-ea54-48ee-be13-a314e8d7cc34.png)
+   > <img src="https://github.com/OfficeDev/TeamsFx/assets/49138419/be8615da-1b63-43a0-ac3d-81a8eecbdaab" width="800"/>
 1. Open Teams on your mobile device and click "More" to find the previewing app. 
    
-   ![image](https://user-images.githubusercontent.com/49138419/236614567-b87c9d6d-6367-468a-b5fa-a9a10442f5f1.png)
+   <img src="https://github.com/OfficeDev/TeamsFx/assets/49138419/6c98c48b-d893-408d-b980-cc630690e9de" width="300"/>
 
    > **Note:** If a user has previously debugged the app, it is advisable for them to clear the cache on their mobile device to ensure immediate app synchronization. After clearing the cache, it may take some time for the app to sync. 
    > 
@@ -102,9 +104,9 @@
    > ![image](https://user-images.githubusercontent.com/49138419/236614768-096f81b8-fc94-4f25-837d-cf97c588a50b.png)
 
 1. If you are accessing the dev tunnel for the first time, you will need to sign in with your M365 account and confirm the anti-phishing page. 
-   
-   ![image](https://user-images.githubusercontent.com/49138419/236614829-0d9948d2-8d1a-4188-acbf-43b4179d981b.png)
-   ![image](https://user-images.githubusercontent.com/49138419/236614843-d96c5de4-f6f4-4656-9da0-841848eedc1c.png)
+
+   <img src="https://github.com/OfficeDev/TeamsFx/assets/49138419/fd22a01e-3d73-469b-a7f2-caeb8159716c" width="300"/>
+   <img src="https://github.com/OfficeDev/TeamsFx/assets/49138419/061963e8-3e20-44c7-903f-20342e776d3b" width="300"/>
 
    > **Note:** The login process should only be required once per device, and confirmation of the anti-phishing page must be completed after every installation of the app. 
 
@@ -118,7 +120,7 @@
 1. Open the sideloading URL and install the app in the Teams website as usual. 
 1. Open Teams on your mobile device and click "More" to find the previewing app. 
 
-   ![image](https://user-images.githubusercontent.com/49138419/236614567-b87c9d6d-6367-468a-b5fa-a9a10442f5f1.png)
+   <img src="https://github.com/OfficeDev/TeamsFx/assets/49138419/6c98c48b-d893-408d-b980-cc630690e9de" width="300">
 
    > **Note:** If a user has previously debugged the bot app and the Team app manifest file is changes, it is advisable for them to clear the cache on their mobile device to ensure immediate app synchronization. After clearing the cache, it may take some time for the app to sync. 
    > 
