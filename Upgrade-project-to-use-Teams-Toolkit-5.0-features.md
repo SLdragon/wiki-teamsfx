@@ -239,10 +239,10 @@ The steps in this section is prepared for project that contains multiple 1 capab
 1. Download sample project based on your project's capabilities
     | Capabilities | Sample project location |
     | --- | --- |
-    | tab, api, SSO | [sample project](https://github.com/OfficeDev/TeamsFx/tree/chyuan/add-manual-upgrad-sample-project/docs/vscode-extension/5.0-multi-capability-sample/tab-and-api-with-sso) |
-    | tab, bot / message extension  | [sample project](https://github.com/OfficeDev/TeamsFx/tree/chyuan/add-manual-upgrad-sample-project/docs/vscode-extension/5.0-multi-capability-sample/tab-and-bot) |
-    | tab, bot / message extension, SSO | [sample project](https://github.com/OfficeDev/TeamsFx/tree/chyuan/add-manual-upgrad-sample-project/docs/vscode-extension/5.0-multi-capability-sample/tab-and-bot-with-sso) |
-    | tab, api, bot / message extension, SSO | [sample project](https://github.com/OfficeDev/TeamsFx/tree/chyuan/add-manual-upgrad-sample-project/docs/vscode-extension/5.0-multi-capability-sample/tab-api-and-bot-with-sso) |
+    | tab, api, SSO | [sample project](https://github.com/OfficeDev/TeamsFx/tree/dev/docs/vscode-extension/5.0-multi-capability-sample/tab-and-api-with-sso) |
+    | tab, bot / message extension  | [sample project](https://github.com/OfficeDev/TeamsFx/tree/dev/docs/vscode-extension/5.0-multi-capability-sample/tab-and-bot) |
+    | tab, bot / message extension, SSO | [sample project](https://github.com/OfficeDev/TeamsFx/tree/dev/docs/vscode-extension/5.0-multi-capability-sample/tab-and-bot-with-sso) |
+    | tab, api, bot / message extension, SSO | [sample project](https://github.com/OfficeDev/TeamsFx/tree/dev/docs/vscode-extension/5.0-multi-capability-sample/tab-api-and-bot-with-sso) |
 
 2. Copy your project's source code to the new project
     1. If your project contains a tab, copy everything under `tabs` folder to the new project's `tabs` folder
