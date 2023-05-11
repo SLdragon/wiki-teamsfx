@@ -111,6 +111,9 @@
    > **Note:** The login process should only be required once per device, and confirmation of the anti-phishing page must be completed after every installation of the app. 
 
 1. Show a mobile friendly tab app. 
+   
+   <img src="https://github.com/OfficeDev/TeamsFx/assets/49138419/fcafa66e-6ca3-4144-b989-56497d88c38d" width="300"/>
+
 1. For Android devices, you can use [DevTools](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/developer-tools#access-devtools-from-an-android-device) to debug your tab while it is running.
 
 ## Steps for debugging a Teams bot app on mobile client
@@ -132,13 +135,9 @@
    > 
    > ![image](https://user-images.githubusercontent.com/49138419/236614768-096f81b8-fc94-4f25-837d-cf97c588a50b.png)
 
-1. If you are debugging a bot app with SSO and accessing the dev tunnel for the first time, you will need to confirm the anti-phishing page. 
-   
-   ![image](https://user-images.githubusercontent.com/49138419/236614843-d96c5de4-f6f4-4656-9da0-841848eedc1c.png)
-   > **Note:** The confirmation of the anti-phishing page must be completed after every installation of the app. 
 1. Debug the bot app on your mobile.  
-   ![image](https://user-images.githubusercontent.com/49138419/236615112-ee793006-bb63-4bd8-a76e-7d977a617d74.png)
-   ![image](https://user-images.githubusercontent.com/49138419/236615116-35bc81f6-acf6-490b-b6b4-b270c6e133af.png)
+   <img src="https://github.com/OfficeDev/TeamsFx/assets/49138419/1cd8408a-87d5-4fc8-91a3-923a015452c7" width="300">
+
 
 
  
