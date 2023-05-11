@@ -1,4 +1,7 @@
 # Run and debug your Teams application on iOS or Android client.
+
+Please follow the instructions in this tutorial to debug your bot or message extension apps or preview your tab application on mobile devices.
+
 ## Steps for testing a tab app on mobile client
 
 1. Run the Teams tab app locally
