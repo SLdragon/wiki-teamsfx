@@ -79,12 +79,6 @@
            TAB_DOMAIN=sample-ngrok-id.ngrok.io 
            TAB_ENDPOINT=https://sample-ngrok-id.ngrok.io 
            ```
-      - Update `appPackage/manifest.json`, set `showLoadingIndicator` to be `false`.
-        ```json
-        {
-            "showLoadingIndicator": false
-        }
-        ```
        - Executing the command `teamsfx provision --env local` in your project directory. 
        - Executing the command `teamsfx deploy --env local` in your project directory. 
        - Executing the command `teamsfx preview --env local` in your project directory. 
