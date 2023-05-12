@@ -239,3 +239,19 @@ If still fail with the same error, try:
   }
   ```
 - Clear Azure Functions Core Tools local cache at `${HOME}/.azure-functions-core-tools/`.
+
+## Error "ERR_NGROK_6022" when starting bot sso project
+### Error
+![image](https://github.com/OfficeDev/TeamsFx/assets/49138419/2b27d2be-cae9-453a-a8d1-d108306c51dc)
+### Reason
+In order to visit `auth-start.html`, you need to set the ngrok auth token.
+### Mitigation
+1. Stop debugging in Visual Studio Code.
+2. Sign up an ngrok account in https://dashboard.ngrok.com/signup.
+3. Copy your personal ngrok authtoken from https://dashboard.ngrok.com/get-started/your-authtoken.
+4. Run the following commands in Visual Studio Code terminal.
+   ```
+   cd ~/.fx/bin/ngrok
+   ngrok authtoken <your-personal-ngrok-authtoken>`
+   ```
+5. Start debugging the project again by hitting the F5 key in Visual Studio Code.
