@@ -179,8 +179,8 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
 1. In the .env.local file, find the lines that assign values to the `TAB_DOMAIN` and `TAB_ENDPOINT` variables. Add the following lines immediately below them:
 
     ```
-    ADDIN_DOMAIN=localhost:53000
-    ADDIN_ENDPOINT=https://localhost:53000
+    ADDIN_DOMAIN=localhost:3000
+    ADDIN_ENDPOINT=https://localhost:3000
     ```
 
     **NOTE**: During the early preview phase, these variables are set to the same string as the two `TAB_...` variables. It is not possible at this time to host the add-in and the tab capability on distinct domains.
@@ -209,7 +209,6 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     ```
 
 1. Copy the entire "extensions" property from the add-in's manifest into the Teams app manifest template as a top-level property.
-1. In the Teams app manifest template, replace every occurrence of "localhost:3000" with "localhost:53000".
 
 ## Copy the Outlook Add-in files to the Teams app project
 
@@ -275,7 +274,6 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     ```
 
 1. Open the package.json file *in the add-in folder* (not the tab folder, and not the root of the project). 
-1. In the "config" object, change the "dev_server_port" value to `53000`.
 1. Several of the scripts in the "scripts" object have a `manifest.json` parameter like the following. 
 
     ```
@@ -304,8 +302,6 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
 1. In Visual Studio Code, open the **TERMINAL**. Navigate to the add-in folder, and then run the command `npm install`. 
 1. In the add-in folder, open the webpack.config.js file. 
 1. Change the line `from: "manifest*.json",` to `from: "../build/appPackage/manifest*.json",`.
-1. Near the top of the webpack.config.js file, there is a line that assigns a localhost URL with port `3000` to the `urlDev` constant. Change the value from `3000` to `53000`.
-1. Near the end of the webpack.config.js file there is a line that assigns a value to the `devServer.port` property. Change the value from `3000` to `53000`.
 1. In the root of project, open the teamsapp.local.yml file and find the `provision` section. Use the `#` character to comment out the three lines that validate the manifest template. This is necessary because the Teams manifest validation system is not yet compatible with the changes you made to the manifest template. When you are done, the three lines should look like the following:
 
     ```
