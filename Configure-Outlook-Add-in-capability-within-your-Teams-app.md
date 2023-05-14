@@ -29,6 +29,7 @@ The following are the major steps to adding an Outlook Add-in to a Teams app. De
 1. [Merge the manifest](#merge-the-manifest) from the Outlook Add-in project into the unified Microsoft 365 manifest.
 1. [Copy the Outlook Add-in files to the Teams app project](#copy-the-outlook-add-in-files-to-the-teams-app-project).
 1. [Edit the tooling configuration files](#edit-the-tooling-configuration-files).
+1. [Run the app and add-in locally at the same time](#run-the-app-and-add-in-locally-at-the-same-time)
 1. [Move the application to Azure](#move-the-application-to-azure).
 
 ## Prepare the Teams app project
@@ -419,7 +420,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
       <li>To stop debugging and uninstall the add-in, select <b>Run</b> | <b>Stop Debugging</b> in Visual Studio Code.</li>
     </ol> 
 
-## Debug the app or add-in or run them at the same time
+## Run the app and add-in locally at the same time
 
 You can sideload and run the app and the add-in simultaneously, but breakpoints are not reliably hit when both are running. So to debug, run only one at a time. 
 
