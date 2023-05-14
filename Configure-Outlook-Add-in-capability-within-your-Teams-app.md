@@ -437,10 +437,10 @@ To see both the app and the add-in running at the same time, take the following 
       <li><i>First, make sure Outlook desktop is closed.</i></li>
       <li>In Visual Studio Code, open the Teams Toolkit.</li>
       <li>In the <b>ACCOUNTS</b> section, verify that you are signed into Microsoft 365.</li>
-      <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code. In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch Add-in Outlook Desktop (Edge Chromium)</b>, and then press F5. The project builds and a Node dev-server window opens. This process may take a couple of minutes. Eventually, both of the following will happen:
-        <ul>
-            <ol>Teams opens in a browser with a prompt to add your tab app.</ol>
-            <ol>Outlook desktop opens.</ol>
+      <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code. In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch App and Add-in Outlook Desktop (Edge Chromium)</b>, and then press F5. The project builds and a Node dev-server window opens to host the add-in. The tab app is hosted in the Visual Studio Code terminal. This process may take a couple of minutes. Eventually, both of the following will happen:
+        <ul list-style="disc">
+          <ol>Teams opens in a browser with a prompt to add your tab app.</ol>
+          <ol>Outlook desktop opens.</ol>
        </ul>
       </li>
       <li>In the Teams prompt, select <b>Add</b> and the tab will open.</li>
