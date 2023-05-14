@@ -113,7 +113,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 
     <ol type="a">
       <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code.</li>
-      <li>In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch App Debug (Edge)</b>, and then press F5. The project will build and run. This process may take a couple of minutes. Eventually, Teams opens in a browser with a prompt to add your tab app.</li>
+      <li>In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Debug (Edge)</b>, and then press F5. The project will build and run. This process may take a couple of minutes. Eventually, Teams opens in a browser with a prompt to add your tab app.</li>
       <li>Select <b>Add</b>.</li>
       <li>To stop debugging and uninstall the app, select <b>Run</b> | <b>Stop Debugging</b> in Visual Studio Code.</li>
     </ol>
