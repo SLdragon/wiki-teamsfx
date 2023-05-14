@@ -112,7 +112,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 
     <ol type="a">
       <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code.</li>
-      <li>In the <b>RUN AND DEBUG</b> drop down menu, select the top option, <b>Debug (Edge)</b>, and then press F5. The project will build and run. This process may take a couple of minutes. Eventually, Teams opens in a browser with a prompt to add your tab app.</li>
+      <li>In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch App Debug (Edge)</b>, and then press F5. The project will build and run. This process may take a couple of minutes. Eventually, Teams opens in a browser with a prompt to add your tab app.</li>
       <li>Select <b>Add</b>.</li>
       <li>To stop debugging and uninstall the app, select <b>Run</b> | <b>Stop Debugging</b> in Visual Studio Code.</li>
     </ol>
@@ -375,7 +375,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
 
    ```
     {
-        "label": "Start App and AddIn Locally",
+        "label": "Start App and Add-in Locally",
         "dependsOn": [
             "Start Teams App Locally"",
             "Start Add-in Locally"
@@ -384,20 +384,32 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     },
    ```
 
-1. Open the .vscode\launch.json file in the project, which configures the **RUN AND DEBUG** UI in Visual Studio Code and add the following object to the top of the "configurations" array.
+1. Open the .vscode\launch.json file in the project, which configures the **RUN AND DEBUG** UI in Visual Studio Code and add the following two objects to the top of the "configurations" array.
 
     ```
     {
-        "name": "Outlook Desktop (Edge Chromium)",
+        "name": "Launch Add-in Outlook Desktop (Edge Chromium)",
         "type": "msedge",
         "request": "attach",
         "port": 9229,
         "timeout": 600000,
         "webRoot": "${workspaceRoot}",
-        "preLaunchTask": "Start App and AddIn Locally",
+        "preLaunchTask": "Start Add-in Locally",
+        "postDebugTask": "Stop Debug"
+    },
+    {
+        "name": "Launch App and Add-in Outlook Desktop (Edge Chromium)",
+        "type": "msedge",
+        "request": "attach",
+        "port": 9229,
+        "timeout": 600000,
+        "webRoot": "${workspaceRoot}",
+        "preLaunchTask": "Start App and Add-in Locally",
         "postDebugTask": "Stop Debug"
     },
     ```
+
+1. In the "compounds" section of the same file, rename the "Debug (Edge)" compound to "Launch App Debug (Edge)", and rename the "Debug (Chrome)" compound to "Launch App Debug (Chrome)".
 
 1. Verify that you can sideload the add-in capability of the Teams app to Outlook with the following steps:
 
@@ -405,8 +417,34 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
       <li><i>First, make sure Outlook desktop is closed.</i></li>
       <li>In Visual Studio Code, open the Teams Toolkit.</li>
       <li>In the <b>ACCOUNTS</b> section, verify that you are signed into Microsoft 365.</li>
-      <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code. In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Outlook Desktop (Edge Chromium)</b>, and then press F5. The project builds and a Node dev-server window opens. This process may take a couple of minutes. Eventually, Outlook desktop will open.</li>
+      <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code. In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch Add-in Outlook Desktop (Edge Chromium)</b>, and then press F5. The project builds and a Node dev-server window opens. This process may take a couple of minutes. Eventually, Outlook desktop will open.</li>
       <li>Open the <b>Inbox</b> <i>of your Microsoft 365 account identity</i> and open any message. A <b>Contoso Add-in</b> tab with two buttons will appear on the <b>Home</b> ribbon (or the <b>Message</b> ribbon, if you have opened the message in its own window).</li>
+      <li>Click the <b>Show Taskpane</b> button and a task pane opens. Click the <b>Perform an action</b> button and a small notification appears near the top of the message.</li>
+      <li>To stop debugging and uninstall the add-in, select <b>Run</b> | <b>Stop Debugging</b> in Visual Studio Code.</li>
+    </ol> 
+
+## Debug the app or add-in or run them at the same time
+
+You can sideload and run the app and the add-in simultaneously, but breakpoints are not reliably hit when both are running. So to debug, run only one at a time. 
+
+To debug the app, see the last step of the **Prepare the Teams app project** above.
+
+To debug the add-in, see the last step of the **Edit the tooling configuration files** above.
+
+To see both the app and the add-in running at the same time, take the following steps. 
+
+   <ol type="a">
+      <li><i>First, make sure Outlook desktop is closed.</i></li>
+      <li>In Visual Studio Code, open the Teams Toolkit.</li>
+      <li>In the <b>ACCOUNTS</b> section, verify that you are signed into Microsoft 365.</li>
+      <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code. In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch Add-in Outlook Desktop (Edge Chromium)</b>, and then press F5. The project builds and a Node dev-server window opens. This process may take a couple of minutes. Eventually, both of the following will happen:
+        <ul>
+            <ol>Teams opens in a browser with a prompt to add your tab app.</ol>
+            <ol>Outlook desktop opens.</ol>
+       </ul>
+      </li>
+      <li>In the Teams prompt, select <b>Add</b> and the tab will open.</li>
+      <li>In Outlook, open the <b>Inbox</b> <i>of your Microsoft 365 account identity</i> and open any message. A <b>Contoso Add-in</b> tab with two buttons will appear on the <b>Home</b> ribbon (or the <b>Message</b> ribbon, if you have opened the message in its own window).</li>
       <li>Click the <b>Show Taskpane</b> button and a task pane opens. Click the <b>Perform an action</b> button and a small notification appears near the top of the message.</li>
       <li>To stop debugging and uninstall the add-in, select <b>Run</b> | <b>Stop Debugging</b> in Visual Studio Code.</li>
     </ol> 
