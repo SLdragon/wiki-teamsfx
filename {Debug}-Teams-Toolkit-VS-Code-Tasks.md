@@ -178,7 +178,6 @@ This task is to start local tunnel service (ngrok) to make your local bot messag
 | Arguments       | Type    | Required | Description                                                                                                                                                                                             |
 |-----------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ngrokArgs        | string or string[]  | required | The ngrok command line arguments to start the tunnel. Full references can be found in [ngrok document](https://ngrok.com/docs/ngrok-agent/ngrok). |
-| ngrokPath        | string | optional | The ngrok binary path. If undefined, use Teams Toolkit ngrok, otherwise use provided path. E.g.,"ngrokPath": <ul><li>"ngrok" // use ngrok from `env:PATH`</li><li>"C:/some-path/ngrok" // use ngrok from absolute path</li><li>"./bot/my-ngrok/ngrok" // use ngrok from relative path</li></ul> |
 | tunnelInspection | string  | optional | Teams Toolkit tries to get tunnel public URL from ngrok log first, then the first PublicURL via default inspection "http://127.0.0.1:4040/api/tunnels". If you specify your own `ngrokArgs` with different log format or inspection, set this arg to provide your own inspection location. |
 
 #### Sample
@@ -228,19 +227,31 @@ This task is to start local tunnel service (ngrok) to make your local bot messag
 },
 ```
 
-**4. Use your own ngrok binary.** If Teams Toolkit has issue on installing ngrok or you'd like to use your own ngrok binary, set `ngrokPath`.
+**4. Use your own ngrok binary.** 
+Start your own ngrok with command `ngrok http 3978` in the terminal and set the ngrok endpoint into the `botMessagingEndpoint`.
+
 ```json
 {
-    "label": "Start local tunnel",
+    "label": "Start Teams App Locally",
+    "dependsOn": [
+        ...
+        // Remove/Comment out tunnel task
+        //"Start local tunnel",
+        "Set up bot",
+        ...
+    ],
+    "dependsOrder": "sequence"
+},
+...
+{
+    "label": "Set up bot",
     "type": "teamsfx",
-    "command": "debug-start-local-tunnel",
+    "command": "debug-set-up-bot",
     "args": {
-        "ngrokArgs": "http 3978 --log=stdout --log-format=logfmt",
-        // set ngrok path
-        "ngrokPath": "/path/to/your/ngrok"
-    },
-    "isBackground": true,
-    "problemMatcher": "$teamsfx-local-tunnel-watch"
+        ...
+        // tell Teams Toolkit your message endpoint
+        "botMessagingEndpoint": "https://sample-id.ngrok.io/api/messages",
+    }
 },
 ```
 
