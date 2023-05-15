@@ -418,7 +418,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
 
 ## Run the app and add-in locally at the same time
 
-You can sideload and run the app and the add-in simultaneously, but breakpoints are not reliably hit when both are running. So to debug, run only one at a time. 
+You can sideload and run the app and the add-in simultaneously, but the debugger cannot reliably hit attach when both are running. So to debug, run only one at a time. 
 
 To debug the app, see the last step of the **Prepare the Teams app project** above.
 
