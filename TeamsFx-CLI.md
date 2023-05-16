@@ -27,7 +27,7 @@ The following list provides the common scenarios for`teamsfx preview:
     teamsfx preview --env local
     ```
 
-- Local Preview Bot App
+- Local Preview Bot App / Message Extension App
   - To make the bot endpoint public, you should use your own tunnel service solution. For example, you can use [ngrok](https://ngrok.com/) by the following steps:
       - Install [ngrok](https://ngrok.com/download)
       - Start your local tunnel service by running the command `ngrok http 3978`.
@@ -46,6 +46,13 @@ The following list provides the common scenarios for`teamsfx preview:
     ```shell
     teamsfx provision --env local
     teamsfx deploy --env local
+    ```
+  - If you are previewing a Azure Functions hosted notification bot, please execute the following command in your project directory.
+    ```shell
+    npm run prepare-storage:teamsfx
+    ```
+  - Executing the command in your project directory.
+    ```shell
     teamsfx preview --env local
     ```
 
