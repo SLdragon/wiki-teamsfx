@@ -312,7 +312,7 @@ If you are upgrading a project created by Teams Toolkit v4.x.x, `BOT_ID` and `SE
 
 ### Using existing Azure Active Directory app ID for SSO
 
-If you are developing with a Teams Toolkit scaffolded project, you can set the following environment variables in `.env` files listed under the env folder:
+If you are developing with a Teams Toolkit scaffolded project, you can set the following environment variables in `.env` and `.env.{envName}.user` files listed under the env folder:
 * `AAD_APP_CLIENT_ID` - the client id of AAD app
 * `AAD_APP_CLIENT_SECRET` - the client secret of AAD app
 * `AAD_APP_OBJECT_ID` - the object id of AAD app
