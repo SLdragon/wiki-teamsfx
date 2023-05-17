@@ -282,9 +282,11 @@ However, Teams Toolkit supports using existing Azure Active Directory app IDs. <
 
 ### Using existing Azure Active Directory app ID for bot
 
-If you are developing with a Teams Toolkit scaffolded project, you can set `BOT_ID` and `SECRET_BOT_PASSWORD` in `.env` files listed under the env folder.
+If you are developing with a Teams Toolkit scaffolded project, you can set `BOT_ID` in `.env` files listed under the env folder, you can set `SECRET_BOT_PASSWORD` in `.env.{envName}.user` files.
 
-![image](https://user-images.githubusercontent.com/103554011/217710285-2ea82d7a-4985-4b88-94c4-64a075e7b9b0.png)
+![image](https://github.com/OfficeDev/TeamsFx/assets/103554011/0c6547ef-ffce-40ed-8458-e0e246550d28)
+
+![image](https://github.com/OfficeDev/TeamsFx/assets/103554011/f72ef1a2-ff05-483b-a1aa-7845c8ada82b)
 
 You can find your app's `BOT_ID` and `SECRET_BOT_PASSWORD` in [Azure Active Directory](https://ms.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview).
 * Select your app under "App registration"
