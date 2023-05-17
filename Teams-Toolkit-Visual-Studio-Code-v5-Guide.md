@@ -29,8 +29,6 @@ Teams Toolkit enables developers to bring their existing internal and SaaS appli
 
 At the same time, Teams Toolkit helps developers simplify the cloud infrastructure and deployment processes that are required to run their application. Developers can leverage existing cloud resources, leverage existing cloud infrastructure source code, or use Teams Toolkit’s opinionated templates to provision and deploy their application.
 
-<em>Follow <b>[Install a pre-release version](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/install-teams-toolkit?tabs=vscode&pivots=visual-studio-code#install-a-pre-release-version)</b> to get this pre-release.</em>
-
 # Core concepts
 
 Teams Toolkit consists of several tools that come together to enable you to build Teams applications:
