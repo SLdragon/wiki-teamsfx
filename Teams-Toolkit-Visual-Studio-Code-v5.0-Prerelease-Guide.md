@@ -229,7 +229,7 @@ There're 3 ways to add customized environment variables to teamsfx actions:
 
 1. Update your machine's environment variables directly. You need to close all the opened VS Code instances and reopen VS Code again to let the environment variable changes take effect.
 
-2. Add your environment variables to the `.env.{envName}` and `.env.{envName}.user` files. The environment variables defined in these 2 files will be available to all the actions. You can reference the [dotenv](https://github.com/motdotla/dotenv) document to understand the syntax.
+2. Add your environment variables to the `.env.{envName}` and `.env.{envName}.user` files. See [Environment](aka.ms/teamsfx-v5.0-guide#environments) sections for details.
 
    Teams Toolkit scaffolded projects include `.env.{envName}.user` in `.gitignore` by default. Thus, if you want to commit your environment variables to git, you need to add them to `.env.{envName}`. Otherwise, you need to add them to `.env.{envName}.user`.
 
