@@ -4,7 +4,7 @@
 
 ### Links to more information
 
-For information on Teams Toolkit v5.0 pre-release, visit [Teams Toolkit v5.0 pre-release guide](https://aka.ms/teamsfx-v5.0-guide).
+For information on Teams Toolkit v5, visit [Teams Toolkit v5 guide](https://aka.ms/teamsfx-v5.0-guide).
 
 For information on lifecycles, visit [Lifecycles](https://aka.ms/teamsfx-v5.0-guide#lifecycles).
 
