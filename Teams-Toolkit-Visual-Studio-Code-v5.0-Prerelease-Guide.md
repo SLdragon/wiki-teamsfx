@@ -14,7 +14,7 @@
   * [yml definition](#yml-definition)
 * [Debug (F5) in Visual Studio Code](#debug-f5-in-visual-studio-code)
 * [Examples](#examples)
-  * [Customize your Ngrok configuration for debug](#customize-your-ngrok-configuration-for-debug)
+  * [Customize your Dev Tunnel configuration for debug](#customize-your-dev-tunnel-configuration-for-debug)
   * [Use your existing Teams app ID](#use-your-existing-teams-app-id)
   * [Use your existing Azure Active Directory app ID](#use-your-existing-azure-active-directory-app-id)
     * [Using existing Azure Active Directory app ID for bot](#using-existing-azure-active-directory-app-id-for-bot)
