@@ -253,7 +253,7 @@ Teams Toolkit uses ngrok for tunneling, but you could customize the tunneling se
 
 You can use your existing Teams app ID instead of registering a new one with Teams Toolkit.
 
-You can do this by setting the `TEAMS_APP_ID` environment variable. When `TEAMS_APP_ID` exist, the `teamsApp/create` action won't register a new Teams app, the Teams `manifest.json` file can reference `TEAMS_APP_ID`. <b>[Learn more about Teams Toolkit actions](#teamsappcreate)</b>
+You can do this by setting the `TEAMS_APP_ID` environment variable. When `TEAMS_APP_ID` exist, the `teamsApp/create` action won't register a new Teams app, the Teams `manifest.json` file can reference `TEAMS_APP_ID`. <b>[Learn more about Teams Toolkit actions](aka.ms/teamsfx-actions)</b>
 
 If you are developing with a Teams Toolkit scaffolded project, you can set it in `.env` files listed under the env folder.
 
