@@ -257,7 +257,7 @@ You can do this by setting the `TEAMS_APP_ID` environment variable. When `TEAMS_
 
 If you are developing with a Teams Toolkit scaffolded project, you can set it in `.env` files listed under the env folder.
 
-![image](https://github.com/OfficeDev/TeamsFx/assets/103554011/1a7ff382-7a7b-461d-a1bf-886e5297a1a0)
+![image](https://github.com/OfficeDev/TeamsFx/assets/103554011/ffd6de18-8c5a-4ea6-bdd5-2ba08384f765)
 
 Also make sure your `manifest.json` file correctly reference it.
 
