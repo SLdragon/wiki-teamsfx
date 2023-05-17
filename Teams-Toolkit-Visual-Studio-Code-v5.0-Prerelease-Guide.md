@@ -243,11 +243,11 @@ There're 3 ways to add customized environment variables to teamsfx actions:
 
 Some local debug operations are not defined in `teamsapp.local.yml`, for example `npm run dev:teamsfx`. You need to inspect the actual command in `package.json` to understand which file is used to define the npm command's input (usually in the form of environment variable) and update that file.
 
-Most of the time, the npm command uses `env-cmd -f .localSettings` to load environment variables. So you need to create a `.localSettings` file in the same folder of `package.json` and add environment variables to it.
+Most of the time, the npm command uses `env-cmd -f .localConfigs` to load environment variables. So you need to create a `.localConfigs` file in the same folder of `package.json` and add environment variables to it.
 
-## Customize your Ngrok configuration for debug
+## Customize your Dev Tunnel configuration for debug
 
-Teams Toolkit uses ngrok for tunneling, but you could customize the tunneling settings or use your own tunneling service by modifying .`vscode/tasks.json`. Visit [teamsfx local tunnel](https://aka.ms/teamsfx-tasks#start-local-tunnel) for more details.
+Teams Toolkit uses Dev Tunnel for tunneling, but you could customize the tunneling settings or use your own tunneling service. Visit [Teams Toolkit tunnel](https://aka.ms/teamsfx-tasks/local-tunnel) for more details.
 
 ## Use your existing Teams app ID
 
