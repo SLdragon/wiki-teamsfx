@@ -30,15 +30,15 @@ Alternative ways to send notifications to Teams:
 
 ### In Visual Studio Code
 
-1. From Teams Toolkit side bar click `Create a new app` or select `Teams: Create a new app` from the command palette.
+1. From Teams Toolkit side bar click `Create a New App` or select `Teams: Create a New App` from the command palette.
 
 ![image](notification/create-vsc-1.png)
 
-2. Select `Start with a Teams capability`.
+2. Select `Bot`.
   
 ![image](notification/create-vsc-2.png)
 
-3. Select `Notification bot` from Scenario-based Teams app section.
+3. Select `Chat Notification Message`.
 
 ![image](notification/create-vsc-3.png)
 
@@ -181,7 +181,7 @@ When notifying, TeamsFx SDK creates new conversation from the selected conversat
 ``` typescript
 /** Typescript **/
 // list all installation targets
-for (const target of await bot.notification.installations()) {
+for (const target of await notificationApp.notification.installations()) {
     // call Bot Framework's adapter.continueConversationAsync()
     await target.adapter.continueConversationAsync(
         target.botAppId,
@@ -260,7 +260,7 @@ You can also add new cards if needed. Follow this [sample](https://aka.ms/teamsf
 ``` typescript
 /** Typescript **/
 // list all installation targets
-for (const target of await bot.notification.installations()) {
+for (const target of await notificationApp.notification.installations()) {
     // "Channel" means this bot is installed to a Team (default to notify General channel)
     if (target.type === "Channel") {
         // Directly notify the Team (to the default General channel)
@@ -311,7 +311,7 @@ foreach (var target in await _conversation.Notification.GetInstallationsAsync())
 ``` typescript
 /** Typescript **/
 // list all installation targets
-for (const target of await bot.notification.installations()) {
+for (const target of await notificationApp.notification.installations()) {
     // "Group" means this bot is installed to a Group Chat
     if (target.type === "Group") {
         // Directly notify the Group Chat
@@ -350,7 +350,7 @@ foreach (var target in await _conversation.Notification.GetInstallationsAsync())
 ``` typescript
 /** Typescript **/
 // list all installation targets
-for (const target of await bot.notification.installations()) {
+for (const target of await notificationApp.notification.installations()) {
     // "Person" means this bot is installed as Personal app
     if (target.type === "Person") {
         // Directly notify the individual person
@@ -379,7 +379,7 @@ foreach (var target in await _conversation.Notification.GetInstallationsAsync())
 ```typescript
 /** Typescript **/
 // find the first channel when the predicate is true.
-const channel = await bot.notification.findChannel(c => Promise.resolve(c.info.name === "MyChannelName"));
+const channel = await notificationApp.notification.findChannel(c => Promise.resolve(c.info.name === "MyChannelName"));
 
 // send adaptive card to the specific channel. 
 await channel?.sendAdaptiveCard(...);
@@ -392,7 +392,7 @@ await channel?.sendAdaptiveCard(...);
 ```typescript
 /** Typescript **/
 // find the first person when the predicate is true.
-const member = await bot.notification.findMember(m => Promise.resolve(m.account.name === "Bob"));
+const member = await notificationApp.notification.findMember(m => Promise.resolve(m.account.name === "Bob"));
 
 // send adaptive card to the specific person. 
 await member?.sendAdaptiveCard(...);
@@ -406,7 +406,7 @@ To send notification, you need to create `ConversationBot` first. (Code already 
 
 ``` typescript
 /** Javascript/Typescript: src/internal/initialize.*s **/
-const bot = new ConversationBot({
+const notificationApp = new ConversationBot({
     // The bot id and password to create CloudAdapter.
     // See https://aka.ms/about-bot-adapter to learn more about adapters.
     adapterConfig: {
@@ -465,14 +465,14 @@ const adapter = new CloudAdapter(...);
 // Customize your adapter, e.g., error handling
 adapter.onTurnError = ...
 
-const bot = new ConversationBot({
+const notificationApp = new ConversationBot({
     // use your own adapter
     adapter: adapter;
     ...
 });
 
 // Or, customize later
-bot.adapter.onTurnError = ...
+notificationApp.adapter.onTurnError = ...
 ```
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
@@ -487,7 +487,7 @@ class MyStorage implements NotificationTargetStorage {...}
 const myStorage = new MyStorage(...);
 
 // initialize ConversationBot with notification enabled and customized storage
-const bot = new ConversationBot({
+const notificationApp = new ConversationBot({
     // The bot id and password to create CloudAdapter.
     // See https://aka.ms/about-bot-adapter to learn more about adapters.
     adapterConfig: {
