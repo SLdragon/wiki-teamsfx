@@ -24,7 +24,7 @@ A: If you do not want to upgrade temporary, you can use VS Code Teams Toolkit 4.
 
 ### Q: Upgrade keeps failing for me, what can I do?
 
-A: There are a few [know issues](https://github.com/OfficeDev/TeamsFx/wiki/Upgrade-project-to-use-Teams-Toolkit-5.0-features#known-issues) that we've provided solutions below. If the issue continue to exist, feel free to reach us at **ttkfeedback@microsoft.com**.
+A: There are a few [known issues](https://github.com/OfficeDev/TeamsFx/wiki/Upgrade-project-to-use-Teams-Toolkit-5.0-features#known-issues) that we've provided solutions below. If the issue continue to exist, feel free to reach us at **ttkfeedback@microsoft.com**.
 
 ## How to Upgrade
 
