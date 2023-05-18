@@ -107,6 +107,9 @@ Since simple auth is deprecated, refer to [wiki](https://github.com/OfficeDev/Te
 ### teamsApp/validateAppPackage failed error
 If your project failed to provision or publish by `teamsApp/validateAppPackage` action after upgrade but had provisioned successfully before, please use the [validation](https://dev.teams.microsoft.com/validation) to check your appPackage zip file and fix the error.
 
+### files missed in appPackage folder
+If you find some files are missing under `appPackage` folder after upgrade, you can find them in the `.backup/templates/appPackage`. Please copy these files (exclude `manifest.template.json`, `aad.manifest.json` and `resources` since they have been handled already) to  appPackage folder manually.
+
 ### Start local service error
 If you've encountered the error message "Teams Toolkit now uses Dev Tunnel as default tunnel solution. For manual updates, see https://aka.ms/teamsfx-tasks/local-tunnel.", you'll need to update your `Start local tunnel` task to continue using Teams Toolkit. Please follow the instructions in this [document](#start-tunnel-service) to update the task.
 
