@@ -1,3 +1,40 @@
+## How to use Zero Install Link Unfurling in Teams
+
+Zero Install Link Unfurling requires link unfurling app to be published. You need an admin account to publish an app into your org.
+
+Login your admin account in Teams. Go to `Manage your apps` -> `Upload an app`. Click `Upload an app to your org's app catalog` to upload your app's zip file.
+
+![upload](https://github.com/OfficeDev/TeamsFx/assets/11220663/895924f4-89e6-44cf-a831-77d282c91d4c)
+
+Switch to another user account. Without installing this app, paste the link "https://www.botframework.com" into chat box, and you should see the adaptive card like below.
+
+![zeroInstall](https://github.com/OfficeDev/TeamsFx/assets/11220663/8b89433c-b73f-486c-b52f-21c449f7347f)
+
+## How to add link unfurling cache in Teams
+
+This template removes cache by default to provide convenience for debug. To add cache, ***REMOVE*** following JSON part from adaptive card in `linkUnfurlingApp.ts`:
+
+```ts
+suggestedActions: {
+          actions: [
+            {
+              title: "default",
+              type: "setCachePolicy",
+              value: '{"type":"no-cache"}',
+            },
+          ],
+        }
+```
+
+After removing this, the link unfurling result will be cached in Teams for 30 minutes. Please refer to [link unfurling document](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=desktop%2Cjson%2Cadvantages#remove-link-unfurling-cache) for more details.
+
+## How to customize Zero Install Link Unfurling's adaptive cards
+
+The supported types for Zero Install Link Unfurling are "result" and "auth" and this template uses "result" as default. By changing it to "auth", the adaptive card will be:
+
+![zeroInstallAuth](https://github.com/OfficeDev/TeamsFx/assets/11220663/620b8dd0-8003-4fda-9865-ac94d212972e)
+
+For card with type "auth", the Teams client strips away any action buttons from the card, and adds a sign in action button. Please refer to [zero install link unfurling document](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=desktop%2Cjson%2Climitations#zero-install-for-link-unfurling) for more details.
 ## How to add stage view (Teams)
 
 Stage View is a full screen UI component that you can invoke to surface your web content. You can turn URLs into a tab using an Adaptive Card and Chat Services. Follow the instructions below to add stage view in your link unfurling app.
