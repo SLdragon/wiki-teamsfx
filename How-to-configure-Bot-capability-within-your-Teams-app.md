@@ -218,13 +218,6 @@ Please check the guide [Create a bot app with Teams Toolkit](https://learn.micro
     +                }
     +            }
     +        },
-    +        {
-    +            "label": "Start application",
-    +            "dependsOn": [
-    +                "Start frontend",
-    +                "Start bot"
-    +            ]
-    +        },
              {
                  "label": "Start application",
                  "dependsOn": [
