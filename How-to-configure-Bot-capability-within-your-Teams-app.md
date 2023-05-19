@@ -147,89 +147,89 @@ Please check the guide [Create a bot app with Teams Toolkit](https://learn.micro
 
 1. Modify `.vscode/task.json`. Add 3 new tasks: `Start local tunnel`, `Start bot`, `Start frontend`. Add `Start bot` and `Start frontend` to task `Start application`'s `dependOn`. Config `Start bot` and `Start frondend`'s `cwd` option since we already move tab and bot's code to `tab/` and `bot/` folder separately. Add `Start local tunnel` to task `Start Teams App Locally`'s dependOn.
     ```
-     "tasks":[
-    +        {
-    +            // Start the local tunnel service to forward public URL to local port and inspect traffic.
-    +            // See https://aka.ms/teamsfx-tasks/local-tunnel for the detailed args definitions.
-    +            "label": "Start local tunnel",
-    +            "type": "teamsfx",
-    +            "command": "debug-start-local-tunnel",
-    +            "args": {
-    +                "type": "dev-tunnel",
-    +                "ports": [
-    +                    {
-    +                        "portNumber": 3978,
-    +                        "protocol": "http",
-    +                        "access": "public",
-    +                        "writeToEnvironmentFile": {
-    +                            "endpoint": "BOT_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT
-    +                            "domain": "BOT_DOMAIN" // output tunnel domain as BOT_DOMAIN
-    +                        }
-    +                    }
-    +                ],
-    +                "env": "local"
-    +            },
-    +            "isBackground": true,
-    +            "problemMatcher": "$teamsfx-local-tunnel-watch"
-    +        },
-    +        {
-    +            "label": "Start bot",
-    +            "type": "shell",
-    +            "command": "npm run dev:teamsfx",
-    +            "isBackground": true,
-    +            "options": {
-    +                "cwd": "${workspaceFolder}/bot"
-    +            },
-    +            "problemMatcher": {
-    +                "pattern": [
-    +                    {
-    +                        "regexp": "^.*$",
-    +                        "file": 0,
-    +                        "location": 1,
-    +                        "message": 2
-    +                    }
-    +                ],
-    +                "background": {
-    +                    "activeOnStart": true,
-    +                    "beginsPattern": "[nodemon] starting",
-    +                    "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
-    +                }
-    +            }
-    +        },
-    +        {
-    +           "label": "Start frontend",
-    +           "type": "shell",
-    +           "command": "npm run dev:teamsfx",
-    +           "isBackground": true,
-    +           "options": {
-    +                "cwd": "${workspaceFolder}/tab"
-    +            },
-    +            "problemMatcher": {
-    +                "pattern": {
-    +                    "regexp": "^.*$",
-    +                    "file": 0,
-    +                    "location": 1,
-    +                    "message": 2
-    +                },
-    +                "background": {
-    +                    "activeOnStart": true,
-    +                    "beginsPattern": ".*",
-    +                    "endsPattern": "Compiled|Failed|compiled|failed"
-    +                }
-    +            }
-    +        },
+    "tasks":[
+            {
+                // Start the local tunnel service to forward public URL to local port and inspect traffic.
+                // See https://aka.ms/teamsfx-tasks/local-tunnel for the detailed args definitions.
+                "label": "Start local tunnel",
+                "type": "teamsfx",
+                "command": "debug-start-local-tunnel",
+                "args": {
+                    "type": "dev-tunnel",
+                    "ports": [
+                        {
+                            "portNumber": 3978,
+                            "protocol": "http",
+                            "access": "public",
+                            "writeToEnvironmentFile": {
+                                "endpoint": "BOT_ENDPOINT", // output tunnel endpoint as BOT_ENDPOINT
+                                "domain": "BOT_DOMAIN" // output tunnel domain as BOT_DOMAIN
+                            }
+                        }
+                    ],
+                    "env": "local"
+                },
+                "isBackground": true,
+                "problemMatcher": "$teamsfx-local-tunnel-watch"
+            },
+            {
+                "label": "Start bot",
+                "type": "shell",
+                "command": "npm run dev:teamsfx",
+                "isBackground": true,
+                "options": {
+                    "cwd": "${workspaceFolder}/bot"
+                },
+                "problemMatcher": {
+                    "pattern": [
+                        {
+                            "regexp": "^.*$",
+                            "file": 0,
+                            "location": 1,
+                            "message": 2
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": "[nodemon] starting",
+                        "endsPattern": "restify listening to|Bot/ME service listening at|[nodemon] app crashed"
+                    }
+                }
+            },
+            {
+               "label": "Start frontend",
+               "type": "shell",
+               "command": "npm run dev:teamsfx",
+               "isBackground": true,
+               "options": {
+                    "cwd": "${workspaceFolder}/tab"
+                },
+                "problemMatcher": {
+                    "pattern": {
+                        "regexp": "^.*$",
+                        "file": 0,
+                        "location": 1,
+                        "message": 2
+                    },
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": ".*",
+                        "endsPattern": "listening to|Compiled|Failed|compiled|failed"
+                    }
+                }
+            },
              {
                  "label": "Start application",
                  "dependsOn": [
-    +                 "Start bot",
-    +                 "Start frontend"
+                     "Start bot",
+                     "Start frontend"
                  ]
              },
              {
                  "label": "Start Teams App Locally",
                  "dependsOn": [
                      "Validate prerequisites",
-    +                 "Start local tunnel",
+                     "Start local tunnel",
                      "Provision",
                      "Deploy",
                      "Start application"
@@ -239,8 +239,28 @@ Please check the guide [Create a bot app with Teams Toolkit](https://learn.micro
     ]
     ```
 
-1. Manually merge `teamsapp.local.yml` file with yours. Then update `file/createOrUpdateEnvironmentFile` action under deploy:
+1. Update `teamsapp.local.yml`. Add action `botAadApp/create` and `botFramework/create` under provision. Then update `file/createOrUpdateEnvironmentFile` action under deploy:
     ```yml
+    provision:
+      - uses: botAadApp/create
+        with:
+          # The Azure Active Directory application's display name
+          name: bot-${{TEAMSFX_ENV}}
+        writeToEnvironmentFile:
+          # The Azure Active Directory application's client id created for bot.
+          botId: BOT_ID
+          # The Azure Active Directory application's client secret created for bot.
+          botPassword: SECRET_BOT_PASSWORD 
+
+      # Create or update the bot registration on dev.botframework.com
+      - uses: botFramework/create
+        with:
+          botId: ${{BOT_ID}}
+          name: bot
+          messagingEndpoint: ${{BOT_ENDPOINT}}/api/messages
+          description: ""
+          channels:
+            - name: msteams
     deploy:
       - uses: file/createOrUpdateEnvironmentFile # Generate runtime environment variables
         with:
