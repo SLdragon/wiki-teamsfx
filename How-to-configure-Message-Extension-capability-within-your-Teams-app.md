@@ -487,4 +487,4 @@ Please check the guide [Create a message extension app with Teams Toolkit](https
 
 There are other commonly suggested next steps, for example:
 
-- [Set up CI/CD pipelines](#How-to-add-CICD)
+- [Set up CI/CD pipelines](/How-to-automate-cicd-pipelines)
