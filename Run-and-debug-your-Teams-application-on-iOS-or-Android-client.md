@@ -15,7 +15,7 @@ Please follow the instructions in this tutorial to debug your bot or message ext
                     "label": "Start Teams App Locally",
                     "dependsOn": [
                         "Validate prerequisites",
-                        "Start local tunnel",
+                        "Start local tunnel", // Add this line
                         "Provision",
                         "Deploy",
                         "Start application"
@@ -23,6 +23,7 @@ Please follow the instructions in this tutorial to debug your bot or message ext
                     "dependsOrder": "sequence"
                 },
                 {
+                    // Add this task
                     "label": "Start local tunnel",
                     "type": "teamsfx",
                     "command": "debug-start-local-tunnel",
@@ -61,7 +62,7 @@ Please follow the instructions in this tutorial to debug your bot or message ext
          ```yaml
          - uses: file/createOrUpdateEnvironmentFile 
            with: 
-             target: ./.localSettings 
+             target: ./.localConfigs
              envs: 
                BROWSER: none 
                HTTPS: true 
