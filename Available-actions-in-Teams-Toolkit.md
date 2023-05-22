@@ -53,6 +53,11 @@ To fix this error: find the id of `access_as_user` scope for your application in
 
 ![image](https://user-images.githubusercontent.com/16605901/204182487-8eb46f6d-cee6-4d97-9cd4-68db59d4a572.png)
 
+### Expected property 'lang' is not present on resource of type 'Permissionscope'
+When you use AAD app manifest displayed in [Azure App Registration portal](https://ms.portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade), you may meet this error or other similar errors. This is because the AAD app manifest displayed in Azure Portal is not 100% compatible with [AAD app manifest schema](https://learn.microsoft.com/en-us/azure/active-directory/develop/reference-app-manifest). This issue is being tracked and will be fixed in the future.
+
+To fix this error: remove the extra properties mentioned in the error message and try to update your AAD app again.
+
 # teamsApp/create
 This action will create a new Teams app for you if the environment variable that stores Teams app id is empty or the app with given id is not found from Teams Developer Portal.
 
