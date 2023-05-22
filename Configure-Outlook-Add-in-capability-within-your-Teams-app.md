@@ -17,7 +17,7 @@ For more information, start with [Outlook Add-ins Overview](https://learn.micros
 To configure an Office Add-in as additional capability, you must meet the following conditions:
 
 - You have a Microsoft 365 account to test the application. For example, an *.onmicrosoft.com account.
-- Your Micrsoft 365 account has been added as an account in desktop Outlook. See [Add an email account to Outlook](https://support.microsoft.com/office/add-an-email-account-to-outlook-e9da47c4-9b89-4b49-b945-a204aeea6726)
+- Your Microsoft 365 account has been added as an account in desktop Outlook. See [Add an email account to Outlook](https://support.microsoft.com/office/add-an-email-account-to-outlook-e9da47c4-9b89-4b49-b945-a204aeea6726)
 - To deploy the Teams app to Azure as described in the last section of this article, you need an Azure account to an Azure subscription. Create your free Azure account if you don't already have one by using the link [Free Azure account](https://azure.microsoft.com/free/).
 
 ## Overview
@@ -122,7 +122,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 
 1. Open a second instance of Visual Studio Code.
 1. With Teams Toolkit open in Visual Studio Code, select **Create a new app**.
-1. In the **Select an option** drop down, select **Start with an Outlook add-in**, and then select **Outlook Taskpane Add-in (preview)**.
+1. In the **Select an option** drop down, select **Outlook add-in**, and then select **Taskpane**.
 1. Give a name (with no spaces) to the project when prompted and Teams Toolkit will create the project with basic files and scaffolding *and open it in a separate Visual Studio Code window*. You will used this project as a source for files and markup that you add to the Teams project.
 1. Although you won't be developing this project, verify that it can be sideloaded from Visual Studio Code before you continue. Use the following steps:
 
@@ -145,7 +145,7 @@ The Teams app's manifest is generated at debug-and-sideload time (or build time)
 
 Unless specified otherwise, the file you change is \appPackage\manifest.json.
 
-1. Copy the "$schema" and "manifestVersion" property values from the add-in's manifest to the corresponding properties of the Teams app's manifest template file. (
+1. Copy the "$schema" and "manifestVersion" property values from the add-in's manifest to the corresponding properties of the Teams app's manifest template file.
 1. Adjust the "name.full", "description.short", and "description.full" property values as needed to take account of the fact that an Outlook add-in is part of the app. 
 1. Do the same for the "name.short" value. We recommend that you keep the `${{TEAMSFX_ENV}}` on the end of the name. This variable is replaced with "local" when you are debugging on localhost and with "dev" when you are either debugging from a remote domain or in production mode. (Historically, Office Add-in developer documentation has used the term "dev" or "dev mode" to refer to running the add-in on a localhost. It has used the term "prod" or "production mode" to refer to running the add-in on a remote host for staging or production. Teams developer documentation has used the term "local" to refer to running the add-in on a localhost, and the term "dev" to refer to running the add-in on a remote host for remote debugging, which is usually called "staging". We are working on getting the terminology consistent.)
 
@@ -281,17 +281,17 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     "validate": "office-addin-manifest validate appPackage/manifest.json",
     ```
 
-    In the "start" script, change `appPackage/manifest.json` to `../AppPackage/build/appPackage.local.zip`. When you are done, they should look like this:
+    In the "start" script, change `appPackage/manifest.json` to `../appPackage/build/appPackage.local.zip`. When you are done, they should look like this:
 
     ```
-    "start": "office-addin-debugging start ../AppPackage/build/appPackage.local.zip",
+    "start": "office-addin-debugging start ../appPackage/build/appPackage.local.zip",
     ```
 
-    In the "validate" and "stop" scripts, change the parameter to `../AppPackage/build/manifest.local.json`. When you are done, they should look like this:
+    In the "validate" and "stop" scripts, change the parameter to `../appPackage/build/manifest.local.json`. When you are done, they should look like this:
 
     ```
-    "stop": "office-addin-debugging stop ../AppPackage/build/manifest.local.json",
-    "validate": "office-addin-manifest validate ../AppPackage/build/manifest.local.json",
+    "stop": "office-addin-debugging stop ../appPackage/build/manifest.local.json",
+    "validate": "office-addin-manifest validate ../appPackage/build/manifest.local.json",
     ```
 
 1. In Visual Studio Code, open the **TERMINAL**. Navigate to the add-in folder, and then run the command `npm install`. 
