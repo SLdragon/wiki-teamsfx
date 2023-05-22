@@ -68,8 +68,8 @@ Alternative ways to send notifications to Teams:
 
 3. In next window enter your project name.
 
-4. In next window select Notification Bot. Then select a trigger type in right panel. You can choose from HTTP Trigger or Timer Trigger. The triggers are based on WebApi Server (means the created app code is a web app) or Azure Functions (means the created app code is Azure Functions)..
-![image](https://user-images.githubusercontent.com/25972542/180789649-6c752c22-1ff1-4294-a281-b88bb763d464.png)
+4. In next window select Notification Bot. Then select a trigger type in right panel. You can choose from HTTP Trigger or Timer Trigger. The triggers are based on ASP.NET Core Web API (means the created app code is a web app) or Azure Functions (means the created app code is Azure Functions)..
+![image](notification/create-vs-trigger.png)
 
 
 ### In TeamsFx CLI
@@ -552,7 +552,9 @@ There would be more authentication / authorization solutions for an API. You can
 
 ## Connect to existing API
 
-If you want to invoke external APIs in your code but do not have the appropriate SDK, the "Teams: Connect to an API" command in Teams Toolkit VS Code extension or "teamsfx add api-connection" command in TeamsFx CLI would be helpful to bootstrap code to call target APIs. For more information, you can visit [Connect existing API document](https://aka.ms/teamsfx-connect-api).
+If you want to invoke external APIs in your code but do not have the appropriate SDK, the [Integration API Connection document](https://aka.ms/teamsfx-add-api-connection-new) would be helpful to bootstrap code to call target APIs. You can also view the document via "Teams: View How-to Guides" command in Teams Toolkit VS Code extension.
+
+![image](notification/connect-api.png)
 
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
