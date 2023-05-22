@@ -24,7 +24,7 @@ To configure an Office Add-in as additional capability, you must meet the follow
 
 The following are the major steps to adding an Outlook Add-in to a Teams app. Details are in the sections below.
 
-1. [Prepare the Teams app project](prepare-the-teams-app-project)
+1. [Prepare the Teams app project](#prepare-the-teams-app-project)
 1. [Create an Office Add-in project](#create-an-outlook-add-in-project) that is initially separate from your Teams app project.
 1. [Merge the manifest](#merge-the-manifest) from the Outlook Add-in project into the unified Microsoft 365 manifest.
 1. [Copy the Outlook Add-in files to the Teams app project](#copy-the-outlook-add-in-files-to-the-teams-app-project).
