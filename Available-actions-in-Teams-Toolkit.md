@@ -1,5 +1,3 @@
-> The content in this page is under construction and may change in the future.
-
 ### The page describes the available actions that can be used in `teamsapp.yml` and `teamsapp.local.yml` in Teams Toolkit.
 
 ### Links to more information
