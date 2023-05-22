@@ -7,8 +7,6 @@ Teams Toolkit continuously evolves to offer more powerful features for developer
 
 These new features will require an update to your existing project structure. Teams Toolkit can automatically upgrade your project with your consent.
 
-> Please note that the new features will be enabled by default in the future release of Teams Toolkit. We thrive to make Teams Toolkit compatible with existing projects but long-term backwards compatibility is not 100% guaranteed, thus we strongly recommend updating your project configurations to continue using the latest Teams Toolkit.
-
 ## FAQ about the upgrade
 ### Q: Will the upgrade impact my source code?
 
