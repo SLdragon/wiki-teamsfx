@@ -49,7 +49,7 @@ Example: You can add following object into your Teams app manifest for your Tab 
 
 ### Teams Toolkit configuration files
 
-You can find your Teams Toolkit configuration files `./.yml`. Azure Active Directory related changes and configs needs to be added into your configuration files:
+You can find your Teams Toolkit configuration files (`./teamsapp.yml`, `./teamsapp.local.yml`, etc.). Azure Active Directory related changes and configs needs to be added into your configuration files:
 - add `aadApp/create` under `provision`:
   * For creating new Azure Active Directory apps used for SSO.
   * You can find more info [here](https://aka.ms/teamsfx-actions/aadapp-create)
@@ -213,7 +213,7 @@ You can set following values if you are using TeamsFx Bot template.
 
 ### Teams Toolkit configuration files
 
-You can find your Teams Toolkit configuration files `./.yml`. Azure Active Directory related changes and configs needs to be added into your configuration files:
+You can find your Teams Toolkit configuration files (`./teamsapp.yml`, `./teamsapp.local.yml`, etc.). Azure Active Directory related changes and configs needs to be added into your configuration files:
 
   - add `aadApp/create` under `provision`:
     * For creating new Azure Active Directory apps used for SSO.
