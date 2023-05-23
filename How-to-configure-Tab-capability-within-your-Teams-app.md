@@ -76,7 +76,7 @@ For example, your folder structure look like:
     |-- infra/
     |-- tab/           <!--tab app source code-->
     |   |-- src/
-    |   |   |-- index.tsx
+    |   |   |-- app.ts
     |   |-- package.json
     |-- src/            <!--your current source code-->
     |   |-- index.ts
@@ -92,7 +92,7 @@ For example, your folder structure look like:
     |-- infra/
     |-- tab/           <!--tab app source code-->
     |   |-- src/
-    |   |   |-- index.tsx
+    |   |   |-- app.ts
     |   |-- package.json
     |-- bot/            <!--move your current source code to a new sub folder-->
     |   |-- src/
@@ -260,7 +260,7 @@ However, this document assumes that you are adding a client-side tab app.
           errorPage: error.html
     ```
 
-1. Run `Teams: Provision in the cloud` command in Visual Studio Code to apply the bicep to Azure.
+1. Run `Teams: Provision` command in Visual Studio Code to apply the bicep to Azure.
 
 1. To automate the build and deployment of your tab app, add the following build and deploy action to your `teamsapp.yml` file.
 
@@ -281,7 +281,7 @@ However, this document assumes that you are adding a client-side tab app.
           resourceId: ${{TAB_AZURE_STORAGE_RESOURCE_ID}}
     ```
 
-1. Run `Teams: Deploy to cloud` command in Visual Studio Code to deploy your Tab app code to Azure.
+1. Run `Teams: Deploy` command in Visual Studio Code to deploy your Tab app code to Azure.
 
 1. Open the `Run and Debug Activity Panel` and select `Launch Remote (Edge)` or `Launch Remote (Chrome)`. Press F5 to preview your Teams app.
 
