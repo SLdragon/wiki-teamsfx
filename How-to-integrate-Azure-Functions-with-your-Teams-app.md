@@ -94,7 +94,7 @@ You can find a complete sample debug profile for VSC [here](https://github.com/O
       "options": {
         "cwd": "${workspaceFolder}/api",
         "env": {
-          "PATH": "${command:fx-extension.get-func-path}${env:PATH}"
+          "PATH": "${workspaceFolder}/devTools/func:${env:PATH}"
         }
       },
       "problemMatcher": {
@@ -258,7 +258,7 @@ You can find a complete sample [here](https://github.com/OfficeDev/TeamsFx-Sampl
 
    ```
    > cd api/
-   > npm i @microsoft/teamsfx & isomorphic-fetch
+   > npm i @microsoft/teamsfx isomorphic-fetch
    ```
 
 1. Here is an example for calling the Graph API with TeamsFx SDK. We have set the environment variables in [./teamsapp.local.yml](#setup-local-debug-environment-in-vsc).
