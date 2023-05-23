@@ -251,7 +251,7 @@ See Azure Functions [supported triggers](https://docs.microsoft.com/azure/azure-
 
 `src/cardModels.ts` defines a data structure that is used to fill data for the Adaptive Card. The binding between the model and the Adaptive Card is done by name matching (for example,`CardData.title` maps to `${title}` in the Adaptive Card). You can add, edit, or remove properties and their bindings to customize the Adaptive Card to your needs.
 
-You can also add new cards if needed. Follow this [sample](https://aka.ms/teamsfx-adaptive-card-sample) to see how to build different types of adaptive cards with a list or a table of dynamic contents using `ColumnSet` and `FactSet`.
+You can also add new cards if needed. Follow this [sample](https://aka.ms/teamsfx-adaptive-card-sample-new) to see how to build different types of adaptive cards with a list or a table of dynamic contents using `ColumnSet` and `FactSet`.
 
 ### Step 3: Customize where notifications are sent
 
@@ -614,14 +614,14 @@ If azurite exits due to port in use, you can [specify another listening port](ht
 
    ![enable-command](https://user-images.githubusercontent.com/10163840/165430233-04648a2a-d637-41f0-bb17-b34ddbd609f7.png)
 
-1. Follow [this instruction](https://aka.ms/teamsfx-create-command#How-to-add-more-command-and-response) to add command to your bot.
+1. Follow [this instruction](https://aka.ms/teamsfx-command-new#How-to-add-more-command-and-response) to add command to your bot.
 
 
 ### How to extend my notification bot to support adaptive card actions
 
 The Adaptive Card action handler feature enables the app to respond to adaptive card actions that triggered by end users to complete a sequential workflow. When user gets an Adaptive Card, it can provide one or more buttons in the card to ask for user's input, do something like calling some APIs, and then send another adaptive card in conversation to response to the card action.
 
-To add adaptive card actions to command bot, you can follow the steps [here](https://aka.ms/teamsfx-card-action-response#add-more-card-actions).
+To add adaptive card actions to command bot, you can follow the steps [here](https://aka.ms/teamsfx-workflow-new#Add-more-card-actions).
 
 <p align="right"><a href="#in-this-tutorial-you-will-learn">back to top</a></p>
 
