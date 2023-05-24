@@ -145,9 +145,9 @@ If you are using other programming language, you can find tutorials for your pro
 
 ## Step 5: Update your cloud infrastructure and deploy your app
 
-After you updated bicep file for your project, you need to run `Teams: Provision in the cloud` command in VS Code extension to apply your changes to bicep file.
+After you updated bicep file for your project, you need to run `Teams: Provision` command in VS Code extension to apply your changes to bicep file.
 
-After you updated your source code, you need to run `Teams: Deploy to the cloud` command in VS Code extension to deploy your code to cloud.
+After you updated your source code, you need to run `Teams: Deploy` command in VS Code extension to deploy your code to cloud.
 
 <p align="right"><a href="#steps-to-create-azure-sql-database">back to top</a></p>
 
