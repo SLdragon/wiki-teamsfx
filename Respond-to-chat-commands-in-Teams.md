@@ -31,23 +31,23 @@ Extend command bot to other bot scenarios:
 
 1. From Teams Toolkit sidebar click `Create a new Teams app` or select `Teams: Create a new Teams app` from command palette.
 
-![image](https://user-images.githubusercontent.com/11220663/165435370-99aa79b8-044f-44ea-b2a9-e42a055a3f6c.png)
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/933116a5-c0f8-44e7-a327-49191edbd20b)
 
-2. Select `Create a new Teams app`.
+2. Select `Bot`.
 
-![image](https://user-images.githubusercontent.com/11220663/168242250-34ca599f-1c9b-4c0c-80a7-ac07ebe10a1a.png)
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/2a2bd256-5bd7-42aa-b7fa-7307e161cfa1)
 
-3. Select the `Command bot` from Scenario-based Teams app section.
-
-![image](https://user-images.githubusercontent.com/11220663/168245299-91749fa4-00b6-4466-89bf-6f35b105828e.png)
+3. Select the `Chat Command` from Scenario-based Teams app section.
+ 
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/22135ffe-ba18-4151-9dbd-2e438e4bb931)
 
 4. Select programming language
 
-![image](https://user-images.githubusercontent.com/11220663/165435816-e6d46074-6e0a-4186-804b-c83bfbe12b6f.png)
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/278187df-bf8b-4dfe-9d20-d717733824f8)
 
 5. Enter an application name and then press enter.
 
-![image](https://user-images.githubusercontent.com/11220663/165435852-686deaef-119e-4311-9343-d8ef4b335516.png)
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/f6cfc494-aa64-442d-a17e-42545925f130)
 
 ### In Visual Studio
 1. Make sure you have installed ASP.NET workloads and "Microsoft Teams development tools".
