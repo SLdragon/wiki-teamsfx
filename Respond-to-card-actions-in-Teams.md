@@ -36,23 +36,23 @@ Extend workflow bot to other bot scenarios:
 
 1. From Teams Toolkit sidebar click `Create a new Teams app` or select `Teams: Create a new Teams app` from command palette.
 
-  ![image](https://user-images.githubusercontent.com/11220663/192237560-e55fb669-88a8-4423-b5e5-49c6f7b3c6fc.png)
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/933116a5-c0f8-44e7-a327-49191edbd20b)
 
-2. Select `Create a new Teams app`.
+2. Select `Bot`.
 
-  ![image](https://user-images.githubusercontent.com/11220663/192237688-4241d52e-b892-42a3-8857-dccfbd1c7013.png)
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/2a2bd256-5bd7-42aa-b7fa-7307e161cfa1)
 
-3. Select the `Workflow bot` from Scenario-based Teams app section.
-
-  ![image](https://user-images.githubusercontent.com/11220663/192220388-910a2708-ab57-4492-b942-4be3b3ea9930.png)
+3. Select the `Sequential Workflow in Chat` from Scenario-based Teams app section.
+  
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/d6ecaa80-8551-4075-8787-1c9bcb00460c)
 
 4. Select programming language.
 
-  ![image](https://user-images.githubusercontent.com/11220663/192237785-e926d9ec-5b97-40a0-8983-ab2db71383ca.png)
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/278187df-bf8b-4dfe-9d20-d717733824f8)
 
 5. Enter an application name and then press enter.
 
-  ![image](https://user-images.githubusercontent.com/11220663/192237915-8ac2c4f3-2cc3-4700-886c-78cda235c835.png)
+  ![image](https://github.com/OfficeDev/TeamsFx/assets/10163840/f6cfc494-aa64-442d-a17e-42545925f130)
 
 ### In TeamsFx CLI
 
