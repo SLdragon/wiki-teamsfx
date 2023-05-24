@@ -31,9 +31,9 @@ Customize the scaffolded app template:
 
 ### In Visual Studio Code
 
-1. From Teams Toolkit side bar click `Create a new app` or select `Teams: Create a new app` from the command palette.
+1. From Teams Toolkit side bar click `Create a new app` or select `Teams: Create a New App` from the command palette.
 
-![image](https://user-images.githubusercontent.com/107838226/220565583-7e6145f1-6f07-4072-b343-b9f76cc63162.png)
+![image](https://github.com/OfficeDev/TeamsFx/assets/107838226/8b3ce8e3-cdfd-48ae-8d67-b56fae156685)
 
 2. Select `Tab`.
 
