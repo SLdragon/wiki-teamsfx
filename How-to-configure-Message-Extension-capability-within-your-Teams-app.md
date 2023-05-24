@@ -147,7 +147,7 @@ Please check the guide [Create a message extension app with Teams Toolkit](https
     |-- teamsapp.local.yml
     |-- teamsapp.yml
     ```
-    We suggest you to re-organize the folder structure and create a root package.json as:
+    We suggest you to re-organize the folder structure and create a root package.json as following. You can create a root package.json using command "npm init -y".
      ```
     |-- .vscode/
     |-- appPackage/
@@ -172,7 +172,6 @@ Please check the guide [Create a message extension app with Teams Toolkit](https
     |-- teamsapp.local.yml
     |-- teamsapp.yml
     ```
-    You can create a root package.json using command "npm init -y".
 1. Add following to your root package.json:
     ```json
     "scripts": {
@@ -194,7 +193,7 @@ Please check the guide [Create a message extension app with Teams Toolkit](https
 
 ### Setup local debug environment
 
-1. Modify `.vscode/task.json`. Add 3 new tasks: `Start local tunnel`, `Start bot`, `Start frontend`. Add `Start bot` and `Start frontend` to task `Start application`'s `dependOn`. Config `Start bot` and `Start frondend`'s `cwd` option since we already move tab and bot's code to `tab/` and `bot/` folder separately. Add `Start local tunnel` to task `Start Teams App Locally`'s dependOn.
+1. Modify `.vscode/task.json`. Add 3 new tasks: `Start local tunnel`, `Start bot`, `Start frontend`. Add `Start bot` and `Start frontend` to task `Start application`'s `dependOn`. Config `Start bot` and `Start frondend`'s `cwd` option since we already move tab and bot's code to `tab/` and `bot/` folder separately. Add `Start local tunnel` to task `Start Teams App Locally`'s `dependOn`.
     ```
     "tasks":[
             {
