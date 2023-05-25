@@ -15,6 +15,8 @@ In this tutorial you will learn:
   * [Update Teams app manifest](#teams-app-manifest)
   * [Update Teams Toolkit configuration files](#teams-toolkit-configuration-files)
   * [Update Source Code](#update-source-code)
+    * [Vanilla Javascript](#vanilla-javascriptbasic-tab)
+    * [React](#react)
 * [Steps to add SSO to Teams Bot/Messaging Extension app](#teams-botmessaging-extension-app)
   * [Create Azure Active Directory app manifest](#azure-active-directory-app-manifest-1)
   * [Update Teams app manifest](#teams-app-manifest-1)
@@ -118,26 +120,7 @@ envs:
 ### Update Source Code
 With all changes above, your environment is ready and can update your code to add SSO to your Teams app.
 
-#### React
-
-Suppose you are building your tab app with React framework. You can find and download sample code for TeamsFx Tab below to `./auth`:
-  * for [js](https://github.com/OfficeDev/TeamsFx/tree/main/packages/fx-core/templates/plugins/resource/aad/auth/tab/js)
-  * for [ts](https://github.com/OfficeDev/TeamsFx/tree/main/packages/fx-core/templates/plugins/resource/aad/auth/tab/ts)
-
-You can follow the following steps to update your source code:
-
-1. Move `auth-start.html` and `auth-end.html` in `auth/public` folder to `public/`.
-  * These two HTML files are used for auth redirects.
-
-2. Move `sso` folder under `auth/` to `src/sso/`.
-  * `InitTeamsFx`: This file implements a function that initialize TeamsFx SDK and will open `GetUserProfile` component after SDK is initialized.
-  * `GetUserProfile`: This file implements a function that calls Microsoft Graph API to get user info.
-
-3. Import and add `InitTeamsFx` in `Welcome.*`.
-
-You can also find sample for SSO enabled Tab [here](https://github.com/OfficeDev/TeamsFx-Samples/tree/dev/hello-world-tab).
-
-#### Vanilla JavaScript
+#### Vanilla JavaScript(Basic Tab)
 
 For non-React tab app, following is a basic sample for getting SSO token with vanilla JavaScript.
 
@@ -165,6 +148,25 @@ For non-React tab app, following is a basic sample for getting SSO token with va
     }
     ```
 
+#### React
+
+Suppose you are building your tab app with React framework. You can find and download sample code for TeamsFx Tab below to `./auth`:
+  * for [js](https://github.com/OfficeDev/TeamsFx/tree/main/packages/fx-core/templates/plugins/resource/aad/auth/tab/js)
+  * for [ts](https://github.com/OfficeDev/TeamsFx/tree/main/packages/fx-core/templates/plugins/resource/aad/auth/tab/ts)
+
+You can follow the following steps to update your source code:
+
+1. Move `auth-start.html` and `auth-end.html` in `auth/public` folder to `public/`.
+  * These two HTML files are used for auth redirects.
+
+2. Move `sso` folder under `auth/` to `src/sso/`.
+  * `InitTeamsFx`: This file implements a function that initialize TeamsFx SDK and will open `GetUserProfile` component after SDK is initialized.
+  * `GetUserProfile`: This file implements a function that calls Microsoft Graph API to get user info.
+
+3. Import and add `InitTeamsFx` in `Welcome.*`.
+
+You can also find sample for SSO enabled Tab [here](https://github.com/OfficeDev/TeamsFx-Samples/tree/dev/hello-world-tab-with-backend).
+
 ## Teams Bot/Messaging Extension app
 
 ### Azure Active Directory app manifest
@@ -181,7 +183,7 @@ You can find your original Teams app manifest template in `./appPackages/manifes
 #### Add `webApplicationInfo`
 [`webApplicationInfo`](https://learn.microsoft.com/microsoftteams/platform/resources/schema/manifest-schema#webapplicationinfo) provides your Azure Active Directory App ID and Microsoft Graph information to help users seamlessly sign into your app.
 
-Example: You can add following object into your Teams app manifest for your Tab project.
+Example: You can add following object into your Teams app manifest for your Bot/Messaging Extension project.
 ```json
 "webApplicationInfo": {
   "id": "${{AAD_APP_CLIENT_ID}}",
@@ -347,6 +349,8 @@ You can find and download sample code for TeamsFx Tab below to `./auth`:
   * for [ts](https://github.com/OfficeDev/TeamsFx/tree/main/packages/fx-core/templates/plugins/resource/aad/auth/bot/ts)
 
 #### For Bot
+> Note: The following part is sample code for `Chat Command` bot.
+
 1. Move files under `auth/sso` folder to `src`. ProfileSsoCommandHandler class is a sso command handler to get user info with SSO token. You can follow this method and create your own sso command handler.
 2. Move `auth/public` folder to `src/public`. This folder contains HTML pages that the bot application hosts. When single sign-on flows are initiated with Azure Active Directory, Azure Active Directory will redirect the user to these pages.
 3. Execute the following commands under `./` folder: `npm install isomorphic-fetch --save`
