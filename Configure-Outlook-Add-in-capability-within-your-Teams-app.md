@@ -432,7 +432,7 @@ To see both the app and the add-in running at the same time, take the following 
       <li>In the <b>ACCOUNTS</b> section, verify that you are signed into Microsoft 365.</li>
       <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code. In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch App and Add-in Outlook Desktop (Edge Chromium)</b>, and then press F5. The project builds and a Node dev-server window opens to host the add-in. The tab app is hosted in the Visual Studio Code terminal. This process may take a couple of minutes. Eventually, both of the following will happen:
         <ul list-style="disc">
-          <ol>Teams opens in a browser with a prompt to add your tab app. <i>If Teams has not opened by the time Outlook desktop opens, then automatic sideloading has failed. You can manually sideload it to see both the app and the add-in running at the same time. For sideloading instructions, see <a href="https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload"></a></i>.</ol>
+          <ol>Teams opens in a browser with a prompt to add your tab app. <i>If Teams has not opened by the time Outlook desktop opens, then automatic sideloading has failed. You can manually sideload it to see both the app and the add-in running at the same time. For sideloading instructions, see <a href="https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload">Upload your app in Teams</a></i>.</ol>
           <ol>Outlook desktop opens.</ol>
        </ul>
       </li>
