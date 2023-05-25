@@ -34,11 +34,25 @@ After adding function app project, your folder structure may be like:
     |   |   |-- function.json
     |   |   |-- index.ts
     |   |-- package.json
+    |   |-- tsconfig.json
     |-- src/                      <!--your current source code-->
     |   |-- index.ts
     |-- package.json
     |-- teamsapp.yml
+    |-- tsconfig.json
     ```
+
+For TypeScript developer, it is recommended to specify the `typeRoots` in `api/tsconfig.json` to avoid type conflict.
+Adding following config may help when there are compile errors like `Module '"xxx"' has no exported member`.
+
+```json
+{
+  "compilerOptions": {
+    ...
+    "typeRoots": ["./node_modules/@types"]
+  }
+}
+```
 
 ## Setup local debug environment in VSC
 
