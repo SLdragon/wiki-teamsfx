@@ -6,8 +6,8 @@ Teams Toolkit orchestrates cloud service provision and configuration with an inf
 
 Follow these steps to provision a new Azure Key Vault service with Teams Toolkit:
 
-1. [Step 1: Create a new bicep file](#step-1-create-a-new-bicep-filestep-1-create-a-new-bicep-file)
-1. [Step 2: Updae existing bicep file](#step-2-updae-existing-bicep-file)
+1. [Step 1: Create a new bicep file](#step-1-create-a-new-bicep-file)
+1. [Step 2: Update existing bicep file](#step-2-update-existing-bicep-file)
 1. [Step 3: Execute provision command](#step-3-execute-provision-command)
 
 ### Step 1: Create a new bicep file
@@ -67,7 +67,7 @@ resource secretKv 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
 ```
 
 
-### Step 2: Updae existing bicep file
+### Step 2: Update existing bicep file
 
 Update existing `azure.bicep` file under `infra` folder.
 
@@ -94,9 +94,9 @@ Update existing `azure.bicep` file under `infra` folder.
     }
     ```
 
-1. Update the existing resouce for accessing Azure Key Vault.
+1. Update the existing resource for accessing Azure Key Vault.
     
-    E.g. If it is a Bot or Fucntion project hosted on Azure Web App, you need to update the bicep content of `webApp`:
+    E.g. If it is a Bot or Function project hosted on Azure Web App, you need to update the bicep content of `webApp`:
     
     1. Add below content under `resource webApp`:
 
