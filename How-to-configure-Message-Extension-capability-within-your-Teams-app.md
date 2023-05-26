@@ -327,7 +327,7 @@ Please check the guide [Create a message extension app with Teams Toolkit](https
             BOT_ID: ${{BOT_ID}}
             BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
     ```
-    Here is an [sample project](https://github.com/OfficeDev/TeamsFx-Samples/tree/v3/hello-world-bot-with-tab) for reference.
+    Here is an [sample project](https://github.com/OfficeDev/TeamsFx-Samples/tree/dev/hello-world-bot-with-tab) for reference.
 
 1. Open the `Run and Debug Activity Panel` and select `Debug (Edge)` or `Debug (Chrome)`. Press F5 to preview your Teams app locally.
 
