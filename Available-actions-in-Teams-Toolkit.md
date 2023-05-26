@@ -434,6 +434,15 @@ NA
 # botFramework/create
 This action will create or update the bot registration on [dev.botframework.com](https://dev.botframework.com/bots). If the bot registraion specified by `botId` does not exist, this action will create a new one; otherwise, this action will update it.
 
+> Note:
+>
+> There's a known issue for error "*'MsaAppTenantId' property cannot be changed*" when using an existing single-tenant bot. Currently `botFramework/create` only supports multi-tenant bot.
+>
+> To use single-tenant bot for local development, please:
+> - Remove or comment out `botFramework/create` action from *teamsapp.local.yml* file
+> - Start debug / F5
+> - Get `BOT_ENDPOINT` from *env/.env.local* and manually update the bot's message endpoint to "*{{**BOT_ENDPOINT**}}/api/messages*"
+
 ## Syntax:
 ```yml
   - uses: botFramework/create
@@ -451,15 +460,6 @@ This action will create or update the bot registration on [dev.botframework.com]
 
 ## Output:
 NA
-
-> Note:
->
-> There's a known issue for error "*'MsaAppTenantId' property cannot be changed*" when using an existing single-tenant bot. Currently `botFramework/create` only supports multi-tenant bot.
->
-> To use single-tenant bot for local development, please:
-> - Remove or comment out `botFramework/create` action from *teamsapp.local.yml* file
-> - Start debug / F5
-> - Get `BOT_ENDPOINT` from *env/.env.local* and manually update the bot's message endpoint to "*{{**BOT_ENDPOINT**}}/api/messages*"
 
 # file/updateEnv
 
