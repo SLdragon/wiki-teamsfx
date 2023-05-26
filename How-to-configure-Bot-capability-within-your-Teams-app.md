@@ -411,7 +411,7 @@ Please check the guide [Create a bot app with Teams Toolkit](https://learn.micro
           # or add it to your environment variable file.
           resourceId: ${{BOT_AZURE_APP_SERVICE_RESOURCE_ID}}
     ```
-Here is an [sample project](https://github.com/OfficeDev/TeamsFx-Samples/tree/dev/hello-world-bot-with-tab) for reference.
+   Here is an [sample project](https://github.com/OfficeDev/TeamsFx-Samples/tree/dev/hello-world-bot-with-tab) for reference.
 1. Run `Teams: Provision` command in Visual Studio Code to apply the bicep to Azure.
 
 1. Run `Teams: Deploy` command in Visual Studio Code to deploy your app code to Azure.
