@@ -332,60 +332,100 @@ Please check the guide [Create a message extension app with Teams Toolkit](https
 1. Open the `Run and Debug Activity Panel` and select `Debug (Edge)` or `Debug (Chrome)`. Press F5 to preview your Teams app locally.
 
 ### Move the application to Azure
-This document assumes that you are provisioning a client-side tab app, so the first step is to change tab's remote resource from Web App to Azure Storage.
-
-1.  Change your tab's bicep file to be following:
+1.  Copy the `botRegistration/` folder from bot to your `infra/`. Add following to your bicep file:
     ```bicep
-    @maxLength(20)
-    @minLength(4)
-    param resourceBaseName string
-    param storageSku string
-    param storageName string = resourceBaseName
-    param location string = resourceGroup().location
+    param resourceBaseName2 string
+    param webAppName2 string = resourceBaseName2
+    @maxLength(42)
+    param botDisplayName string
+    @description('Required when create Azure Bot service')
+    param botAadAppClientId string
 
-    // Azure Storage that hosts your static web site
-    resource storage 'Microsoft.Storage/storageAccounts@2021-06-01' = {
-      kind: 'StorageV2'
+    @secure()
+    @description('Required by Bot Framework package in your bot project')
+    param botAadAppClientSecret string
+    resource webApp2 'Microsoft.Web/sites@2021-02-01' = {
+      kind: 'app'
       location: location
-      name: storageName
+      name: webAppName2
       properties: {
-        supportsHttpsTrafficOnly: true
-      }
-      sku: {
-        name: storageSku
+        serverFarmId: serverfarm.id
+        httpsOnly: true
+        siteConfig: {
+          alwaysOn: true
+          appSettings: [
+            {
+              name: 'WEBSITE_RUN_FROM_PACKAGE'
+              value: '1' // Run Azure APP Service from a package file
+            }
+            {
+              name: 'WEBSITE_NODE_DEFAULT_VERSION'
+              value: '~18' // Set NodeJS version to 18.x for your site
+            }
+            {
+              name: 'RUNNING_ON_AZURE'
+              value: '1'
+            }
+            {
+              name: 'BOT_ID'
+              value: botAadAppClientId
+            }
+            {
+              name: 'BOT_PASSWORD'
+              value: botAadAppClientSecret
+            }
+          ]
+          ftpsState: 'FtpsOnly'
+        }
       }
     }
 
-    output TAB_AZURE_STORAGE_RESOURCE_ID string = storage.id // used in deploy stage
-    output TAB_DOMAIN string = siteDomain
-    output TAB_ENDPOINT string = 'https://${siteDomain}'
+    // Register your web service as a bot with the Bot Framework
+    module azureBotRegistration './botRegistration/azurebot.bicep' = {
+      name: 'Azure-Bot-registration'
+      params: {
+        resourceBaseName: resourceBaseName
+        botAadAppClientId: botAadAppClientId
+        botAppDomain: webApp2.properties.defaultHostName
+        botDisplayName: botDisplayName
+      }
+    }
+
+    // The output will be persisted in .env.{envName}. Visit https://aka.ms/teamsfx-actions/arm-deploy for more details.
+    output BOT_AZURE_APP_SERVICE_RESOURCE_ID string = webApp2.id
+    output BOT_DOMAIN string = webApp2.properties.defaultHostName
+
     ```
+
 1. Additionally, make sure to update the `azure.parameters.json` file to ensure that necessary parameters are set correctly.
 
     ```json
     {
-      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-      "contentVersion": "1.0.0.0",
-      "parameters": {
-        "resourceBaseName": {
-          "value": "helloworld${{RESOURCE_SUFFIX}}"
-        },
-        "storageSku": {
-          "value": "Standard_LRS"
-        },
-        ...
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "resourceBaseName": {
+        "value": "tab${{RESOURCE_SUFFIX}}"
+      },
+      "webAppSku": {
+        "value": "B1"
+      },
+      "botAadAppClientId": {
+        "value": "${{BOT_ID}}"
+      },
+      "botAadAppClientSecret": {
+        "value": "${{SECRET_BOT_PASSWORD}}"
+      },
+      "botDisplayName": {
+        "value": "bot"
+      },
+      "resourceBaseName2":{
+        "value": "bot${{RESOURCE_SUFFIX}}"
       }
     }
     ```
-1. Update your `teamsapp.yml` file.
-
+1. Update your `teamsapp.yml` file. Add "botAadApp/create" action in "provision" section. Update "deploy" section to be the following:
     ```yml
-    provision:
-      - uses: azureStorage/enableStaticWebsite
-        with:
-          storageResourceId: ${{TAB_AZURE_STORAGE_RESOURCE_ID}}
-          indexPage: index.html
-          errorPage: error.html
     deploy:
       - uses: cli/runNpmCommand # Run npm command
         with:
@@ -394,16 +434,32 @@ This document assumes that you are provisioning a client-side tab app, so the fi
         with:
           args: run build
       # Deploy bits to Azure Storage Static Website
-      - uses: azureStorage/deploy
+      - uses: azureAppService/zipDeploy
         with:
-          workingDirectory: tab
+          workingDirectory: ./tab
           # Deploy base folder
-          artifactFolder: build
-          # The resource id of the cloud resource to be deployed to. This key will be generated by arm/deploy action automatically. You can replace it with your existing Azure Resource id or add it to your environment variable file.
-          resourceId: ${{TAB_AZURE_STORAGE_RESOURCE_ID}}
+          artifactFolder: .
+          # Ignore file location, leave blank will ignore nothing
+          ignoreFile: .webappignore
+          # The resource id of the cloud resource to be deployed to.
+          # This key will be generated by arm/deploy action automatically.
+          # You can replace it with your existing Azure Resource id
+          # or add it to your environment variable file.
+          resourceId: ${{TAB_AZURE_APP_SERVICE_RESOURCE_ID}}
+      - uses: azureAppService/zipDeploy
+        with:
+          workingDirectory: ./bot
+          # Deploy base folder
+          artifactFolder: .
+          # Ignore file location, leave blank will ignore nothing
+          ignoreFile: .webappignore
+          # The resource id of the cloud resource to be deployed to.
+          # This key will be generated by arm/deploy action automatically.
+          # You can replace it with your existing Azure Resource id
+          # or add it to your environment variable file.
+          resourceId: ${{BOT_AZURE_APP_SERVICE_RESOURCE_ID}}
     ```
-1. Manually merge bot's `infra/` and `teamsapp.yml` with yours.
-Here is an [sample project](https://github.com/OfficeDev/TeamsFx-Samples/tree/v3/hello-world-bot-with-tab) for reference.
+   Here is an [sample project](https://github.com/OfficeDev/TeamsFx-Samples/tree/dev/hello-world-bot-with-tab) for reference.
 1. Run `Teams: Provision` command in Visual Studio Code to apply the bicep to Azure.
 1. Run `Teams: Deploy` command in Visual Studio Code to deploy your app code to Azure.
 
