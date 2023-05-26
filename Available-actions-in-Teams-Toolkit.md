@@ -452,6 +452,15 @@ This action will create or update the bot registration on [dev.botframework.com]
 ## Output:
 NA
 
+> Note:
+>
+> There's a known issue for error "*'MsaAppTenantId' property cannot be changed*" when using an existing single-tenant bot. Currently `botFramework/create` only supports multi-tenant bot.
+>
+> To use single-tenant bot for local development, please:
+> - Remove or comment out `botFramework/create` action from *teamsapp.local.yml* file
+> - Start debug / F5
+> - Get `BOT_ENDPOINT` from *env/.env.local* and manually update the bot's message endpoint to "*{{**BOT_ENDPOINT**}}/api/messages*"
+
 # file/updateEnv
 
 > This action is deprecated. To generate to Teams Toolkit env file, please use [script](#script) to output. To generate to your own file, please use [file/createOrUpdateEnvironmentFile](#filecreateorupdateenvironmentfile) instead.
