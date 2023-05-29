@@ -35,7 +35,7 @@ The supported types for Zero Install Link Unfurling are "result" and "auth" and 
 ![zeroInstallAuth](https://github.com/OfficeDev/TeamsFx/assets/11220663/620b8dd0-8003-4fda-9865-ac94d212972e)
 
 For card with type "auth", the Teams client strips away any action buttons from the card, and adds a sign in action button. Please refer to [zero install link unfurling document](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=desktop%2Cjson%2Climitations#zero-install-for-link-unfurling) for more details.
-## How to add stage view (Teams)
+## How to add stage view
 
 Stage View is a full screen UI component that you can invoke to surface your web content. You can turn URLs into a tab using an Adaptive Card and Chat Services. Follow the instructions below to add stage view in your link unfurling app.
 
@@ -144,22 +144,6 @@ In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
 ```json
 "actions": [
         {
-            "type": "Action.Submit",
-            "title": "View Via card",
-            "data":{
-                "msteams": {
-                    "type": "invoke",
-                    "value": {
-                        "type": "tab/tabInfoAction",
-                        "tabInfo": {
-                            "contentUrl": "https://${url}/tab",
-                            "websiteUrl": "https://${url}/tab"
-                        }
-                    }
-                }
-            }
-        },
-        {
             "type": "Action.OpenUrl",
             "title": "View Via Deep Link",
             "url": "https://teams.microsoft.com/l/stage/${appId}/0?context=%7B%22contentUrl%22%3A%22https%3A%2F%2F${url}%2Ftab%22%2C%22websiteUrl%22%3A%22https%3A%2F%2F${url}%2Ftab%22%2C%22name%22%3A%22DemoStageView%22%7D"
@@ -182,15 +166,19 @@ In `linkUnfurlingApp.ts`, update variable `attachment` to be following.
 
 In Teams, the adaptive card will be like:
 
-![stageView](https://github.com/OfficeDev/TeamsFx/assets/11220663/6a9537e2-5433-4941-becb-dbae54965a7c)
-
-Opening stage view from Adaptive card Action:
-
-![viaAction](https://github.com/OfficeDev/TeamsFx/assets/11220663/c2f655d9-b3e6-43a6-8c6d-9d0f61facfad)
+![stageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/db467fc6-8e2d-4197-8c89-171e5f29331e)
 
 Opening stage view from Adaptive card via deep link:
 
 ![viaDeepLink](https://github.com/OfficeDev/TeamsFx/assets/11220663/3664bcde-eb66-4b00-882b-9e9e44006ec6)
+
+In Outlook, the adaptive card will be like:
+
+![stageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/9ea42c24-e06a-4c48-b8dc-e8a884d8d883)
+
+Opening stage view from Adaptive card via deep link:
+
+![viaDeepLink](https://github.com/OfficeDev/TeamsFx/assets/25220706/b02ae0c8-6ef3-4e79-aabf-09e6b621d567)
 
 Please refer to [Stage view document](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling) for more details.
 
