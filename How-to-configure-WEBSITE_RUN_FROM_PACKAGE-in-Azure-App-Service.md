@@ -25,7 +25,7 @@ https://github.com/projectkudu/kudu/wiki/WEBSITE_RUN_FROM_PACKAGE-and-WEBSITE_CO
 # How to enable run from package
 1. Make sure that the version of Node.js on your machine is the same as the Node.js version on App Service.
 1. Check your .webappignore file at the project root, make sure all the dependencies that running required are not excluded by this file.
-1. Enable `WEBSITE_RUN_FROM_PACKAGE` app setting in your Azure App Service.
+1. Enable `WEBSITE_RUN_FROM_PACKAGE` app setting in your Azure App Service. Below are three methods you can choose from.
    * Add WEBSITE_RUN_FROM_PACKAGE flag to your bicep file.
    * Follow [the documentation](https://learn.microsoft.com/en-us/azure/app-service/deploy-run-package#enable-running-from-package) do it manually.
    * Go to Azure Portal. Navigate to your App Service - Setting - Configuration - Applications settings, + New application setting, Name: WEBSITE_RUN_FROM_PACKAGE, Value: 1, Click OK.
