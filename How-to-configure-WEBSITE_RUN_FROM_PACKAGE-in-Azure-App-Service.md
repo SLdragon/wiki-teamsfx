@@ -31,11 +31,13 @@ https://github.com/projectkudu/kudu/wiki/WEBSITE_RUN_FROM_PACKAGE-and-WEBSITE_CO
    * Go to Azure Portal. Navigate to your App Service - Setting - Configuration - Applications settings, + New application setting, Name: WEBSITE_RUN_FROM_PACKAGE, Value: 1, Click OK.
 1. **Make sure there is no `SCM_SCRIPT_GENERATOR_ARGS` setting in your Azure App Service**, check this configuration in the Azure portal - Your App Service - Setting - Configuration - Applications settings. If your project is upgraded from the old version, this setting may be set to `--node`. Remove this setting before deploying your project. You may also have the `SCM_DO_BUILD_DURING_DEPLOYMENT` setting in your configuration. Technically, this setting has a lower priority than `WEBSITE_RUN_FROM_PACKAGE`, but for the sake of avoiding confusion, it's best to delete this setting as well.
 1. Put the `web.config` file to the root of the project if your project is using nodeJS. You can find the template file from [here](https://github.com/projectkudu/kudu/blob/master/Kudu.Core/Scripts/iisnode.config.template) and example from [here](https://github.com/Azure-Samples/nodejs-docs-hello-world/blob/master/web.config). If your project is built by Dotnet, skip this step.
+1. Restart the App Service, and redeploy again.
 
 # How to disable run from package
 1. Remove `WEBSITE_RUN_FROM_PACKAGE` app setting from your Azure App Service.
 1. If your project is built by nodeJS and you already have a `web.config` file in your project root, you can keep this file and everything is fine now. If you want to delete the `web.config` file, remember to [enable the build process](https://learn.microsoft.com/en-us/azure/app-service/deploy-zip?tabs=cli#enable-build-automation-for-zip-deploy) or set `SCM_SCRIPT_GENERATOR_ARGS=--node` (This option will also need you to upload all the dependencies to the Azure App Service).
 1. Adjust your .webappignore file at the project root, make sure all source code is not excluded by this file. This file excludes *.ts files by default. If you enabled the build process during deploy, you should upload all the source code to the App Service. If you use `SCM_SCRIPT_GENERATOR_ARGS=--node` option or keep the `web.config` at the project root, skip this step.
+1. Restart the App Service, and redeploy again.
 
 # Q&A
 ## Deployment failed, and a `FAILD TO INITIALIZED RUN FROM PACKAGE.txt` file was in my wwwroot folder.
