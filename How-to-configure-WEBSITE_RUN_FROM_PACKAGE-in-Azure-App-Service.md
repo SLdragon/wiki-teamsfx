@@ -23,6 +23,7 @@ https://learn.microsoft.com/en-us/azure/app-service/deploy-run-package
 https://github.com/projectkudu/kudu/wiki/WEBSITE_RUN_FROM_PACKAGE-and-WEBSITE_CONTENTAZUREFILECONNECTIONSTRING-Best-Practices
 
 # How to enable run from package
+1. Make sure that the version of Node.js on your machine is the same as the Node.js version on App Service.
 1. Enable `WEBSITE_RUN_FROM_PACKAGE` app setting in your Azure App Service.
    * Add WEBSITE_RUN_FROM_PACKAGE flag to your bicep file.
    * Follow [the documentation](https://learn.microsoft.com/en-us/azure/app-service/deploy-run-package#enable-running-from-package) do it manually.
