@@ -265,6 +265,12 @@ Please check the log output and try to upload the files located in your .deploym
 ### Error message: Failed to check deployment status.
 This error can be ignored if the deployment is already successful. You can check the deploy status by visiting `Deployment - Deployment center - Logs` in the Azure portal.
 
+### Error message: Error: Request failed with status code 401
+This error may have two possible causes:
+
+1. Your Azure login information is incorrect, and you are attempting to deploy to an App Service that you do not have permission for. Please double-check that you have enough permissions for this resource.
+2. You are using an old version of the Teams Toolkit while your Web App has Basic Auth turned off. Log into the Azure Portal, find your Web App, then go to Settings - Configuration - General Settings - Basic Authentication and set it to ON before trying to redeploy again.
+
 # azureFunctions/zipDeploy
 This action will upload and deploy the project to Azure Functions using [the zip deploy feature](https://aka.ms/zip-deploy-to-azure-functions). 
 The parameter `workingDirectory` refers to the root folder for deploy action operations. It can be removed if you want to run deploy command in the project root.
