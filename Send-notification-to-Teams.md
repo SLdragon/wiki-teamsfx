@@ -526,7 +526,7 @@ builder.Services.AddSingleton(sp =>
 });
 ```
 
-**[This Sample](https://github.com/OfficeDev/TeamsFx-Samples/blob/ga/adaptive-card-notification/bot/src/storage/blobsStorage.ts)** provides a sample implementation that persists to Azure Blob Storage.
+**[This Sample](https://github.com/OfficeDev/TeamsFx-Samples/blob/v3/adaptive-card-notification/src/storage/blobsStorage.ts)** provides a sample implementation that persists to Azure Blob Storage.
 
 > Note-1: It's recommended to use your own shared storage for production environment. If `storage` is not provided, a default local file storage will be used, which stores notification connections into:
 >   - *.notification.localstore.json* if running locally
@@ -647,7 +647,7 @@ Here's the comparison of the two approaches to help you make the decision.
 ## Notification via Incoming Webhook
 Incoming Webhooks help in posting messages from apps to Teams. If Incoming Webhooks are enabled for a team in any channel, it exposes the HTTPS endpoint, which accepts correctly formatted JSON and inserts the messages into that channel. For example, you can create an Incoming Webhook in your DevOps channel, configure your build, and simultaneously deploy and monitor services to send alerts.
 
-Teams Framework has built a [sample](https://github.com/OfficeDev/TeamsFx-Samples/tree/release/incoming-webhook-notification) that walks you through:
+Teams Framework has built a [sample](https://github.com/OfficeDev/TeamsFx-Samples/tree/v3/incoming-webhook-notification) that walks you through:
 * How to create an incoming webhook in Teams.
 * How to send notifications using incoming webhooks with adaptive cards.
 
