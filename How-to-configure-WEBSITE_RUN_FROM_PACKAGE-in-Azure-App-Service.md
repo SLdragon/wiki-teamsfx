@@ -24,6 +24,7 @@ https://github.com/projectkudu/kudu/wiki/WEBSITE_RUN_FROM_PACKAGE-and-WEBSITE_CO
 
 # How to enable run from package
 1. Make sure that the version of Node.js on your machine is the same as the Node.js version on App Service.
+1. Check your .webappignore file at the project root, make sure all the dependencies that running required are not excluded by this file.
 1. Enable `WEBSITE_RUN_FROM_PACKAGE` app setting in your Azure App Service.
    * Add WEBSITE_RUN_FROM_PACKAGE flag to your bicep file.
    * Follow [the documentation](https://learn.microsoft.com/en-us/azure/app-service/deploy-run-package#enable-running-from-package) do it manually.
@@ -33,6 +34,7 @@ https://github.com/projectkudu/kudu/wiki/WEBSITE_RUN_FROM_PACKAGE-and-WEBSITE_CO
 # How to disable run from package
 1. Remove `WEBSITE_RUN_FROM_PACKAGE` app setting from your Azure App Service.
 1. If your project is built by nodeJS and you already have a `web.config` file in your project root, you can keep this file and everything is fine now. If you want to delete the `web.config` file, remember to [enable the build process](https://learn.microsoft.com/en-us/azure/app-service/deploy-zip?tabs=cli#enable-build-automation-for-zip-deploy) or set `SCM_SCRIPT_GENERATOR_ARGS=--node` (This option will also need you to upload all the dependencies to the Azure App Service).
+1. Adjust your .webappignore file at the project root, make sure all source code is not excluded by this file. This file excludes *.ts files by default. If you enabled the build process during deploy, you should upload all the source code to the App Service. If you use `SCM_SCRIPT_GENERATOR_ARGS=--node` option or keep the `web.config` at the project root, skip this step.
 
 # Q&A
 ## Deployment failed, and a `FAILD TO INITIALIZED RUN FROM PACKAGE.txt` file was in my wwwroot folder.
