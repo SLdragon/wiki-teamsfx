@@ -20,7 +20,7 @@ Learn more about:
 ## Get the empty starter template
 We've put all of the files necessary to use every feature of Teams Toolkit on GitHub so that it's easier to add them to your projects. Throughout this tutorial there are indications of where you may need to customize the files and which are optional. 
 
-1. Download or clone the starter template from [link](). This is the `template directory`. 
+1. Download or clone the starter template from [GitHub](https://github.com/therealjohn/teams-toolkit-starter-template). This is the `template directory`. 
 
 ## Modify your project directory and copy template files
 1. Navigate to the directory that has your app project in it. This is your `project directory`. 
@@ -59,7 +59,11 @@ Teams Toolkit includes (optional) features to help create (provision) Azure reso
 
 The `template directory` includes smart defaults for Teams apps using Bicep that help you create the right resources in Azure to host the app. The templates ensure idempotence of the resources. 
 
-1. (Optionally) Copy the `infra` directory from the `template directory` to the root of your `project directory`. 
+These steps are optional. Follow them if you want to use Teams Toolkit to help host your app in Azure.
+
+1. Copy the `infra` directory from the `template directory` to the root of your `project directory`. 
+1. For apps with tabs, copy the `.storageignore` and `aad.manifest.json` files from the `template directory` to the root of your `project directory`.
+1. For apps with a bot, copy the `.appserviceignore` and `web.config` files from the `template directory` to the root of your `project directory`.
 
 Now your project directory supports Teams Toolkit, but you'll need to customize these files to better match any existing resources or differences from the Teams Toolkit conventions.
 
