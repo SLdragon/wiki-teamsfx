@@ -1,4 +1,13 @@
-Teams Toolkit enables developers to scaffold app projects that run in Teams, Outlook, and the Microsoft 365 app and includes several templates to get you started. In addition, compatible projects benefit from integrated tunneling for debugging bot capabilities, composable automation tasks for each step of the developer journey and launching the app to different organizations (tenants). In this article, you learn how to make your own application or existing Teams app projects compatible with Teams Toolkit.
+Teams Toolkit enables developers to scaffold app projects that run in Teams, Outlook, and the Microsoft 365 app and includes several templates to get you started. In addition, compatible projects benefit from integrated tunneling for debugging bot capabilities, composable automation tasks for each step of the developer journey and launching the app to different organizations (tenants). In this article, you learn how to make your own application or existing Teams app projects compatible with Teams Toolkit by choosing which steps apply to your project:
+
+- [Modify your project directory and copy template files](#Modify-your-project-directory-and-copy-template-files)
+- [Add support to launch and debug your app](#Add-support-to-launch-and-debug-your-app)
+- [Add support for Teams Toolkit automation tasks](#Add-support-for-Teams-Toolkit-automation-tasks)
+- [Add support for Teams Toolkit environments](#Add-support-for-Teams-Toolkit-environments)
+- [Add support for hosting in Azure](#Add-support-for-hosting-in-Azure)
+- [Update the app manifest](#Update-the-app-manifest)
+- [Using existing resources like an App ID](#Using-existing-resources-like-an-App-ID)
+- [Using env variables in code](#Using-env-variables-in-code)
 
 ## Understand the Teams Toolkit architecture
 All Teams Toolkit templates have the same file structure, based on Teams Toolkit conventions. THe following hierarchy shows the directory structure you'll build in this tutorial:
