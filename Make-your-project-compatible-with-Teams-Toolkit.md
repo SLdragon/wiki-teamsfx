@@ -9,7 +9,8 @@ All Teams Toolkit templates have the same file structure, based on Teams Toolkit
 ├── env                        [ Environment files used by Teams Toolkit ]
 ├── infra                      [ Creates and configures Azure resources ]
 ├── src                        [ Source code for your app ]
-└── teamsapp.local.yaml        [ Project file for Teams Toolkit that defines automation tasks]
+├── teamsapp.yaml              [ Defines automation tasks for hosted environments ]
+└── teamsapp.local.yaml        [ Defines automation tasks for running from your machine or localhost]
 ```
 
 Learn more about:
