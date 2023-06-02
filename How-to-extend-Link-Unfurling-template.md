@@ -12,7 +12,7 @@ Switch to another user account. Without installing this app, paste the link "htt
 
 ## How to add link unfurling cache in Teams
 
-This template removes cache by default to provide convenience for debug. To add cache, ***REMOVE*** following JSON part from adaptive card in `linkUnfurlingApp.ts`:
+This template removes cache by default to provide convenience for debug. To add cache, ***REMOVE*** following JSON part from adaptive card in `linkUnfurlingApp.ts` (`linkUnfurlingApp.js`):
 
 ```ts
 suggestedActions: {
@@ -40,7 +40,7 @@ For card with type "auth", the Teams client strips away any action buttons from 
 Stage View is a full screen UI component that you can invoke to surface your web content. You can turn URLs into a tab using an Adaptive Card and Chat Services. Follow the instructions below to add stage view in your link unfurling app.
 
 - [Step 1: Update `staticTabs` in manifest.json](#step-1-update-statictabs-in-manifestjson)
-- [Step 2: Update `index.ts`](#step-2-update-indexts)
+- [Step 2: Update source code](#step-2-update-source-code)
 - [Step 3: Set `BOT_DOMAIN` and `TEAMS_APP_ID` in environment variables](#step-3-set-bot_domain-and-teams_app_id-in-environment-variables)
 - [Step 4: Update adaptive card](#step-4-update-adaptive-card)
 
@@ -67,9 +67,8 @@ In `appPackage/manifest.json`, update `staticTabs` section.
     ],
 ```
 
-### Step 2: Update `index.ts`
-
-In `src/index.ts`, add following code.
+### Step 2: Update source code
+In `src/index.ts` (`src/index.js`), add following code.
 
 ```ts
 server.get("/tab", async (req, res) => {
@@ -153,7 +152,7 @@ In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
 
 Run `npm install @microsoft/adaptivecards-tools`. This package helps render placeholders such as `${url}` in adaptive card to be real values.
 
-In `linkUnfurlingApp.ts`, update variable `attachment` to be following.
+In `src/linkUnfurlingApp.ts` (`src/linkUnfurlingApp.js`), update variable `attachment` to be following.
 
 ```ts
     const data = { url: process.env.BOT_DOMAIN, appId: process.env.TEAMS_APP_ID };
@@ -211,7 +210,7 @@ In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
 
 ### Step 2: Add `handleTeamsTaskModuleFetch` function in handler
 
-In `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
+For typescript template, in `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
 
 ```ts
   public async handleTeamsTaskModuleFetch(context: TurnContext, taskModuleRequest: TaskModuleRequest): Promise<TaskModuleResponse> {
@@ -249,11 +248,46 @@ In `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
     };
   }
 ```
-
+For javascript template, in `src/linkUnfurlingApp.js`, add following method to `LinkUnfurlingApp` class.
+```js
+  handleTeamsTaskModuleFetch(context, taskModuleRequest) {
+    return {
+      task: {
+        type: "continue",
+        value: {
+          title: "Task Module Fetch",
+          height: 200,
+          width: 400,
+          card: CardFactory.adaptiveCard({
+            version: '1.0.0',
+            type: 'AdaptiveCard',
+            body: [
+              {
+                type: 'TextBlock',
+                text: 'Enter Text Here'
+              },
+              {
+                type: 'Input.Text',
+                id: 'usertext',
+                placeholder: 'add some text and submit',
+                IsMultiline: true
+              }
+            ],
+            actions: [
+              {
+                type: 'Action.Submit',
+                title: 'Submit'
+              }
+            ]
+          })
+        },
+      },
+    };
+  }
+```
 ### Step 3: Add `handleTeamsTaskModuleSubmit` function in handler
 
-In `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
-
+For typescript template, in `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
 ```ts
   public async handleTeamsTaskModuleSubmit(context: TurnContext, taskModuleRequest: TaskModuleRequest): Promise<TaskModuleResponse> {
     return {
@@ -264,7 +298,17 @@ In `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
     };
   }
 ```
-
+For javascript template, in `src/linkUnfurlingApp.js`, add following method to `LinkUnfurlingApp` class.
+```js
+  handleTeamsTaskModuleSubmit(context, taskModuleRequest) {
+    return {
+      task: {
+        type: 'message',
+        value: 'Thanks!'
+      }
+    };
+  }
+```
 In Teams, the adaptive card will be like:
 
 ![taskModule](https://github.com/OfficeDev/TeamsFx/assets/11220663/eec7cf9b-d134-4f76-badf-c3fe312e8655)
@@ -323,7 +367,7 @@ In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
 
 ### Step 3: Add `onAdaptiveCardInvoke` function in handler
 
-In `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
+For typescript template, in `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
 
 ```ts
   public async onAdaptiveCardInvoke(context: TurnContext, invokeValue: AdaptiveCardInvokeValue): Promise<AdaptiveCardInvokeResponse> {
@@ -345,7 +389,27 @@ In `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
     return res;
   }
 ```
-
+For javascript template, in `src/linkUnfurlingApp.js`, add following method to `LinkUnfurlingApp` class.
+```js
+  onAdaptiveCardInvoke(context, invokeValue) {
+    const card = {
+      "type": "AdaptiveCard",
+      "body": [
+        {
+          "type": "TextBlock",
+          "text": "Your response was sent to the app",
+          "size": "Medium",
+          "weight": "Bolder",
+          "wrap": true
+        },
+      ],
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "version": "1.4"
+    };
+    const res = { statusCode: 200, type: "application/vnd.microsoft.card.adaptive", value: card };
+    return res;
+  }
+```
 In Teams, the adaptive card will be like:
 
 ![cardAction](https://github.com/OfficeDev/TeamsFx/assets/11220663/5019a59f-4707-42d8-8bc3-9fdf2981b8fa)
