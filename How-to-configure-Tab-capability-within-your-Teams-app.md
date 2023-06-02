@@ -74,12 +74,11 @@ For example, your folder structure look like:
     |-- appPackage/
     |-- env/
     |-- infra/
-    |-- tab/           <!--tab app source code-->
+    |-- tab/            <!--tab app source code-->
     |   |-- src/
     |   |   |-- app.ts
     |   |-- package.json
-    |-- src/            <!--your current source code-->
-    |   |-- index.ts
+    |-- index.ts        <!--your current source code-->
     |-- package.json
     |-- teamsapp.yml
     ```
@@ -95,10 +94,20 @@ For example, your folder structure look like:
     |   |   |-- app.ts
     |   |-- package.json
     |-- bot/            <!--move your current source code to a new sub folder-->
-    |   |-- src/
-    |   |   |-- index.ts
+    |   |-- index.ts
     |   |-- package.json
     |-- teamsapp.yml
+    ```
+
+    Also remember to update your teamsapp.yml and teamsapp.local.yml to align with the folder structure. For example:
+
+    ```
+    deploy:
+      # Run npm command
+      - uses: cli/runNpmCommand
+        with:
+          args: install --no-audit
+          workingDirectory: ./bot
     ```
 
 1. To configure the debug profile for your new tab project, add the following section to your `tasks.json`. You can find a complete example [here](https://github.com/OfficeDev/TeamsFx-Samples/tree/dev/hello-world-bot-with-tab/.vscode).
