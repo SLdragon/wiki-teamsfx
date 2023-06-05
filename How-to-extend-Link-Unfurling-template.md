@@ -157,7 +157,7 @@ In `src/linkUnfurlingApp.ts` (`src/linkUnfurlingApp.js`), update variable `attac
 ```ts
     const data = { url: process.env.BOT_DOMAIN, appId: process.env.TEAMS_APP_ID };
 
-    const renderedCard = AdaptiveCards.declare(card).render(data);
+    const renderedCard = AdaptiveCards.declare(helloWorldCard).render(data);
 
     const attachment = { ...CardFactory.adaptiveCard(renderedCard), preview: previewCard };
 
