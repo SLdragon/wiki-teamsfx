@@ -65,7 +65,7 @@ For a complete example, please refer to [Hello World Bot with Tab](https://githu
 ## Setup local debug environment in VSCode
 
 If you prefer to create a server-side tab app, you may not need to update your folder structure or debug profile. Simply add new routes to the tab page in your bot service.
-However, this document assumes that you are adding a client-side tab app.
+However, **this document assumes that you are adding a client-side tab app**.
 
 1. To begin, bring your tab app code into your project. If you do not have one, you can create a new Tab app project with Teams Toolkit and copy the source code to into your current project.
 For example, your folder structure look like:
