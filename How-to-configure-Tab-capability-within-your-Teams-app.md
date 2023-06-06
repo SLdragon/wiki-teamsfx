@@ -278,9 +278,11 @@ However, this document assumes that you are adding a client-side tab app.
       - uses: cli/runNpmCommand # Run npm command
         with:
           args: install
+          workingDirectory: ./tab
       - uses: cli/runNpmCommand # Run npm command
         with:
           args: run build
+          workingDirectory: ./tab
       # Deploy bits to Azure Storage Static Website
       - uses: azureStorage/deploy
         with:
