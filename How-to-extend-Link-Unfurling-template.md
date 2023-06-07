@@ -191,7 +191,7 @@ Once your link is unfurled into an Adaptive Card and sent in conversation, you c
 
 #### Step 1: Update adaptive card
 
-In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
+In `src/adaptiveCards/helloWorldCard.json` (`Resources/helloWorldCard.json` for c# template), update `actions` to be following.
 
 ```json
     "actions": [
@@ -285,6 +285,57 @@ For javascript template, in `src/linkUnfurlingApp.js`, add following method to `
     };
   }
 ```
+For c# template, in `LinkUnfurling/LinkUnfurlingApp.cs`, add following method to `LinkUnfurlingApp` class.
+```cs
+   protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+    {
+        return Task.FromResult(new TaskModuleResponse
+        {
+            Task = new TaskModuleContinueResponse
+            {
+                Type = "continue",
+                Value = new TaskModuleTaskInfo
+                {
+                    Title = "Task Module Fetch",
+                    Height = 200,
+                    Width = 400,
+                    Card = new Attachment
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = new AdaptiveCard("1.0.0")
+                        {
+                            Version = "1.0.0",
+                            Type = "AdaptiveCard",
+                            Body = new List<AdaptiveElement>
+                        {
+                            new AdaptiveTextBlock
+                            {
+                                Text = "Enter Text Here",
+                                Type = "TextBlock"
+                            },
+                            new AdaptiveTextInput
+                            {
+                                Id = "usertext",
+                                Placeholder = "add some text and submit",
+                                IsMultiline = true,
+                                Type = "Input.Text"
+                            }
+                        },
+                            Actions = new List<AdaptiveAction>
+                        {
+                            new AdaptiveSubmitAction
+                            {
+                                Title = "Submit",
+                                Type = "Action.Submit"
+                            }
+                        }
+                        }
+                    }
+                }
+            }
+        });
+    }
+```
 ### Step 3: Add `handleTeamsTaskModuleSubmit` function in handler
 
 For typescript template, in `src/linkUnfurlingApp.ts`, add following method to `LinkUnfurlingApp` class.
@@ -308,6 +359,20 @@ For javascript template, in `src/linkUnfurlingApp.js`, add following method to `
       }
     };
   }
+```
+For c# template, in `LinkUnfurling/LinkUnfurlingApp.cs`, add following method to `LinkUnfurlingApp` class.
+```cs
+    protected override Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+    {
+        return Task.FromResult(new TaskModuleResponse
+        {
+            Task = new TaskModuleMessageResponse
+            {
+                Type = "message",
+                Value = "Thanks!"
+            }
+        });
+    }
 ```
 In Teams, the adaptive card will be like:
 
@@ -352,7 +417,7 @@ The card action requires bot capability. In `appPackage/manifest.json`, update `
 
 ### Step 2: Update adaptive card
 
-In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
+In `src/adaptiveCards/helloWorldCard.json` (`Resources/helloWorldCard.json` for c# template), update `actions` to be following.
 
 ```json
     "actions": [
@@ -409,6 +474,33 @@ For javascript template, in `src/linkUnfurlingApp.js`, add following method to `
     const res = { statusCode: 200, type: "application/vnd.microsoft.card.adaptive", value: card };
     return res;
   }
+```
+For c# template, in `LinkUnfurling/LinkUnfurlingApp.cs`, add following method to `LinkUnfurlingApp` class.
+```cs
+    protected override Task<AdaptiveCardInvokeResponse> OnAdaptiveCardInvokeAsync(ITurnContext<IInvokeActivity> turnContext, AdaptiveCardInvokeValue invokeValue, CancellationToken cancellationToken)
+    {
+        var card = new AdaptiveCard(new AdaptiveSchemaVersion("1.4"))
+        {
+            Body = new List<AdaptiveElement>
+        {
+            new AdaptiveTextBlock
+            {
+                Text = "Your response was sent to the app",
+                Size = AdaptiveTextSize.Medium,
+                Weight = AdaptiveTextWeight.Bolder,
+                Wrap = true,
+                Type = "TextBlock"
+            }
+        }
+        };
+        var response = new AdaptiveCardInvokeResponse
+        {
+            StatusCode = 200,
+            Type = "application/vnd.microsoft.card.adaptive",
+            Value = card,
+        };
+        return Task.FromResult(response);
+    }
 ```
 In Teams, the adaptive card will be like:
 
