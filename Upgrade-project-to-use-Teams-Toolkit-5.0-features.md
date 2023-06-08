@@ -27,10 +27,11 @@ A: There are a few [known issues](https://github.com/OfficeDev/TeamsFx/wiki/Upgr
 ## How to Upgrade
 
 Teams Toolkit can automatically upgrade your project with your consent. To trigger upgrade, you can:
-1. Trigger any Teams Toolkit command, Teams Toolkit will pop up dialog to confirm upgrade.
+1. Open your project using VS Code or VS, click upgrade in VS Code's upgrade notification or VS's upgrade info bar.
+2. Trigger any Teams Toolkit command in VS Code, VS or Teams Toolkit CLI, Teams Toolkit will ask you to confirm upgrade.
     > You need to trigger the expected command again after upgrade.
-2. Open VS Code command palette (Shift + Command + P (Mac) / Ctrl + Shift + P (Windows/Linux)) and run `Teams: Upgrade project` command.
-3. Click Teams Toolkit sidebar in VS Code, and click `Upgrade project` button.
+3. Open VS Code command palette (Shift + Command + P (Mac) / Ctrl + Shift + P (Windows/Linux)) and run `Teams: Upgrade project` command.
+4. Click Teams Toolkit sidebar in VS Code, and click `Upgrade project` button.
 
 > We recommend using git to track changes during upgrade.
 
@@ -482,4 +483,4 @@ The project to be upgraded has no appPackage folder under templates which is req
 The project to be upgraded has no manifest.template.json file under templates/appPackage which is required for Upgrade. You can refer to [upgrade your projects manually](https://github.com/OfficeDev/TeamsFx/wiki/Upgrade-project-to-use-Teams-Toolkit-5.0-features#upgrade-your-projects-manually) to upgrade your project manually.
 
 ### UpgradeAadManifestTemplateNotExist
-The project to be upgraded has no aad.template.json file under templates/appPackage which is required for your project. You may be trying to upgrade a project created by Teams Toolkit <= v3.8.0. Please install Teams Toolkit v4.x and run upgrade first, or refer to [upgrade your projects manually](https://github.com/OfficeDev/TeamsFx/wiki/Upgrade-project-to-use-Teams-Toolkit-5.0-features#upgrade-your-projects-manually) to upgrade your project manually.
+The project to be upgraded has no aad.template.json file under templates/appPackage which is required for your project. You may be trying to upgrade a project created by Teams Toolkit for VS Code v3.x / Teams Toolkit for Visual Studio v17.3 / Teams Toolkit CLI 0.x. Please install Teams Toolkit for Visual Studio Code v4.x / Teams Toolkit for Visual Studio v17.4 / Teams Toolkit CLI v1.x and run upgrade first, or refer to [upgrade your projects manually](https://github.com/OfficeDev/TeamsFx/wiki/Upgrade-project-to-use-Teams-Toolkit-5.0-features#upgrade-your-projects-manually) to upgrade your project manually.
