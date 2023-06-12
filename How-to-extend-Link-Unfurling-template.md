@@ -143,6 +143,22 @@ In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
 ```json
 "actions": [
         {
+            "type": "Action.Submit",
+            "title": "View Via card",
+            "data":{
+                "msteams": {
+                    "type": "invoke",
+                    "value": {
+                        "type": "tab/tabInfoAction",
+                        "tabInfo": {
+                            "contentUrl": "https://${url}/tab",
+                            "websiteUrl": "https://${url}/tab"
+                        }
+                    }
+                }
+            }
+        },
+        {
             "type": "Action.OpenUrl",
             "title": "View Via Deep Link",
             "url": "https://teams.microsoft.com/l/stage/${appId}/0?context=%7B%22contentUrl%22%3A%22https%3A%2F%2F${url}%2Ftab%22%2C%22websiteUrl%22%3A%22https%3A%2F%2F${url}%2Ftab%22%2C%22name%22%3A%22DemoStageView%22%7D"
@@ -165,15 +181,15 @@ In `src/linkUnfurlingApp.ts` (`src/linkUnfurlingApp.js`), update variable `attac
 
 In Teams, the adaptive card will be like:
 
-![stageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/db467fc6-8e2d-4197-8c89-171e5f29331e)
+![stageView](https://user-images.githubusercontent.com/11220663/237932418-6a9537e2-5433-4941-becb-dbae54965a7c.png)
 
-Opening stage view from Adaptive card via deep link:
+Opening stage view from Adaptive card:
 
 ![viaDeepLink](https://github.com/OfficeDev/TeamsFx/assets/11220663/3664bcde-eb66-4b00-882b-9e9e44006ec6)
 
 In Outlook, the adaptive card will be like:
 
-![stageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/9ea42c24-e06a-4c48-b8dc-e8a884d8d883)
+![stageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/76743ade-30bc-499d-bbb2-a613734c49e9)
 
 Opening stage view from Adaptive card via deep link:
 
