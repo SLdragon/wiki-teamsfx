@@ -40,8 +40,8 @@ For card with type "auth", the Teams client strips away any action buttons from 
 Stage View is a full screen UI component that you can invoke to surface your web content. You can turn URLs into a tab using an Adaptive Card and Chat Services. Follow the instructions below to add stage view in your link unfurling app.
 
 - [Step 1: Update `staticTabs` in manifest.json](#step-1-update-statictabs-in-manifestjson)
-- [Step 2: Update source code](#step-2-update-source-code)
-- [Step 3: Set `BOT_DOMAIN` and `TEAMS_APP_ID` in environment variables](#step-3-set-bot_domain-and-teams_app_id-in-environment-variables)
+- [Step 2: Add route for `/tab`](#step-2-add-route-for-tab)
+- [Step 3: Set `BOT_DOMAIN` and `TEAMS_APP_ID` in environment variables or `appsettings.json`](#step-3-set-bot_domain-and-teams_app_id-in-environment-variables-or-appsettingsjson)
 - [Step 4: Update adaptive card](#step-4-update-adaptive-card)
 
 ### Step 1: Update `staticTabs` in `manifest.json`
@@ -67,8 +67,8 @@ In `appPackage/manifest.json`, update `staticTabs` section.
     ],
 ```
 
-### Step 2: Update source code
-In `src/index.ts` (`src/index.js`), add following code.
+### Step 2: Add route for `/tab`
+For typescript and javascript template, in `src/index.ts` (`src/index.js`), add following code.
 
 ```ts
 server.get("/tab", async (req, res) => {
@@ -88,12 +88,43 @@ server.get("/tab", async (req, res) => {
   res.end();
 });
 ```
+For c# template, in `Controllers/`, add a new `TabController`:
+```csharp
+[Route("tab")]
+[ApiController]
+public class TabController : ControllerBase
+{
+    [HttpPost, HttpGet]
+    public ContentResult Get()
+    {
+        // Delegate the processing of the HTTP POST to the adapter.
+        // The adapter will invoke the bot.
 
-### Step 3: Set `BOT_DOMAIN` and `TEAMS_APP_ID` in environment variables
+        var html = "<h1>Tab in stage view</h1>";
+        return new ContentResult
+        {
+            Content = html,
+            ContentType = "text/html"
+        };
+    }
+}
+```
+Update `Config.cs` to be:
+```csharp
+    public class ConfigOptions
+    {
+        public string BOT_ID { get; set; }
+        public string BOT_PASSWORD { get; set; }
+        public string TEAMS_APP_ID { get; set; }
+        public string BOT_DOMAIN { get; set; }
+    }
+```
+
+### Step 3: Set `BOT_DOMAIN` and `TEAMS_APP_ID` in environment variables or `appsettings.json`
 
 For local debug:
 
-Update action `file/createOrUpdateEnvironmentFile` in `teamsapp.local.yml`, add `TEAMS_APP_ID` and `BOT_DOMAIN` to env.
+If it's typescript or javascript template, update action `file/createOrUpdateEnvironmentFile` in `teamsapp.local.yml`, add `TEAMS_APP_ID` and `BOT_DOMAIN` to env.
 
 ```yaml
   - uses: file/createOrUpdateEnvironmentFile # Generate runtime environment variables
@@ -105,7 +136,17 @@ Update action `file/createOrUpdateEnvironmentFile` in `teamsapp.local.yml`, add 
         TEAMS_APP_ID: ${{TEAMS_APP_ID}}
         BOT_DOMAIN: ${{BOT_DOMAIN}}
 ```
-
+If it's c# template, update action `file/createOrUpdateJsonFile` in `teamsapp.local.yml`, add `TEAMS_APP_ID` and `BOT_DOMAIN` to `appsettings.json`.
+```yaml
+  - uses: file/createOrUpdateJsonFile
+    with:
+      target: ./appsettings.Development.json
+      appsettings:
+        BOT_ID: ${{BOT_ID}}
+        BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+        TEAMS_APP_ID: ${{TEAMS_APP_ID}}
+        BOT_DOMAIN: ${{BOT_DOMAIN}}
+```
 For remote:
 
 Update `infra/azure.parameters.json`. Add following to `parameters`:
@@ -138,7 +179,7 @@ resource webAppSettings 'Microsoft.Web/sites/config@2022-09-01' = {
 
 ### Step 4: Update adaptive card
 
-In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
+In `src/adaptiveCards/helloWorldCard.json` or `Resources/helloWorldCard.json`, update `actions` to be following.
 
 ```json
 "actions": [
@@ -165,8 +206,9 @@ In `src/adaptiveCards/helloWorldCard.json`, update `actions` to be following.
         }
       ],
 ```
+For typescript or javascript templates:
 
-Run `npm install @microsoft/adaptivecards-tools`. This package helps render placeholders such as `${url}` in adaptive card to be real values.
+Run `npm install @microsoft/adaptivecards-tools` to install the package for adaptivecards templating.
 
 In `src/linkUnfurlingApp.ts` (`src/linkUnfurlingApp.js`), update variable `attachment` to be following.
 
@@ -177,6 +219,31 @@ In `src/linkUnfurlingApp.ts` (`src/linkUnfurlingApp.js`), update variable `attac
 
     const attachment = { ...CardFactory.adaptiveCard(renderedCard), preview: previewCard };
 
+```
+
+For c# templates:
+
+run `dotnet add package AdaptiveCards.Templating` to install the package for adaptivecards templating.
+
+Update `LinkUnfurlingApp` class:
+```csharp
+    private readonly ConfigOptions _config;
+
+    public LinkUnfurlingApp(ConfigOptions config)
+    {
+        _config = config;
+    }
+```
+Update variable `adaptiveCard` to be following:
+```csharp
+        var data = new { url = _config.BOT_DOMAIN, appId = _config.TEAMS_APP_ID };
+        var template = new AdaptiveCards.Templating.AdaptiveCardTemplate(adaptiveCardJson);
+
+        var adaptiveCard =AdaptiveCard.FromJson(template.Expand(data)).Card;
+```
+Update `program.cs`:
+```csharp
+    builder.Services.AddTransient<IBot>(sp => new LinkUnfurlingApp(config));
 ```
 
 In Teams, the adaptive card will be like:
