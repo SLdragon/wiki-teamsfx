@@ -109,16 +109,6 @@ public class TabController : ControllerBase
     }
 }
 ```
-Update `Config.cs` to be:
-```csharp
-    public class ConfigOptions
-    {
-        public string BOT_ID { get; set; }
-        public string BOT_PASSWORD { get; set; }
-        public string TEAMS_APP_ID { get; set; }
-        public string BOT_DOMAIN { get; set; }
-    }
-```
 
 ### Step 3: Set `BOT_DOMAIN` and `TEAMS_APP_ID` in environment variables or `appsettings.json`
 
@@ -157,7 +147,7 @@ Update `infra/azure.parameters.json`. Add following to `parameters`:
     }
 ```
 
-Add following to `infra/azure.bicep`:
+Add following to `infra/azure.bicep` (if it's c# template, remove line `WEBSITE_NODE_DEFAULT_VERSION: '~18'`):
 
 ```bicep
 param teamsAppId string 
@@ -225,6 +215,16 @@ For c# templates:
 
 run `dotnet add package AdaptiveCards.Templating` to install the package for adaptivecards templating.
 
+Update `Config.cs`:
+```csharp
+    public class ConfigOptions
+    {
+        public string BOT_ID { get; set; }
+        public string BOT_PASSWORD { get; set; }
+        public string TEAMS_APP_ID { get; set; }
+        public string BOT_DOMAIN { get; set; }
+    }
+```
 Update `LinkUnfurlingApp` class:
 ```csharp
     private readonly ConfigOptions _config;
