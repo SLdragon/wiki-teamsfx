@@ -6,8 +6,8 @@ To support [multi-tenant](https://docs.microsoft.com/azure/active-directory/deve
 
 > Note: This document is only for TeamsFx projects that have already enabled [single sign on](https://aka.ms/teamsfx-add-sso).
 
-### (Optional) Update your Tab applications
-> You can skip this part if your projects does not contain Tab application or you are working with Visual Studio.
+### (Optional) Update Application Id URI
+> This part is only for TAB projects for ts/js. If you are working on a Bot/Messaging Extension or a VS project, please go to [Update your project](#update-your-project).
 
 > Since Azure AD app requires an ["tenant verified domain"](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-modify-supported-accounts#why-changing-to-multi-tenant-can-fail) for `Application ID URI`, you can use your own Custom Domain or Create a new Custom Domain on Azure.
 
