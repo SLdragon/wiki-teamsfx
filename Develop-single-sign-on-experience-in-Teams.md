@@ -24,6 +24,8 @@ In this tutorial you will learn:
   * [Update Infra](#update-infra)
   * [Update Source Code](#update-source-code-1)
 
+> Note: This sample will only provision [single tenant](https://learn.microsoft.com/azure/active-directory/develop/single-and-multi-tenant-apps#who-can-sign-in-to-your-app) Azure Active Directory app. For multi-tenant support, please refer to this [wiki](https://aka.ms/teamsfx-multi-tenant).
+
 ## Teams Tab app
 
 ### Azure Active Directory app manifest
