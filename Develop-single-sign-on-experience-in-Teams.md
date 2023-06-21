@@ -352,6 +352,7 @@ You can find and download sample code for TeamsFx Tab below to `./auth`:
 
 #### For Bot
 > Note: The following part is sample code for `Chat Command` bot.
+> SSO for `Chat Command` bot only supports personal chat. This bot may not work if you add it to a team or a group chat.
 
 1. Move files under `auth/sso` folder to `src`. ProfileSsoCommandHandler class is a sso command handler to get user info with SSO token. You can follow this method and create your own sso command handler.
 2. Move `auth/public` folder to `src/public`. This folder contains HTML pages that the bot application hosts. When single sign-on flows are initiated with Azure Active Directory, Azure Active Directory will redirect the user to these pages.
