@@ -17,14 +17,63 @@ Learn more about:
 - [Teams Toolkit's teamsapp.yml schema](https://aka.ms/teams-toolkit/1.0.0/yaml.schema.json)
 
 ## Set up
-Create a new app with Teams Toolkit with SPFx tab capability (You can use SPFx solution name as app name to create the new app).
+Create a new app with Teams Toolkit with SPFx tab capability 
+> You can use SPFx solution name as app name to create the new app.
 
 ## Update the app manifest
-- Delete the SPFx solution under `./src` folder.
-- Update `staticTabs` and `configurableTabs` fields for both manifest.json and manifest.local.json under `./appPackage` directory:
-For each of the web parts in your SPFx solution, use `manifest["id"]` as 
+- Delete the created SPFx solution under `./src` folder.
+- Removing and update `staticTabs` and `configurableTabs` fields for both manifest.json and manifest.local.json under `./appPackage` directory.
 
-Move your existing Teams manifest into the new project, replacing the default ones. Teams Toolkit scaffolded projects save these files in the appPackage folder. If you choose to move these files to a different location, make sure you update [actions](https://aka.ms/teamsfx-actions) in teamsapp.local.yml that reference them.
+For each of the web parts in your existing SPFx solution, use `id` and `preconfiguredEntries[0].title.default` in web part manifest as `componentId` and `webpartName` to construct the Teams manifest:
+- - manifest.json
+Add following item to `staticTabs` array for each of the web parts:
+```
+        {
+            "entityId": "`{{componentId}}`",
+            "name": "`{{webpartName}}`",
+            "contentUrl": "https://{teamSiteDomain}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest=/_layouts/15/teamshostedapp.aspx%3Fteams%26personal%26componentId=`{{componentId}}`%26forceLocale={locale}", 
+            "websiteUrl": "https://products.office.com/en-us/sharepoint/collaboration",
+            "scopes": [
+                "personal"
+            ]
+        }
+```
+Add following item to `configurableTabs` array for one of the web parts:
+```
+        {
+            "configurationUrl": "https://{teamSiteDomain}{teamSitePath}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest={teamSitePath}/_layouts/15/teamshostedapp.aspx%3FopenPropertyPane=true%26teams%26componentId=`{{componentId}}`%26forceLocale={locale}", 
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ]
+        }
+```
+- - manifest.local.json
+Add following item to `staticTabs` array for each of the web parts:
+```
+        {
+            "entityId": "`{{componentId}}`",
+            "name": "`{{webpartName}}`",
+            "contentUrl": "https://{teamSiteDomain}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest={teamSitePath}/_layouts/15/TeamsWorkBench.aspx%3FcomponentId=`{{componentId}}`%26teams%26personal%26forceLocale={locale}%26loadSPFX%3Dtrue%26debugManifestsFile%3Dhttps%3A%2F%2Flocalhost%3A4321%2Ftemp%2Fmanifests.js", 
+            "websiteUrl": "https://products.office.com/en-us/sharepoint/collaboration",
+            "scopes": [
+                "personal"
+            ]
+        }
+```
+Add following item to `configurableTabs` array for one of the web parts:
+```
+        {
+            "configurationUrl": "https://{teamSiteDomain}{teamSitePath}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest={teamSitePath}/_layouts/15/TeamsWorkBench.aspx%3FcomponentId=`{{componentId}}`%26openPropertyPane=true%26teams%26forceLocale={locale}%26loadSPFX%3Dtrue%26debugManifestsFile%3Dhttps%3A%2F%2Flocalhost%3A4321%2Ftemp%2Fmanifests.js", 
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ]
+        }
+```
+
+ - If you already have an existing Teams manifest, you can use your existing one and replace the default ones. But make sure to update the following fields so that your manifest can be compatible with Teams Toolkit:
+
 
 Update your manifest file. You can use ${{MY_VARIABLE_NAME}} as placeholders in manifest.json, Teams Toolkit will replace them with their corresponding value at runtime. For a bot project, you usually need to use placeholders for id, name.short, and bots[].botId. Make sure you save the values into an environment file.
 
