@@ -194,11 +194,11 @@ Perform the following steps to create Azure service principals:
 
 > Save your tenant id, application id (AZURE_SERVICE_PRINCIPAL_NAME), and the secret (AZURE_SERVICE_PRINCIPAL_PASSWORD) for future use.
 
-For more information, see [Azure service principals guidelines](/azure/active-directory/develop/howto-create-service-principal-portal). The following are the three ways to create service principals:
+For more information, see [Azure service principals guidelines](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal). The following are the three ways to create service principals:
 
-* [Microsoft Azure portal](/azure/active-directory/develop/howto-create-service-principal-portal)
-* [Windows PowerShell](/azure/active-directory/develop/howto-authenticate-service-principal-powershell)
-* [Microsoft Azure CLI](/cli/azure/create-an-azure-service-principal-azure-cli)
+* [Microsoft Azure portal](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)
+* [Windows PowerShell](https://learn.microsoft.com/azure/active-directory/develop/howto-authenticate-service-principal-powershell)
+* [Microsoft Azure CLI](https://learn.microsoft.com/cli/azure/create-an-azure-service-principal-azure-cli)
 
 ## Publish Teams app using Teams Developer Portal
 
