@@ -279,12 +279,9 @@ For Teams Tab Application
      > Note: You need to replace `{{YOUR_NAMESPACE}}` with your namespace name
   
    2. Move `TeamsFx-Auth/Tab/GetUserProfile.razor` to `Components/`
-   3. Find following line in `Component/Welcome.razor`:
+   3. Add the `GetUserProfile` component to your razor page, for example:
     ```
-    <AddSSO />
-    ```
-    and replace with:
-    ```
+    <h1>Hello, World</h1>
     <GetUserProfile />
     ```
 
