@@ -20,4 +20,6 @@ Please read this API basic [introduce](https://github.com/OfficeDev/TeamsFx/blob
 Please [reference this sample code](https://github.com/OfficeDev/TeamsFx-Samples/blob/49179ff8f766c2f99c5fa93d97ad8939ec880056/query-org-user-with-message-extension-sso/teamsBot.ts#L32) for the basic usage.
 
 ## API limitation
-SSO only work for `query` and `link unfurling` in Message Extension. So this API should be implement within `TeamsActivityHandler.handleTeamsMessagingExtensionQuery`, actually this API also works in `TeamsActivityHandler.handleTeamsAppBasedLinkQuery`.
+SSO only work for `query` and `link unfurling` in Message Extension. So this API should be implement within `TeamsActivityHandler.handleTeamsMessagingExtensionQuery`. 
+
+In view of the poor SSO effect of link unfurling, the `API` has not been implemented for `TeamsActivityHandler.handleTeamsAppBasedLinkQuery` yet. If you have any idea about this, please submit an issue to us.
