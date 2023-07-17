@@ -53,7 +53,11 @@ api2teams -v # show version information
 
 - Open the generated project in [Visual Studio Code](https://code.visualstudio.com/) and make sure you have the latest [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) (version 5.0.0 or higher) installed.
 
-- Follow the instruction provided in the `README.md` for the generated project to get started. For the Teams app converted by the given sample Open API spec, you will be able to run a `GET /pets/1` command in Teams and a bot will return an Adaptive Card as response.
+- Follow the instruction provided in the `README.md` for the generated project to get started. After installing the Teams app generated from the provided OpenAPI spec, you will receive a welcome message. 
+    
+    ![welcome](https://github.com/OfficeDev/TeamsFx/wiki/api2teams/welcome.png)
+
+- You can then run a `GET /pets/1` command in Teams to receive an Adaptive Card response from the bot. 
 
     ![response](https://github.com/OfficeDev/TeamsFx/wiki/api2teams/workflow1.png)
 
@@ -80,6 +84,7 @@ The files in following folder can be customized and demonstrate an example imple
 |`src/cardActions`|This folder contains [card action handlers](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/workflow-bot-in-teams?tabs=JS#card-action-handler), when user click action button in the request adaptive card, it would use these handlers to get response and render response adaptive card.|
 |`src/commands`|This folder contains bot [command handlers](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/command-bot-in-teams#command-and-response), when user send messages, it will match the api, and send back request adaptive card. There is a special command handler which named `helpCommandHandler` which is used to show help messages.|
 |`src/index.ts`|Index file using `restify` as web service framework to host bot server, and register command handlers and action handlers for bot to handle use messages and button clicking event. |
+|`src/teamsBot.ts`|This file contains bot welcome message code, and it will be called by `index.ts`.|
 
 ## How it works
 Below is a simple command and response flow chart:
