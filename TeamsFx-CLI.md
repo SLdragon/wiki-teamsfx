@@ -28,19 +28,13 @@ The following list provides the common scenarios for`teamsfx preview:
     ```
 
 - Local Preview Bot App / Message Extension App
-  - To make the bot endpoint public, you should use your own tunnel service solution. For example, you can use [ngrok](https://ngrok.com/) by the following steps:
-      - Install [ngrok](https://ngrok.com/download)
-      - Start your local tunnel service by running the command `ngrok http 3978`.
-      > **Note:**
-      > If you encounter the ngrok page below, please follow the steps to solve this issue.
-      > <img width="596" alt="ngrok-authtoken-page" src="https://user-images.githubusercontent.com/49138419/230855631-e2228a47-402b-4b15-b8b0-5a2323050157.png">
-      > 1. Sign up an ngrok account in https://dashboard.ngrok.com/signup.
-      >    Copy your personal ngrok authtoken from https://dashboard.ngrok.com/get-started/your-authtoken.
-      > 1. Start your local tunnel service by running the command `ngrok http 3978 --authtoken=<your-personal-ngrok-authtoken>`.
-  - In the `env/.env.local` file, fill in the values for `BOT_DOMAIN` and `BOT_ENDPOINT` with your ngrok URL.
+  - Install [dev tunnel cli](https://aka.ms/teamsfx-install-dev-tunnel).
+  - Login with your M365 Account using the command `devtunnel user login`.
+  - Start your local tunnel service by running the command `devtunnel host -p 3978 --protocol http --allow-anonymous`.
+  - In the `env/.env.local` file, fill in the values for `BOT_DOMAIN` and `BOT_ENDPOINT` with your dev tunnel URL.
     ```
-    BOT_DOMAIN=sample-id.ngrok.io
-    BOT_ENDPOINT=https://sample-id.ngrok.io
+    BOT_DOMAIN=sample-id-3978.devtunnels.ms
+    BOT_ENDPOINT=https://sample-id-3978.devtunnels.ms/
     ```
   - Executing the commands in your project directory.
     ```shell
