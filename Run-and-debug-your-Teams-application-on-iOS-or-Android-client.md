@@ -75,14 +75,14 @@ Please follow the instructions in this tutorial to debug your bot or message ext
          ```
       - Use the `Run and Debug Activity Panel` in Visual Studio Code and click the `Debug in Teams` green arrow button. 
     - For CLI: 
-       - Install [ngrok](https://ngrok.com/). 
-       - Sign up a ngrok account in https://dashboard.ngrok.com/signup. Copy your personal ngrok authtoken from https://dashboard.ngrok.com/get-started/your-authtoken. 
-       - Start your local tunnel service by running the command `ngrok http https://localhost:53000 --authtoken=<your-personal-ngrok-authtoken> `. 
-       - In the `env/.env.local` file, fill in the values for `TAB_DOMAIN` and `TAB_ENDPOINT` with your ngrok URL. 
-           ```
-           TAB_DOMAIN=sample-ngrok-id.ngrok.io 
-           TAB_ENDPOINT=https://sample-ngrok-id.ngrok.io 
-           ```
+      - Install [dev tunnel cli](https://aka.ms/teamsfx-install-dev-tunnel).
+      - Login with your M365 Account using the command `devtunnel user login`.
+      - Start your local tunnel service by running the command `devtunnel host -p 3978 --protocol http --allow-anonymous`.
+      - In the `env/.env.local` file, fill in the values for `BOT_DOMAIN` and `BOT_ENDPOINT` with your dev tunnel URL.
+          ```
+          TAB_DOMAIN=sample-id-3978.devtunnels.ms
+          TAB_ENDPOINT=https://sample-id-3978.devtunnels.ms
+          ``` 
        - Executing the command `teamsfx provision --env local` in your project directory. 
        - Executing the command `teamsfx deploy --env local` in your project directory. 
        - Executing the command `teamsfx preview --env local` in your project directory. 
