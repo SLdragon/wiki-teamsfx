@@ -331,6 +331,15 @@ You can find the complete sample [here](https://github.com/OfficeDev/TeamsFx-Sam
     param functionStorageName string = '${resourceBaseName}api'
     var oauthAuthority = uri(aadAppOauthAuthorityHost, aadAppTenantId)
 
+    var teamsMobileOrDesktopAppClientId = '1fec8e78-bce4-4aaf-ab1b-5451cc387264'
+    var teamsWebAppClientId = '5e3ce6c0-2b1f-4285-8d4b-75ee78787346'
+    var officeWebAppClientId1 = '4345a7b9-9a63-4910-a426-35363201d503'
+    var officeWebAppClientId2 = '4765445b-32c6-49b0-83e6-1d93765276ca'
+    var outlookDesktopAppClientId = 'd3590ed6-52b3-4102-aeff-aad2292ab01c'
+    var outlookWebAppClientId = '00000002-0000-0ff1-ce00-000000000000'
+    var authorizedClientApplicationIds = '${teamsMobileOrDesktopAppClientId};${teamsWebAppClientId};${officeWebAppClientId1};${officeWebAppClientId2};${outlookDesktopAppClientId};${outlookWebAppClientId}'
+    var allowedClientApplications = '"${teamsMobileOrDesktopAppClientId}","${teamsWebAppClientId}","${officeWebAppClientId1}","${officeWebAppClientId2}","${outlookDesktopAppClientId}","${outlookWebAppClientId}"'
+
     var tabEndpoint = ${TabAppEndpoint}
     var aadApplicationIdUri = 'api://${TabAppDomain}/${aadAppClientId}'
 
@@ -405,6 +414,10 @@ You can find the complete sample [here](https://github.com/OfficeDev/TeamsFx-Sam
             {
               name: 'M365_APPLICATION_ID_URI'
               value: aadApplicationIdUri
+            }
+            {
+              name: 'WEBSITE_AUTH_AAD_ACL'
+              value: '{"allowed_client_applications": [${allowedClientApplications}]}'
             }
           ]
           ftpsState: 'FtpsOnly'
