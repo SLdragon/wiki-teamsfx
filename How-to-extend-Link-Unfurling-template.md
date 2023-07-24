@@ -337,6 +337,7 @@ Opening collaborative stage view from Adaptive card:
 
 ![collabStageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/6f685491-1459-4f3b-9db9-fbe0d01b73f9)
 
+Please refer to [Collaborative Stage View](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling#collaborative-stage-view) for more details.
 ## How to add task module (Teams)
 
 Once your link is unfurled into an Adaptive Card and sent in conversation, you can use Task modules to create modal pop-up experiences in your Teams application. Follow the instructions below to add task module in your link unfurling app.
