@@ -37,14 +37,20 @@ The supported types for Zero Install Link Unfurling are "result" and "auth" and 
 For card with type "auth", the Teams client strips away any action buttons from the card, and adds a sign in action button. Please refer to [zero install link unfurling document](https://learn.microsoft.com/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=desktop%2Cjson%2Climitations#zero-install-for-link-unfurling) for more details.
 ## How to add stage view
 
-Stage View is a full screen UI component that you can invoke to surface your web content. You can turn URLs into a tab using an Adaptive Card and Chat Services. Follow the instructions below to add stage view in your link unfurling app.
+Stage View is a full screen UI component that you can invoke to surface your web content. You can turn URLs into a tab using an Adaptive Card and Chat Services. 
+
+Collaborative Stage View is an enhancement to Stage View that allows users to engage with your app content in a new Teams window. When a user opens Collaborative Stage View from an Adaptive Card, the app content pops-out in a new Teams window instead of the default Stage View modal.
+
+Follow these steps to add stage view or collaborative stage view to your link unfurling template.
 
 - [Step 1: Update `staticTabs` in manifest.json](#step-1-update-statictabs-in-manifestjson)
 - [Step 2: Add route for `/tab`](#step-2-add-route-for-tab)
 - [Step 3: Set `BOT_DOMAIN` and `TEAMS_APP_ID` in environment variables or `appsettings.json`](#step-3-set-bot_domain-and-teams_app_id-in-environment-variables-or-appsettingsjson)
-- [Step 4: Update adaptive card](#step-4-update-adaptive-card)
+- [Step 4: Update adaptive card (stage view only)](#step-4-update-adaptive-card-for-stage-view)
+- [Step 4: Update adaptive card (collaborative stage view only)](#step-5-update-adaptive-card-for-collaborative-stage-view)
 
 ### Step 1: Update `staticTabs` in `manifest.json`
+Firstly, we need to add a tab to the link unfurling template.
 
 In `appPackage/manifest.json`, update `staticTabs` section.
 
@@ -167,28 +173,12 @@ resource webAppSettings 'Microsoft.Web/sites/config@2022-09-01' = {
 }
 ```
 
-### Step 4: Update adaptive card
+### Step 4: Update adaptive card for stage view
 
 In `src/adaptiveCards/helloWorldCard.json` or `Resources/helloWorldCard.json`, update `actions` to be following.
 
 ```json
 "actions": [
-        {
-            "type": "Action.Submit",
-            "title": "View Via card",
-            "data":{
-                "msteams": {
-                    "type": "invoke",
-                    "value": {
-                        "type": "tab/tabInfoAction",
-                        "tabInfo": {
-                            "contentUrl": "https://${url}/tab",
-                            "websiteUrl": "https://${url}/tab"
-                        }
-                    }
-                }
-            }
-        },
         {
             "type": "Action.OpenUrl",
             "title": "View Via Deep Link",
@@ -248,7 +238,7 @@ Update `program.cs`:
 
 In Teams, the adaptive card will be like:
 
-![stageView](https://user-images.githubusercontent.com/11220663/237932418-6a9537e2-5433-4941-becb-dbae54965a7c.png)
+![stageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/2d16c0b8-b117-4045-8ead-80e0188d3f09)
 
 Opening stage view from Adaptive card:
 
@@ -256,13 +246,96 @@ Opening stage view from Adaptive card:
 
 In Outlook, the adaptive card will be like:
 
-![stageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/76743ade-30bc-499d-bbb2-a613734c49e9)
+![stageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/5021dd9d-8a8e-47f1-ac76-f7b4d76e5143)
 
 Opening stage view from Adaptive card via deep link:
 
 ![viaDeepLink](https://github.com/OfficeDev/TeamsFx/assets/25220706/b02ae0c8-6ef3-4e79-aabf-09e6b621d567)
 
 Please refer to [Stage view document](https://learn.microsoft.com/microsoftteams/platform/tabs/tabs-link-unfurling) for more details.
+
+### Step 4: Update adaptive card for collaborative stage view
+
+
+In `src/adaptiveCards/helloWorldCard.json` or `Resources/helloWorldCard.json`, update `actions` to be following.
+
+```json
+"actions": [
+        {
+            "type": "Action.Submit",
+            "title": "View Via card",
+            "data":{
+                "msteams": {
+                    "type": "invoke",
+                    "value": {
+                        "type": "tab/tabInfoAction",
+                        "tabInfo": {
+                            "contentUrl": "https://${url}/tab",
+                            "websiteUrl": "https://${url}/tab"
+                        }
+                    }
+                }
+            }
+        }
+      ],
+```
+For typescript or javascript templates:
+
+Run `npm install @microsoft/adaptivecards-tools` to install the package for adaptivecards templating.
+
+In `src/linkUnfurlingApp.ts` (`src/linkUnfurlingApp.js`), update variable `attachment` to be following.
+
+```ts
+    const data = { url: process.env.BOT_DOMAIN, appId: process.env.TEAMS_APP_ID };
+
+    const renderedCard = AdaptiveCards.declare(helloWorldCard).render(data);
+
+    const attachment = { ...CardFactory.adaptiveCard(renderedCard), preview: previewCard };
+
+```
+
+For c# templates:
+
+run `dotnet add package AdaptiveCards.Templating` to install the package for adaptivecards templating.
+
+Update `Config.cs`:
+```csharp
+    public class ConfigOptions
+    {
+        public string BOT_ID { get; set; }
+        public string BOT_PASSWORD { get; set; }
+        public string TEAMS_APP_ID { get; set; }
+        public string BOT_DOMAIN { get; set; }
+    }
+```
+Update `LinkUnfurlingApp` class:
+```csharp
+    private readonly ConfigOptions _config;
+
+    public LinkUnfurlingApp(ConfigOptions config)
+    {
+        _config = config;
+    }
+```
+Update variable `adaptiveCard` to be following:
+```csharp
+        var data = new { url = _config.BOT_DOMAIN, appId = _config.TEAMS_APP_ID };
+        var template = new AdaptiveCards.Templating.AdaptiveCardTemplate(adaptiveCardJson);
+
+        var adaptiveCard =AdaptiveCard.FromJson(template.Expand(data)).Card;
+```
+Update `program.cs`:
+```csharp
+    builder.Services.AddTransient<IBot>(sp => new LinkUnfurlingApp(config));
+```
+
+In Teams client, the adaptive card will be like:
+
+![collabStageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/10b9a86f-b157-46df-ad8e-c8314c5a91b3)
+
+Opening collaborative stage view from Adaptive card:
+
+![collabStageView](https://github.com/OfficeDev/TeamsFx/assets/25220706/6f685491-1459-4f3b-9db9-fbe0d01b73f9)
 
 ## How to add task module (Teams)
 
