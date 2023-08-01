@@ -43,34 +43,20 @@ Collaborative Stage View is an enhancement to Stage View that allows users to en
 
 Follow these steps to add stage view or collaborative stage view to your link unfurling template.
 
-- [Step 1: Update `staticTabs` in manifest.json](#step-1-update-statictabs-in-manifestjson)
+- [Step 1: Update manifest.json](#step-1-update-manifestjson)
 - [Step 2: Add route for `/tab`](#step-2-add-route-for-tab)
 - [Step 3: Set `BOT_DOMAIN` and `TEAMS_APP_ID` in environment variables or `appsettings.json`](#step-3-set-bot_domain-and-teams_app_id-in-environment-variables-or-appsettingsjson)
 - [Step 4: Update adaptive card (stage view only)](#step-4-update-adaptive-card-for-stage-view)
 - [Step 4: Update adaptive card (collaborative stage view only)](#step-5-update-adaptive-card-for-collaborative-stage-view)
 
-### Step 1: Update `staticTabs` in `manifest.json`
-Firstly, we need to add a tab to the link unfurling template.
+### Step 1: Update `manifest.json`
 
-In `appPackage/manifest.json`, update `staticTabs` section.
+In `appPackage/manifest.json`, update `validDomains` section.
 
 ```json
-    "staticTabs": [
-        {
-            "entityId": "stageViewTask",
-            "name": "Stage View",
-            "contentUrl": "https://${{BOT_DOMAIN}}/tab",
-            "websiteUrl": "https://${{BOT_DOMAIN}}/tab",
-            "searchUrl": "https://${{BOT_DOMAIN}}/tab",
-            "scopes": [
-                "personal"
-            ],
-            "context": [
-                "personalTab",
-                "channelTab"
-            ]
-        }
-    ],
+    "validDomains": [
+        "${{BOT_DOMAIN}}"
+    ]
 ```
 
 ### Step 2: Add route for `/tab`
@@ -271,7 +257,8 @@ In `src/adaptiveCards/helloWorldCard.json` or `Resources/helloWorldCard.json`, u
                         "type": "tab/tabInfoAction",
                         "tabInfo": {
                             "contentUrl": "https://${url}/tab",
-                            "websiteUrl": "https://${url}/tab"
+                            "websiteUrl": "https://${url}/tab",
+                            "entityId": "entityId"
                         }
                     }
                 }
