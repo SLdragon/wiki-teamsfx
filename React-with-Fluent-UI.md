@@ -1,13 +1,15 @@
 # Architecture
+
+Here is an overall architectural diagram for the `React with Fluent UI` app template:
 ![Architecture](https://github.com/OfficeDev/TeamsFx/assets/63089166/a73b8b48-1411-4b09-bd74-ffbc8974f675)
 
-This app has the following main components:
+This app template has three major components:
 
-1. Azure Storage: Host the React app with Fluent UI. Code of the React app can be found in `src` folder.
+1. Azure Storage: Host the React app with Fluent UI. The code of the React app can be found in the `src` folder.
 
 2. Azure Function: Middle-tier service to call Graph. Adopted [On-Behalf-Of flow](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow). Code of the Azure Function can be found in `api` folder.
 
-3. Azure Active Directory: Both `Azure Storage` and `Azure Function` are configured with Azure Active Directory(AAD) app and using the AAD app for authentication.
+3. Azure Active Directory: Both `Azure Storage` and `Azure Function` are configured with Azure Active Directory (AAD) app and use the AAD app for authentication.
 
 # Authentication
 ![Authentication](https://github.com/OfficeDev/TeamsFx/assets/63089166/49781751-0910-42d9-b218-9de2a7495ddb)
