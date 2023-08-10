@@ -43,7 +43,6 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 |-- env/
 |-- infra/
 |-- node_modules/
-|-- public/
 |-- src/
 |-- gitignore
 |-- package-lock.json
@@ -96,7 +95,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
             "test": "echo \"Error: no test specified\" && exit 1"
         },
         "devDependencies": {
-            "@microsoft/teamsfx-cli": "^1.2.3",
+            "@microsoft/teamsfx-cli": "2.0.2-alpha.4f379e6ab.0",
             "@microsoft/teamsfx-run-utils": "alpha",
             "env-cmd": "^10.1.0",
             "office-addin-dev-settings": "^2.0.3",
