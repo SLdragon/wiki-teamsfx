@@ -58,7 +58,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 
     **NOTE**: For simplicity, the remainder of this article assumes that the existing Teams app is a tab. If you started with a bot instead, replace "tab" with "bot" in all of these instructions, including the content you add or edit in various files. 
 
-1. Move the node_modules, public, and src folders into the new subfolder.
+1. Move the node_modules and src folders into the new subfolder.
 1. Move the package-lock.json, package.json, and tsconfig.json into the new subfolder. The project structure should now look like the following:
 
     ```
@@ -69,7 +69,6 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
     |-- infra/
     |-- tab/
     |-- |-- node_modules/
-    |-- |-- public/
     |-- |-- src/
     |-- |-- package-lock.json
     |-- |-- package.json
