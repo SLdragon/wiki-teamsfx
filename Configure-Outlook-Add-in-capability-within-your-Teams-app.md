@@ -113,12 +113,13 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 1. Open the teamsapp.yml file in the root of the project and find the line `ignoreFile: .webappignore`. Change this to `ignoreFile: ./tab/.webappignore`.
 1. Open the teamsapp.local.yml file in the root of the project and find the line `args: install --no-audit`. Change this to `args: run install:tab --no-audit`.
 1. Open **TERMINAL** in Visual Studio Code. Navigate to the root of the project and run `npm install`. Among other things, a new node_modules folder and a new package.lock.json file are created in the project root. 
-1. Next run `npm run install:tab`. Among other things, a new node_modules folder will be created in the tab folder, if there isn't one already. 
+1. Next run `npm run install:tab`. Among other things, a new node_modules folder and a new package.lock.json file are created are created in the tab folder, if they aren't there already. 
 1. Verify that you can sideload the tab with the following steps:
 
     <ol type="a">
       <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code.</li>
-      <li>In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Debug (Edge)</b>, and then press F5. The project will build and run. This process may take a couple of minutes. Eventually, Teams opens in a browser with a prompt to add your tab app.</li>
+      <li><p>In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Debug in Teams (Edge)</b>, and then press F5. The project will build and run. This process may take a couple of minutes. Eventually, Teams opens in a browser with a prompt to add your tab app.</p>
+      <p><b>Note:</b> If this is the first time you've debugged a Teams app on this computer, you will be prompted to install an SSL certificate. Select <b>Install</b> and then <b>Yes</b> to the second prompt. Login to your Microsoft 365 account if you are prompted to do so.</p></li>
       <li>Select <b>Add</b>.</li>
       <li>To stop debugging and uninstall the app, select <b>Run</b> | <b>Stop Debugging</b> in Visual Studio Code.</li>
     </ol>
