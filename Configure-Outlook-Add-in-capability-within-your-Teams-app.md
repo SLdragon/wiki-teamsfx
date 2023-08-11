@@ -185,14 +185,14 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     },
     ```
 
-1. In the .env.local file, find the lines that assign values to the `TAB_DOMAIN` and `TAB_ENDPOINT` variables. Add the following lines immediately below them:
+1. In the env/.env.local file, find the lines that assign values to the `TAB_DOMAIN` and `TAB_ENDPOINT` variables. Add the following lines immediately below them:
 
     ```
     ADDIN_DOMAIN=localhost:3000
     ADDIN_ENDPOINT=https://localhost:3000
     ```
 
-1. Add the following line to the .env.dev file, just below the `TAB_ENDPOINT=` ... line:
+1. In the env/.env.dev file, add the following line just below the `TAB_ENDPOINT=` ... line:
 
     ```
     ADDIN_ENDPOINT=
@@ -231,8 +231,6 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     - tsconfig.json
     - webpack.config.js
 
-    **NOTE**: Do *not* copy over the manifest.json file.
-
     Your folder structure should now look like the following:
 
     ```
@@ -265,6 +263,8 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     |-- teamsapp.local.yml
     |-- teamsapp.yml
     ```
+
+1. When you have finished the copy, *delete the manifest.json file in the /add-in/appPackage folder*.
 
 ## Edit the tooling configuration files
 
