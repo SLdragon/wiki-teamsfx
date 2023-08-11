@@ -45,21 +45,24 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 |-- node_modules/
 |-- src/
 |-- gitignore
+|-- .localConfigs
+|-- .webappignore
 |-- package-lock.json
 |-- package.json
 |-- teamsapp.local.yml
 |-- teamsapp.yml
 |-- tsconfig.json
+|-- web.config
 ```
 
-**NOTE**: If you are working with a new Teams tab project, the \node_modules folder and the package-lock.json file will not be present until you run `npm install` in the root of the project. The build folder will not be present if you have not run a build script on the project. 
+**NOTE**: If you are working with a new Teams tab project, the node_modules folder and the package-lock.json file will not be present. The node_modules is created in a later step when you run `npm install` in the root of the project. The build folder will not be present unless and until you run a build script on the project. 
 
 1. Create a folder under the root named "tab" (or "bot").
 
     **NOTE**: For simplicity, the remainder of this article assumes that the existing Teams app is a tab. If you started with a bot instead, replace "tab" with "bot" in all of these instructions, including the content you add or edit in various files. 
 
 1. Move the node_modules and src folders into the new subfolder.
-1. Move the package-lock.json, package.json, and tsconfig.json into the new subfolder. The project structure should now look like the following:
+1. Move the .webappignore, package-lock.json, package.json, tsconfig.json, and web.config files into the new subfolder. The project structure should now look like the following:
 
     ```
     |-- .vscode/
@@ -70,10 +73,13 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
     |-- tab/
     |-- |-- node_modules/
     |-- |-- src/
+    |-- |-- .webappignore
     |-- |-- package-lock.json
     |-- |-- package.json
     |-- |-- tsconfig.json
+    |-- |-- web.config
     |-- gitignore
+    |-- .localConfigs
     |-- teamsapp.local.yml
     |-- teamsapp.yml
     ```
@@ -104,7 +110,8 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
     ```
 
 1. Change the "name", "version", and "author" properties, as needed.
-1. Open the teamsapp.local.yml file in the root of the project and find the line `args: install --no-audit`. Change this to `args: run install:tab --no-audit`.npm 
+1. Open the teamsapp.yml file in the root of the project and find the line `ignoreFile: .webappignore`. Change this to `ignoreFile: ./tab/.webappignore`.
+1. Open the teamsapp.local.yml file in the root of the project and find the line `args: install --no-audit`. Change this to `args: run install:tab --no-audit`.
 1. Open **TERMINAL** in Visual Studio Code. Navigate to the root of the project and run `npm install`. Among other things, a new node_modules folder is in the project root. 
 1. Next run `npm run install:tab`. Among other things, a new node_modules folder will be created in the tab folder, if there isn't one already. 
 1. Verify that you can sideload the tab with the following steps:
