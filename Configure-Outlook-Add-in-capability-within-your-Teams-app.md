@@ -112,7 +112,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 1. Change the "name", "version", and "author" properties, as needed.
 1. Open the teamsapp.yml file in the root of the project and find the line `ignoreFile: .webappignore`. Change this to `ignoreFile: ./tab/.webappignore`.
 1. Open the teamsapp.local.yml file in the root of the project and find the line `args: install --no-audit`. Change this to `args: run install:tab --no-audit`.
-1. Open **TERMINAL** in Visual Studio Code. Navigate to the root of the project and run `npm install`. Among other things, a new node_modules folder is in the project root. 
+1. Open **TERMINAL** in Visual Studio Code. Navigate to the root of the project and run `npm install`. Among other things, a new node_modules folder and a new package.lock.json file are created in the project root. 
 1. Next run `npm run install:tab`. Among other things, a new node_modules folder will be created in the tab folder, if there isn't one already. 
 1. Verify that you can sideload the tab with the following steps:
 
