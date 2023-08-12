@@ -432,7 +432,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
 
 ## Run the app and add-in locally at the same time
 
-You can sideload and run the app and the add-in simultaneously, but the debugger cannot reliably hit attach when both are running. So to debug, run only one at a time. 
+You can sideload and run the app and the add-in simultaneously, but the debugger cannot reliably attach when both are running. So to debug, run only one at a time. 
 
 To debug the app, see the last step of the **Prepare the Teams app project** above.
 
@@ -444,16 +444,17 @@ To see both the app and the add-in running at the same time, take the following 
       <li><i>First, make sure Outlook desktop is closed.</i></li>
       <li>In Visual Studio Code, open the Teams Toolkit.</li>
       <li>In the <b>ACCOUNTS</b> section, verify that you are signed into Microsoft 365.</li>
-      <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code. In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch App and Add-in Outlook Desktop (Edge Chromium)</b>, and then press F5. The project builds and a Node dev-server window opens to host the add-in. The tab app is hosted in the Visual Studio Code terminal. This process may take a couple of minutes. Eventually, both of the following will happen:
+      <li>Select <b>View</b> | <b>Run</b> in Visual Studio Code. In the <b>RUN AND DEBUG</b> drop down menu, select the option, <b>Launch App and Add-in Outlook Desktop (Edge Chromium)</b>, and then press F5. The project builds and a Webpack dev-server window opens to host the add-in. The tab app is hosted in the Visual Studio Code terminal. This process may take a couple of minutes. Eventually, both of the following will happen:
         <Ul list-style="disc">
-          <li>Teams opens in a browser with a prompt to add your tab app. <i>If Teams has not opened by the time Outlook desktop opens, then automatic sideloading has failed. You can manually sideload it to see both the app and the add-in running at the same time. For sideloading instructions, see <a href="https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload">Upload your app in Teams</a></i>.</li>
+          <li>Teams opens in a browser with a prompt to add your tab app. <i>If Teams has not opened by the time Outlook desktop opens, then automatic sideloading has failed. You can manually sideload it to see both the app and the add-in running at the same time. For sideloading instructions, see <a href="https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload">Upload your app in Teams</a></i>. You'll find the manifest.zip file to upload at `C:\Users\{yourname}\AppData\Local\Temp`.</li>
           <li>Outlook desktop opens.</li>
        </ul>
       </li>
       <li>In the Teams prompt, select <b>Add</b> and the tab will open.</li>
       <li>In Outlook, open the <b>Inbox</b> <i>of your Microsoft 365 account identity</i> and open any message. A <b>Contoso Add-in</b> tab with two buttons will appear on the <b>Home</b> ribbon (or the <b>Message</b> ribbon, if you have opened the message in its own window).</li>
       <li>Click the <b>Show Taskpane</b> button and a task pane opens. Click the <b>Perform an action</b> button and a small notification appears near the top of the message.</li>
-      <li>To stop debugging and uninstall the add-in, select <b>Run</b> | <b>Stop Debugging</b> in Visual Studio Code.</li>
+      <li>To stop debugging and uninstall the add-in, select <b>Run</b> | <b>Stop Debugging</b> in Visual Studio Code. If the Webpack dev-server window does not close, open the Visual Studio Code <b>TERMINAL</b> in the root of the project and run `npm stop`.</li>
+      <li>If you had to manually sideload the Teams Tab app, remove it from Teams as instructed in a href="https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#remove-your-app">Remove your app</a></i>. 
     </ol> 
 
 ## Move the application to Azure
