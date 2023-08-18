@@ -197,13 +197,6 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     ```
     ADDIN_ENDPOINT=
    ```
-   
-1. Add the following two lines to the end of the \infra\azure.bicep file:
-
-    ```
-    output ADDIN_DOMAIN string = siteDomain
-    output ADDIN_ENDPOINT string = 'https://${siteDomain}'
-    ```
 
 1. In the Teams manifest template, add the placeholder `"${{ADDIN_DOMAIN}}",` to the top of the "validDomains" array. The Teams Toolkit will replace this with a localhost domain when you are developing locally. When you deploy the finished combined app to staging or production as described below in [Move the application to Azure](#move-the-application-to-azure), Teams Toolkit will replace the placeholder with the staging/production URI. The following is an example:
 
@@ -492,8 +485,159 @@ To see both the app and the add-in running at the same time, take the following 
           artifactFolder: add-in/dist
           # The resource id of the cloud resource to be deployed to
           resourceId: ${{ADDIN_AZURE_STORAGE_RESOURCE_ID}}
+    ```
+1. Open the azure.bicep file in the infra folder and replace all its contents with the following code.
 
+    ```
+    // Params for Teams tab resources
+    @maxLength(20)
+    @minLength(4)
+    @description('Used to generate names for all resources in this file')
+    param resourceBaseName string
+    param webAppSku string
+    param serverfarmsName string = resourceBaseName
+    param webAppName string = resourceBaseName
+    param location string = resourceGroup().location
+    param storageSku string
+    param storageName string = resourceBaseName
 
+    module tabModule 'tab/azure.bicep' = {
+      name: 'tabModule'
+      params: {
+        resourceBaseName: resourceBaseName
+        webAppSku: webAppSku
+        serverfarmsName: serverfarmsName
+        webAppName: webAppName
+        location: location
+      }
+    }
+
+    module addinModule 'add-in/azure.bicep' = {
+      name: 'addinModule'
+      params: {
+        resourceBaseName: resourceBaseName
+        storageSku: storageSku
+        storageName: storageName
+        location: location
+      }
+    }
+    
+    // The output will be persisted in .env.{envName}. Visit https://aka.ms/teamsfx-actions/arm-deploy for more details.
+    output TAB_AZURE_APP_SERVICE_RESOURCE_ID string = tabModule.outputs.TAB_AZURE_APP_SERVICE_RESOURCE_ID // used in deploy stage
+    output TAB_DOMAIN string = tabModule.outputs.TAB_DOMAIN
+    output TAB_ENDPOINT string = tabModule.outputs.TAB_ENDPOINT
+    
+    output ADDIN_AZURE_STORAGE_RESOURCE_ID string =  addinModule.outputs.ADDIN_AZURE_STORAGE_RESOURCE_ID// used in deploy stage
+    output ADDIN_DOMAIN string = addinModule.outputs.ADDIN_DOMAIN
+    output ADDIN_ENDPOINT string = addinModule.outputs.ADDIN_ENDPOINT
+    ```
+
+1. Open the azure.parameters.json file and replace its contents with the following JSON.
+
+    ```
+    {
+        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+          "resourceBaseName": {
+            "value": "tab${{RESOURCE_SUFFIX}}"
+          },
+          "webAppSku": {
+            "value": "F1"
+          },
+          "storageSku": {
+            "value": "Standard_LRS"
+          }
+        }
+    }
+    ```
+
+1. Inside the infra folder, create two subfolders named tab and add-in.
+1. In the infra/add-in folder, create a file named azure.bicep and give it the following contents.
+
+    ```
+    @maxLength(20)
+    @minLength(4)
+    param resourceBaseName string
+    param storageSku string
+    param storageName string = resourceBaseName
+    param location string = resourceGroup().location
+
+    // Azure Storage that hosts your static web site
+    resource storage 'Microsoft.Storage/storageAccounts@2021-06-01' = {
+      kind: 'StorageV2'
+      location: location
+      name: storageName
+      properties: {
+        supportsHttpsTrafficOnly: true
+      }
+      sku: {
+        name: storageSku
+      }
+    }
+
+    var siteDomain = replace(replace(storage.properties.primaryEndpoints.web, 'https://', ''), '/', '')
+
+    // The output will be persisted in .env.{envName}. Visit https://aka.ms/teamsfx-actions/arm-deploy for more details.
+    output ADDIN_AZURE_STORAGE_RESOURCE_ID string = storage.id // used in deploy stage
+    output ADDIN_DOMAIN string = siteDomain
+    output ADDIN_ENDPOINT string = 'https://${siteDomain}'
+    ```
+
+1. In the infra/tab folder, create a file named azure.bicep and give it the following contents.
+
+    ```
+    @maxLength(20)
+    @minLength(4)
+    @description('Used to generate names for all resources in this file')
+    param resourceBaseName string
+    param webAppSku string
+    param serverfarmsName string = resourceBaseName
+    param webAppName string = resourceBaseName
+    param location string = resourceGroup().location
+
+    // Compute resources for your Web App
+    resource serverfarm 'Microsoft.Web/serverfarms@2021-02-01' = {
+      kind: 'app'
+      location: location
+      name: serverfarmsName
+      sku: {
+        name: webAppSku
+      }
+    }
+
+    // Azure Web App that hosts your website
+    resource webApp 'Microsoft.Web/sites@2021-02-01' = {
+      kind: 'app'
+      location: location
+      name: webAppName
+      properties: {
+        serverFarmId: serverfarm.id
+        httpsOnly: true
+        siteConfig: {
+          appSettings: [
+            {
+              name: 'WEBSITE_RUN_FROM_PACKAGE'
+              value: '1' // Run Azure APP Service from a package file
+            }
+            {
+              name: 'WEBSITE_NODE_DEFAULT_VERSION'
+              value: '~18' // Set NodeJS version to 18.x for your site
+            }
+            {
+             name: 'RUNNING_ON_AZURE'
+              value: '1'
+            }
+          ]
+          ftpsState: 'FtpsOnly'
+        }
+      }
+    }
+
+    // The output will be persisted in .env.{envName}. Visit https://aka.ms/teamsfx-actions/arm-deploy for more details.
+    output TAB_AZURE_APP_SERVICE_RESOURCE_ID string = webApp.id // used in deploy stage
+    output TAB_DOMAIN string = webApp.properties.defaultHostName
+    output TAB_ENDPOINT string = 'https://${webApp.properties.defaultHostName}'
     ```
 
 1. In Visual Studio Code open the Teams Toolkit and in the **ACCOUNTS** section be sure you are signed into your *Azure* account (in addition to being signed into your Microsoft 365 account. For more information about signing in, open [Exercise - Create Azure resources to host a Teams tab app](https://learn.microsoft.com/training/modules/teams-toolkit-vsc-deploy-apps/03-create-azure-resources-exercise) and scroll to the **Sign in to Azure in Teams Toolkit** section.
