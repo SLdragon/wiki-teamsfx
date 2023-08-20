@@ -62,7 +62,8 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
     **NOTE**: For simplicity, the remainder of this article assumes that the existing Teams app is a tab. If you started with a bot instead, replace "tab" with "bot" in all of these instructions, including the content you add or edit in various files. 
 
 1. Move the node_modules and src folders into the new subfolder.
-1. Move the .webappignore, package-lock.json, package.json, tsconfig.json, and web.config files into the new subfolder. The project structure should now look like the following:
+1. Move the .webappignore, package-lock.json, package.json, tsconfig.json, and web.config files into the new subfolder. 
+1. Move the azure.bicep file from the infra folder into the new tab folder. The project structure should now look like the following:
 
     ```
     |-- .vscode/
@@ -74,6 +75,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
     |-- |-- node_modules/
     |-- |-- src/
     |-- |-- .webappignore
+    |-- |-- azure.bicep
     |-- |-- package-lock.json
     |-- |-- package.json
     |-- |-- tsconfig.json
@@ -224,6 +226,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     - tsconfig.json
     - webpack.config.js
 
+1. Copy the file infra/azure.bicep from the add-in project to the "add-in" folder of the Teams project.
 1. When you have finished the copy, *delete the manifest.json file in the /add-in/appPackage folder*.
 
     Your folder structure should now look like the following:
@@ -236,6 +239,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     |-- |-- |-- commands/
     |-- |-- |-- taskpane/
     |-- |-- .eslintrc.json
+    |-- |-- azure.bicep
     |-- |-- babel.config.json
     |-- |-- package-lock.json
     |-- |-- package.json
@@ -250,6 +254,7 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     |-- |-- node_modules/
     |-- |-- src/
     |-- |-- .webappignore
+    |-- |-- azure.bicep
     |-- |-- package-lock.json
     |-- |-- package.json
     |-- |-- tsconfig.json
@@ -463,7 +468,7 @@ To see both the app and the add-in running at the same time, take the following 
       errorPage: error.html
     ```
 
-1. In the same file, Replace the entire `deploy:` section with the following code. These changes take account of the new folder structure and the fact that both add-in and tab files need to be deployed.
+1. In the same file, replace the entire `deploy:` section with the following code. These changes take account of the new folder structure and the fact that both add-in and tab files need to be deployed.
 
     ```
     deploy:
@@ -503,7 +508,7 @@ To see both the app and the add-in running at the same time, take the following 
         "contentVersion": "1.0.0.0",
         "parameters": {
           "resourceBaseName": {
-            "value": "tab${{RESOURCE_SUFFIX}}"
+            "value": "tab_and_addin${{RESOURCE_SUFFIX}}"
           },
           "webAppSku": {
             "value": "F1"
@@ -515,9 +520,6 @@ To see both the app and the add-in running at the same time, take the following 
     }
     ```
 
-1. Inside the infra folder, create two subfolders named tab and add-in.
-1. Move the azure.bicep file in the infra folder into the infra/tab folder that you created in the last step.
-1. Move the azure.bicep file from the infra folder **of the add-in project, not the combined project** to the new infra/add-in folder that you created in the next-to-last step.
 1. In the infra folder of the combined project, create a new file named azure.bicep and give it the following contents.
 
     ```
@@ -533,7 +535,7 @@ To see both the app and the add-in running at the same time, take the following 
     param storageSku string
     param storageName string = resourceBaseName
 
-    module tabModule 'tab/azure.bicep' = {
+    module tabModule '../tab/azure.bicep' = {
       name: 'tabModule'
       params: {
         resourceBaseName: resourceBaseName
@@ -544,7 +546,7 @@ To see both the app and the add-in running at the same time, take the following 
       }
     }
 
-    module addinModule 'add-in/azure.bicep' = {
+    module addinModule '../add-in/azure.bicep' = {
       name: 'addinModule'
       params: {
         resourceBaseName: resourceBaseName
