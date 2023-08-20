@@ -44,7 +44,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
 |-- infra/
 |-- node_modules/
 |-- src/
-|-- gitignore
+|-- .gitignore
 |-- .localConfigs
 |-- .webappignore
 |-- package-lock.json
@@ -80,7 +80,7 @@ Begin by separating the source code for the tab (or bot) into its own subfolder.
     |-- |-- package.json
     |-- |-- tsconfig.json
     |-- |-- web.config
-    |-- gitignore
+    |-- .gitignore
     |-- .localConfigs
     |-- teamsapp.local.yml
     |-- teamsapp.yml
@@ -257,7 +257,8 @@ Unless specified otherwise, the file you change is \appPackage\manifest.json.
     |-- |-- package.json
     |-- |-- tsconfig.json
     |-- |-- web.config
-    |-- gitignore
+    |-- .gitignore
+    |-- .localConfigs
     |-- package.json
     |-- teamsapp.local.yml
     |-- teamsapp.yml
