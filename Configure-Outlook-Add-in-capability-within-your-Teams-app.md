@@ -500,7 +500,7 @@ To see both the app and the add-in running at the same time, take the following 
           resourceId: ${{ADDIN_AZURE_STORAGE_RESOURCE_ID}}
     ```
 
-1. Open the infra/azure.parameters.json file and replace its contents with the following JSON.
+1. Open the infra/azure.parameters.json file in the root of the project and replace its contents with the following JSON.
 
     ```
     {
@@ -520,7 +520,7 @@ To see both the app and the add-in running at the same time, take the following 
     }
     ```
 
-1. Open the infra/azure.bicep file and replace its contents with the following.
+1. Open the infra/azure.bicep file in the root of the project (not the one in either the tab or add-in subfolders) and replace its contents with the following.
 
     ```
     // Params for Teams tab resources
