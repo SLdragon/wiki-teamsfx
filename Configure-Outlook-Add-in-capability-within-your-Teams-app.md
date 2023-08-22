@@ -457,14 +457,18 @@ To see both the app and the add-in running at the same time, take the following 
 
 1. Open the teamsapp.yml file in the root of the project and find the line `deploymentName: Create-resources-for-tab`. Change it to `deploymentName: Create-resources-for-tab-and-addin`.
 
-1. In the same file, add the following code to the end of the `provision:` section.
+1. In the same file, add the following code to the end of the `provision:` section. **Note that indentation is meaningful in YAML, so `- uses` and `- name` statements should be indented 2 spaces, `with` statements should be aligned with `uses`, and the children of `with` should be indented a further 2 spaces.** 
 
     ```
-    - uses: azureStorage/enableStaticWebsite
-    with:
-      storageResourceId: ${{ADDIN_AZURE_STORAGE_RESOURCE_ID}}
-      indexPage: index.html
-      errorPage: error.html
+    provision:
+
+      -- other YAML omitted --
+
+      - uses: azureStorage/enableStaticWebsite
+        with:
+          storageResourceId: ${{ADDIN_AZURE_STORAGE_RESOURCE_ID}}
+          indexPage: index.html
+          errorPage: error.html
     ```
 
 1. In the same file, replace the entire `deploy:` section with the following code. These changes take account of the new folder structure and the fact that both add-in and tab files need to be deployed.
@@ -508,7 +512,7 @@ To see both the app and the add-in running at the same time, take the following 
         "contentVersion": "1.0.0.0",
         "parameters": {
           "resourceBaseName": {
-            "value": "tab_and_addin${{RESOURCE_SUFFIX}}"
+            "value": "tabAndAddin${{RESOURCE_SUFFIX}}"
           },
           "webAppSku": {
             "value": "F1"
