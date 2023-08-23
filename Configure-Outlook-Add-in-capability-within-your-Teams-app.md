@@ -512,7 +512,7 @@ To see both the app and the add-in running at the same time, take the following 
         "contentVersion": "1.0.0.0",
         "parameters": {
           "resourceBaseName": {
-            "value": "tabAndAddin${{RESOURCE_SUFFIX}}"
+            "value": "tabandaddin${{RESOURCE_SUFFIX}}"
           },
           "webAppSku": {
             "value": "F1"
