@@ -570,7 +570,7 @@ To see both the app and the add-in running at the same time, take the following 
     output ADDIN_ENDPOINT string = addinModule.outputs.ADDIN_ENDPOINT
     ```
 
-1. In Visual Studio Code open the Teams Toolkit and in the **ACCOUNTS** section be sure you are signed into your *Azure* account (in addition to being signed into your Microsoft 365 account. For more information about signing in, open [Exercise - Create Azure resources to host a Teams tab app](https://learn.microsoft.com/training/modules/teams-toolkit-vsc-deploy-apps/03-create-azure-resources-exercise) and scroll to the **Sign in to Azure in Teams Toolkit** section.
+1. In Visual Studio Code open the Teams Toolkit and in the **ACCOUNTS** section be sure you are signed into your *Azure* account (in addition to being signed into your Microsoft 365 account). For more information about signing in, open [Exercise - Create Azure resources to host a Teams tab app](https://learn.microsoft.com/training/modules/teams-toolkit-vsc-deploy-apps/03-create-azure-resources-exercise) and scroll to the **Sign in to Azure in Teams Toolkit** section.
 1. In the **LIFECYCLE** section of Teams Toolkit, select **Provision**. It may take several minutes. You may be prompted to select one of your Azure resource groups.
 1. When provisioning completes, select **Deploy** to deploy your app code to Azure.
 
