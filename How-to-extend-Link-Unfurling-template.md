@@ -174,16 +174,19 @@ In `src/adaptiveCards/helloWorldCard.json` or `Resources/helloWorldCard.json`, u
 ```
 For typescript or javascript templates:
 
-Run `npm install @microsoft/adaptivecards-tools` to install the package for adaptivecards templating.
+Run `npm install adaptive-expressions adaptivecards-templating` to install the package for adaptivecards templating.
 
 In `src/linkUnfurlingApp.ts` (`src/linkUnfurlingApp.js`), update variable `attachment` to be following.
 
 ```ts
-    const data = { url: process.env.BOT_DOMAIN, appId: process.env.TEAMS_APP_ID };
-
-    const renderedCard = AdaptiveCards.declare(helloWorldCard).render(data);
-
-    const attachment = { ...CardFactory.adaptiveCard(renderedCard), preview: previewCard };
+    const template = new ACData.Template(helloWorldCard);
+    const card = template.expand({
+      $root: {
+        url: process.env.BOT_DOMAIN,
+        appId: process.env.TEAMS_APP_ID
+      },
+    });
+    const attachment = { ...CardFactory.adaptiveCard(card), preview: previewCard };
 
 ```
 
