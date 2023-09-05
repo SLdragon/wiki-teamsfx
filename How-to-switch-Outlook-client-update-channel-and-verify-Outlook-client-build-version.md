@@ -3,6 +3,8 @@
 Go to File -> Office Account -> Update Channel -> Select Beta Channel
 ![image](https://user-images.githubusercontent.com/18023393/234740901-a4f0ed63-f53d-4f79-a0c3-c0f2a45f7984.png)
 
+Or use [Office deployment tool](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/prerequisites#install-microsoft-365-apps-in-your-test-environment) to move to Beta Channel
+
 # Verify Outlook Client Build Version
 
 Go To File -> Office Account -> About Outlook
