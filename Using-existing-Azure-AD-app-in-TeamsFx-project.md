@@ -27,8 +27,12 @@ This doc is for using existing Azure AD app or Manually Create Azure AD app for 
 # Create Access As User Scope for Azure AD app (Optional)
 
 > You can skip this part if your M365 account has permission to update this Azure AD app. We will create the scope for you.
-1. Go to app's "Expose an API" page, click on "Add a scope" under "Scopes defined by this API".
-   * Click on "Save and continue".
+1. Go to app's "Expose an API" page, click "Add" button to add a new Application ID URI:
+   - If your project is tab app, fill in `api://<your-tab-domain>/<aad-app-client-id>`
+   - If your project is bot or message extension app, fill in `api://botid-<your-bot-id>`
+   - If your project contains both tab and bot / message extension, fill in `api://<your-tab-domain>/botid-<your-bot-id>`
+
+1. Click on "Add a scope" under "Scopes defined by this API".
    * **Scope name**: Fill in "access_as_user".
    * **Who can consent?**: Choose "Admins and users".
    * **Admin consent display name**: Fill in "Teams can access app’s web APIs".
@@ -63,8 +67,12 @@ This doc is for using existing Azure AD app or Manually Create Azure AD app for 
 
 1. Go to app's "Certificates & secrets" page, press the copy button under the "Value" column to copy the **Client Secret**. Note: if you can not copy the secret, please follow the [instruction](#create-client-secret-for-azure-ad-app) to create a new client secret.
 
-1. Go to app's "Expose an API" page. If you have already add "access_as_user" scope under "Scopes defined by this API" and pre-auth the two Teams Client Ids, go to app's "Manifest" page, copy the "id" under "oauth2Permissions" as **Access As User Scope ID**.
+1. Go to app's "Expose an API" page. Update the Application ID URI if the format is not as below:
+   - If your project is tab app, fill in `api://<your-tab-domain>/<aad-app-client-id>`
+   - If your project is bot or message extension app, fill in `api://botid-<your-bot-id>`
+   - If your project contains both tab and bot / message extension, fill in `api://<your-tab-domain>/botid-<your-bot-id>`
 
+1. If you have already add "access_as_user" scope under "Scopes defined by this API" and pre-auth the two Teams Client Ids, go to app's "Manifest" page, copy the "id" under "oauth2Permissions" as **Access As User Scope ID**. Otherwise, follow the steps in `Create Access As User Scope for Azure AD app` to create a new one.
 
 # Set necessary info in TeamsFx project
 
